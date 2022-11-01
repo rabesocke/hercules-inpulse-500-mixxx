@@ -47,6 +47,29 @@ DJCi500.kScratchActionSeek = 2;
 DJCi500.kScratchActionBend = 3;
 DJCi500.FxLedtimer;
 
+// Colors
+DJCi500.PadColorMapper = new ColorMapper({
+    0xFF0000: 0x60,
+    0xFFFF00: 0x7C,
+    0x00FF00: 0x1C,
+    0x00FFFF: 0x1F,
+    0x0000FF: 0x03,
+    0xFF00FF: 0x42,
+    0xFF88FF: 0x63,
+    0xFFFFFF: 0x7F,
+    0x000088: 0x02,
+    0x008800: 0x10,
+    0x008888: 0x12,
+    0x228800: 0x30,
+    0x880000: 0x40,
+    0x882200: 0x4C,
+    0x888800: 0x50,
+    0x888888: 0x52,
+    0x88FF00: 0x5C,
+    0xFF8800: 0x74,
+});
+
+
 //Ev3nt1ne Global Var:
 DJCi500.FxD1Active = [0, 0, 0]; //Here I decided to put only 3 effects
 DJCi500.FxD2Active = [0, 0, 0]; //Here I decided to put only 3 effects
@@ -86,9 +109,9 @@ DJCi500.slicerLoopBeat8 = [0, 0, 0, 0];
 ///////////////////////
 
 DJCi500.vuMeterUpdateMaster = function(value, _group, _control) {
-    value = (value * 122) + 5;
-    midi.sendShortMsg(0xB0, 0x40, value);
-    midi.sendShortMsg(0xB0, 0x41, value);
+  value = (value * 122) + 5;
+  midi.sendShortMsg(0xB0, 0x40, value);
+  midi.sendShortMsg(0xB0, 0x41, value);
 };
 
 DJCi500.vuMeterUpdateDeck = function(value, group, _control, _status) {
@@ -98,70 +121,163 @@ DJCi500.vuMeterUpdateDeck = function(value, group, _control, _status) {
 };
 
 DJCi500.init = function() {
-    // Scratch button state
-    DJCi500.scratchButtonState = true;
-    // Scratch Action
-    DJCi500.scratchAction = {
+  // Scratch button state
+  DJCi500.scratchButtonState = true;
+  // Scratch Action
+  DJCi500.scratchAction = {
     1: DJCi500.kScratchActionNone,
     2: DJCi500.kScratchActionNone
-    };
+  };
 
-	DJCi500.AutoHotcueColors = true;
+  DJCi500.AutoHotcueColors = true;
 
-    // Turn On Vinyl buttons LED(one for each deck).
-    midi.sendShortMsg(0x91, 0x03, 0x7F);
-    midi.sendShortMsg(0x92, 0x03, 0x7F);
-	//Turn On Browser button LED
-	midi.sendShortMsg(0x90, 0x05, 0x10);
-	//Softtakeover for Pitch fader
-    engine.softTakeover("[Channel1]", "rate", true);
-    engine.softTakeover("[Channel2]", "rate", true);
-    engine.softTakeoverIgnoreNextValue("[Channel1]", "rate");
-    engine.softTakeoverIgnoreNextValue("[Channel2]", "rate");
+  // Turn On Vinyl buttons LED(one for each deck).
+  midi.sendShortMsg(0x91, 0x03, 0x7F);
+  midi.sendShortMsg(0x92, 0x03, 0x7F);
+  //Turn On Browser button LED
+  midi.sendShortMsg(0x90, 0x05, 0x10);
+  //Softtakeover for Pitch fader
+  engine.softTakeover("[Channel1]", "rate", true);
+  engine.softTakeover("[Channel2]", "rate", true);
+  engine.softTakeoverIgnoreNextValue("[Channel1]", "rate");
+  engine.softTakeoverIgnoreNextValue("[Channel2]", "rate");
 
-	// Connect the VUMeters
-    engine.connectControl("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-	engine.getValue("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-    engine.connectControl("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-	engine.getValue("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-    engine.connectControl("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
-    engine.connectControl("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
+  // Connect the VUMeters
+  engine.connectControl("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.getValue("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.connectControl("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.getValue("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.connectControl("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
+  engine.connectControl("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
 
-	engine.getValue("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
-    engine.getValue("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
-	engine.getValue("[Controls]", "AutoHotcueColors", "DJCi500.AutoHotcueColors");
+  engine.getValue("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
+  engine.getValue("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
+  engine.getValue("[Controls]", "AutoHotcueColors", "DJCi500.AutoHotcueColors");
 
-    //Ev3nt1ne Code
-    var fx1D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect1]', 'enabled', DJCi500.fx1D1Callback);
-    var fx2D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect2]', 'enabled', DJCi500.fx2D1Callback);
-    var fx3D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect3]', 'enabled', DJCi500.fx3D1Callback);
-    var fx1D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect1]', 'enabled', DJCi500.fx1D2Callback);
-    var fx2D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect2]', 'enabled', DJCi500.fx2D2Callback);
-    var fx3D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect3]', 'enabled', DJCi500.fx3D2Callback);
-    //var fx4Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect4]', 'enabled', DJCi500.fx4Callback);
-    var slicerBeatConnection1 = engine.makeConnection('[Channel1]', 'beat_active', DJCi500.slicerBeatActive);
-    var slicerBeatConnection2 = engine.makeConnection('[Channel2]', 'beat_active', DJCi500.slicerBeatActive);
-    //var controlsToFunctions = {'beat_active': 'DJCi500.slicerBeatActive'};
-    //script.bindConnections('[Channel1]', controlsToFunctions, true);
+  //Ev3nt1ne Code
+  var fx1D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect1]', 'enabled', DJCi500.fx1D1Callback);
+  var fx2D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect2]', 'enabled', DJCi500.fx2D1Callback);
+  var fx3D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect3]', 'enabled', DJCi500.fx3D1Callback);
+  var fx1D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect1]', 'enabled', DJCi500.fx1D2Callback);
+  var fx2D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect2]', 'enabled', DJCi500.fx2D2Callback);
+  var fx3D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect3]', 'enabled', DJCi500.fx3D2Callback);
+  //var fx4Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect4]', 'enabled', DJCi500.fx4Callback);
+  var slicerBeatConnection1 = engine.makeConnection('[Channel1]', 'beat_active', DJCi500.slicerBeatActive);
+  var slicerBeatConnection2 = engine.makeConnection('[Channel2]', 'beat_active', DJCi500.slicerBeatActive);
+  //var controlsToFunctions = {'beat_active': 'DJCi500.slicerBeatActive'};
+  //script.bindConnections('[Channel1]', controlsToFunctions, true);
 
+  // Bind the hotcue colors
+  DJCi500.enableHotcueColors();
 
-	// Ask the controller to send all current knob/slider values over MIDI, which will update
-    // the corresponding GUI controls in MIXXX.
-    midi.sendShortMsg(0xB0, 0x7F, 0x7F);
+  // Ask the controller to send all current knob/slider values over MIDI, which will update
+  // the corresponding GUI controls in MIXXX.
+  midi.sendShortMsg(0xB0, 0x7F, 0x7F);
 
-    //Turn on lights:
-    for (var i = 0; i < 2; i++) {
-        midi.sendShortMsg(0x96+i, 0x40, 0x2);
-        midi.sendShortMsg(0x96+i, 0x41, 0x2);
-        midi.sendShortMsg(0x96+i, 0x42, 0x78);
-        midi.sendShortMsg(0x96+i, 0x43, 0x78);
-        midi.sendShortMsg(0x96+i, 0x45, 0x37);
-        midi.sendShortMsg(0x96+i, 0x46, 0x24);
-    }
+  // Turn on lights:
+  for (var i = 0; i < 2; i++) {
+     midi.sendShortMsg(0x96+i, 0x40, 0x2);
+     midi.sendShortMsg(0x96+i, 0x41, 0x2);
+     midi.sendShortMsg(0x96+i, 0x42, 0x78);
+     midi.sendShortMsg(0x96+i, 0x43, 0x78);
+     midi.sendShortMsg(0x96+i, 0x45, 0x37);
+     midi.sendShortMsg(0x96+i, 0x46, 0x24);
+   }
 
-    DJCi500.FxLedtimer = engine.beginTimer(250,"DJCi500.blinkFxLed()");
+  DJCi500.FxLedtimer = engine.beginTimer(250,"DJCi500.blinkFxLed()");
 };
 
+// Enable Hotcue colors
+DJCi500.enableHotcueColors = function () {
+  DJCi500.padsColor = {};
+  DJCi500.padsEnabled = {};
+  for (var channel = 1; channel <= 2; channel++) { 
+    for (var i = 0; i <= 7; i++) {
+      DJCi500.padsColor[i + ((channel - 1) * 8)] = engine.makeConnection('[Channel' + channel +']', 'hotcue_' + (i + 1) + '_color', DJCi500.hotcueColorCallback);
+      DJCi500.padsEnabled[i + ((channel - 1) * 8)] = engine.connectControl('[Channel' + channel +']', 'hotcue_' + (i + 1) + '_enabled', "DJCi500.hotcueEnabledCallback", true);
+    }
+  }
+}
+
+// Hotcue color callback
+// Setting the button to "no light" keeps it illuminated with a default
+// color. Setting it to gray as it is not used in Mixxx to identify a
+// non-set hotcue
+DJCi500.hotcueColorCallback = function(value, group, control) {
+  var channel = parseInt(group.charAt(8)) - 1;
+  print("Channel is " + channel);
+  print("Control received for hotcue color callback");
+  print(control);
+  var cueButton = parseInt(control.split('_')[1]);
+
+  if (value !== -1) {
+    print("Enabled, aiming for color " + value.toString(16));
+    var color = DJCi500.PadColorMapper.getValueForNearestColor(value);
+    print("Setting color " + color);
+    midi.sendShortMsg(0x96 + channel, cueButton - 1, color);
+  } else {
+    print("Disabled");
+    midi.sendShortMsg(0x96 + channel, cueButton - 1, 0x52);
+  }
+}
+
+DJCi500.hotcueEnabledCallback = function(value, group, control) {
+  var channel = parseInt(group.charAt(8)) - 1;
+  print("Channel is " + channel);
+  print("Control received for hotcue enable callback");
+  print(control);
+  var cueButton = parseInt(control.split('_')[1]);
+
+  if (value) {
+    print("Enabling");
+    var color = engine.getValue(group, "hotcue_" + cueButton + "_color");
+    var code = DJCi500.PadColorMapper.getValueForNearestColor(color);
+    print("Aiming for color " + color.toString(16) + " got code " + code);
+    midi.sendShortMsg(0x96 + channel, cueButton - 1, code);
+  } else {
+    print("Disabled");
+    midi.sendShortMsg(0x96 + channel, cueButton - 1, 0x52);
+  }
+}
+
+// Crossfader control, set the curve
+DJCi500.crossfaderSetCurve = function(channel, control, value, _status, _group) {
+    switch (value) {
+    case 0x7F:  // Picnic Bench / Fast Cut
+        engine.setValue("[Mixer Profile]", "xFaderMode", 0);
+        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.9);
+        engine.setValue("[Mixer Profile]", "xFaderCurve", 7.0);
+        break;
+    case 0x00:  // Constant Power
+        engine.setValue("[Mixer Profile]", "xFaderMode", 1);
+        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.3);
+        engine.setValue("[Mixer Profile]", "xFaderCurve", 0.6);
+    }
+}
+
+// Crossfader enable or disable
+DJCi500.crossfaderEnable = function(channel, control, value, _status, _group) {
+    switch (value) {
+    case 0x7F:  // Constant power
+        engine.setValue("[Mixer Profile]", "xFaderMode", 1);
+        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.3);
+        engine.setValue("[Mixer Profile]", "xFaderCurve", 0.6);
+        break;
+    case 0x00:  // Linear, instead of disabling Power
+        engine.setValue("[Mixer Profile]", "xFaderMode", 0);
+        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.4);
+        engine.setValue("[Mixer Profile]", "xFaderCurve", 0.9);
+    }
+}
+
+// Browser button. We move it to a custom JS function to avoid having to focus the Mixxx window for it to respond
+DJCi500.moveLibrary = function(channel, control, value, status, group) {
+  if (value > 0x3F) {
+    engine.setValue('[Playlist]', 'SelectTrackKnob', -1);
+  } else {
+    engine.setValue('[Playlist]', 'SelectTrackKnob', 1);
+  }
+}
 
 // The Vinyl button, used to enable or disable scratching on the jog wheels (One per deck).
 
@@ -265,6 +381,7 @@ DJCi500.bendWheel = function(channel, control, value, _status, _group) {
     engine.setValue(
         "[Channel" + channel + "]", "jog", interval * DJCi500.bendScale);
 };
+
 //Loop Encoder
 DJCi500.loopHalveDouble = function (channel, control, value, status, group) {
     if (value > 64) {
@@ -276,15 +393,15 @@ DJCi500.loopHalveDouble = function (channel, control, value, status, group) {
 
 // Ev3nt1ne code
 DJCi500.fx1D1Callback = function (value, group, control) {
-    DJCi500.FxD1Active[0] = value;
+  DJCi500.FxD1Active[0] = value;
 
-    //LED
-    if (DJCi500.FxD1Active[0] && DJCi500.FxD2Active[0])
-    {
-        midi.sendShortMsg(0x90, 0x14, 0x7F);
-    }
-    //XOR
-    /*
+  //LED
+  if (DJCi500.FxD1Active[0] && DJCi500.FxD2Active[0])
+  {
+    midi.sendShortMsg(0x90, 0x14, 0x7F);
+  }
+  //XOR
+  /*
     else if ((DJCi500.FxD1Active[0] && !DJCi500.FxD2Active[0]) || (!DJCi500.FxD1Active[0] && DJCi500.FxD2Active[0])) {
         if (!DJCi500.blinkingLed)
         {
@@ -292,78 +409,85 @@ DJCi500.fx1D1Callback = function (value, group, control) {
         }
         DJCi500.blinkingLed = DJCi500.blinkingLed + 1;
     }
-    // both 0
+  // both 0
     else {
     */
-    else if (!DJCi500.FxD1Active[0] && !DJCi500.FxD2Active[0]){
-        midi.sendShortMsg(0x90, 0x14, 0x0);
-    }
+  else if (!DJCi500.FxD1Active[0] && !DJCi500.FxD2Active[0]){
+    midi.sendShortMsg(0x90, 0x14, 0x0);
+  }
 
 };
+
 DJCi500.fx2D1Callback = function (value, group, control) {
-    DJCi500.FxD1Active[1] = value;
+  DJCi500.FxD1Active[1] = value;
 
-    //LED
-    if (DJCi500.FxD1Active[1] && DJCi500.FxD2Active[1])
-    {
-        midi.sendShortMsg(0x90, 0x15, 0x7F);
-    }
-    else if (!DJCi500.FxD1Active[1] && !DJCi500.FxD2Active[1]){
-        midi.sendShortMsg(0x90, 0x15, 0x0);
-    }
+  //LED
+  if (DJCi500.FxD1Active[1] && DJCi500.FxD2Active[1])
+  {
+    midi.sendShortMsg(0x90, 0x15, 0x7F);
+  }
+  else if (!DJCi500.FxD1Active[1] && !DJCi500.FxD2Active[1]){
+    midi.sendShortMsg(0x90, 0x15, 0x0);
+  }
 };
+
 DJCi500.fx3D1Callback = function (value, group, control) {
-    DJCi500.FxD1Active[2] = value;
+  DJCi500.FxD1Active[2] = value;
 
-    //LED
-    if (DJCi500.FxD1Active[2] && DJCi500.FxD2Active[2])
-    {
-        midi.sendShortMsg(0x90, 0x16, 0x7F);
-    }
-    else if (!DJCi500.FxD1Active[2] && !DJCi500.FxD2Active[2]){
-        midi.sendShortMsg(0x90, 0x16, 0x0);
-    }
+  //LED
+  if (DJCi500.FxD1Active[2] && DJCi500.FxD2Active[2])
+  {
+    midi.sendShortMsg(0x90, 0x16, 0x7F);
+  }
+  else if (!DJCi500.FxD1Active[2] && !DJCi500.FxD2Active[2]){
+    midi.sendShortMsg(0x90, 0x16, 0x0);
+  }
 };
+
 DJCi500.fx1D2Callback = function (value, group, control) {
-    DJCi500.FxD2Active[0] = value;
+  DJCi500.FxD2Active[0] = value;
 
-    //LED
-    if (DJCi500.FxD1Active[0] && DJCi500.FxD2Active[0])
-    {
-        midi.sendShortMsg(0x90, 0x14, 0x7F);
-    }
-    else if (!DJCi500.FxD1Active[0] && !DJCi500.FxD2Active[0]){
-        midi.sendShortMsg(0x90, 0x14, 0x0);
-    }
+  //LED
+  if (DJCi500.FxD1Active[0] && DJCi500.FxD2Active[0])
+  {
+    midi.sendShortMsg(0x90, 0x14, 0x7F);
+  }
+  else if (!DJCi500.FxD1Active[0] && !DJCi500.FxD2Active[0]){
+    midi.sendShortMsg(0x90, 0x14, 0x0);
+  }
 
 };
+
 DJCi500.fx2D2Callback = function (value, group, control) {
-    DJCi500.FxD2Active[1] = value;
+  DJCi500.FxD2Active[1] = value;
 
-    //LED
-    if (DJCi500.FxD1Active[1] && DJCi500.FxD2Active[1])
-    {
-        midi.sendShortMsg(0x90, 0x15, 0x7F);
-    }
-    else if (!DJCi500.FxD1Active[1] && !DJCi500.FxD2Active[1]){
-        midi.sendShortMsg(0x90, 0x15, 0x0);
-    }
+  //LED
+  if (DJCi500.FxD1Active[1] && DJCi500.FxD2Active[1])
+  {
+    midi.sendShortMsg(0x90, 0x15, 0x7F);
+  }
+  else if (!DJCi500.FxD1Active[1] && !DJCi500.FxD2Active[1]){
+    midi.sendShortMsg(0x90, 0x15, 0x0);
+  }
 };
+
 DJCi500.fx3D2Callback = function (value, group, control) {
-    DJCi500.FxD2Active[2] = value;
+  DJCi500.FxD2Active[2] = value;
 
-    //LED
-    if (DJCi500.FxD1Active[2] && DJCi500.FxD2Active[2])
-    {
-        midi.sendShortMsg(0x90, 0x16, 0x7F);
-    }
-    else if (!DJCi500.FxD1Active[2] && !DJCi500.FxD2Active[2]){
-        midi.sendShortMsg(0x90, 0x16, 0x0);
-    }
+  //LED
+  if (DJCi500.FxD1Active[2] && DJCi500.FxD2Active[2])
+  {
+    midi.sendShortMsg(0x90, 0x16, 0x7F);
+  }
+  else if (!DJCi500.FxD1Active[2] && !DJCi500.FxD2Active[2]){
+    midi.sendShortMsg(0x90, 0x16, 0x0);
+  }
 };
+
 DJCi500.fx4Callback = function (value, group, control) {
     //DJCi500.FxActive[0] = value;
 };
+
 DJCi500.filterKnob1 = function (channel, control, value, status, group) {
     var fx_active = (DJCi500.FxD1Active[0] || DJCi500.FxD1Active[1] || DJCi500.FxD1Active[2]);
     var deck_sel = (DJCi500.FxDeckSel == 0) || (DJCi500.FxDeckSel == 1);
@@ -377,6 +501,7 @@ DJCi500.filterKnob1 = function (channel, control, value, status, group) {
         engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
     }
 };
+
 DJCi500.filterKnob2 = function (channel, control, value, status, group) {
     var fx_active = (DJCi500.FxD2Active[0] || DJCi500.FxD2Active[1] || DJCi500.FxD2Active[2]);
     var deck_sel = (DJCi500.FxDeckSel == 0) || (DJCi500.FxDeckSel == 2);
@@ -414,6 +539,7 @@ DJCi500.Fx1Key = function (channel, control, value, status, group) {
     }
 
 };
+
 DJCi500.Fx2Key = function (channel, control, value, status, group) {
 
     if (value == 0x7F){
@@ -438,6 +564,7 @@ DJCi500.Fx2Key = function (channel, control, value, status, group) {
         }
     }
 };
+
 DJCi500.Fx3Key = function (channel, control, value, status, group) {
 
     if (value == 0x7F){
@@ -462,6 +589,7 @@ DJCi500.Fx3Key = function (channel, control, value, status, group) {
         }
     }
 };
+
 ////SHIFT
 DJCi500.ShiftFx1Key = function (channel, control, value, status, group) {
 
@@ -470,6 +598,7 @@ DJCi500.ShiftFx1Key = function (channel, control, value, status, group) {
         engine.setValue("[EffectRack1_EffectUnit2_Effect1]", "enabled", 0);
     }
 };
+
 DJCi500.ShiftFx2Key = function (channel, control, value, status, group) {
 
     if (value == 0x7F){
@@ -477,6 +606,7 @@ DJCi500.ShiftFx2Key = function (channel, control, value, status, group) {
         engine.setValue("[EffectRack1_EffectUnit2_Effect2]", "enabled", 0);
     }
 };
+
 DJCi500.ShiftFx3Key = function (channel, control, value, status, group) {
 
     if (value == 0x7F){
@@ -484,35 +614,38 @@ DJCi500.ShiftFx3Key = function (channel, control, value, status, group) {
         engine.setValue("[EffectRack1_EffectUnit2_Effect3]", "enabled", 0);
     }
 };
+
 ///Deck Select - FX4
 DJCi500.Fx4Key = function (channel, control, value, status, group) {
 
-    if (value == 0x7F){
-        DJCi500.FxDeckSel = DJCi500.FxDeckSel + 1;
-        if (DJCi500.FxDeckSel > 2)
-        {
-            DJCi500.FxDeckSel = 0;
-        }
-
-        //LED
-        if (DJCi500.FxDeckSel == 0)
-        {
-            midi.sendShortMsg(0x90, 0x17, 0x0);
-        }
-        else if (DJCi500.FxDeckSel == 1){
-            midi.sendShortMsg(0x90, 0x17, 0x7F);
-        }
+  if (value == 0x7F){
+    DJCi500.FxDeckSel = DJCi500.FxDeckSel + 1;
+    if (DJCi500.FxDeckSel > 2)
+    {
+      DJCi500.FxDeckSel = 0;
     }
+
+    //LED
+    if (DJCi500.FxDeckSel == 0)
+    {
+      midi.sendShortMsg(0x90, 0x17, 0x0);
+    }
+    else if (DJCi500.FxDeckSel == 1){
+      midi.sendShortMsg(0x90, 0x17, 0x7F);
+    }
+  }
 };
+
 DJCi500.ShiftFx4Key = function (channel, control, value, status, group) {
 
-    if (value == 0x7F){
-        DJCi500.FxDeckSel = 0;
+  if (value == 0x7F){
+    DJCi500.FxDeckSel = 0;
 
-        //LED
-        midi.sendShortMsg(0x90, 0x17, 0x0);
-    }
+    //LED
+    midi.sendShortMsg(0x90, 0x17, 0x0);
+  }
 };
+
 //Led
 DJCi500.blinkFxLed = function () {
 
@@ -695,6 +828,7 @@ DJCi500.blinkFxLed = function () {
 
 
 };
+
 ///Pad 7
 DJCi500.pitchUpTone = function (channel, control, value, status, group) {
     if (value == 0x7F){
@@ -706,6 +840,7 @@ DJCi500.pitchUpTone = function (channel, control, value, status, group) {
         midi.sendShortMsg(status, control, 0x78); //36 //24
     }
 };
+
 DJCi500.pitchDownTone = function (channel, control, value, status, group) {
     if (value == 0x7F){
         engine.setValue(group, "pitch_down", 1);
@@ -716,6 +851,7 @@ DJCi500.pitchDownTone = function (channel, control, value, status, group) {
         midi.sendShortMsg(status, control, 0x2);
     }
 };
+
 DJCi500.pitchUpSemiTone = function (channel, control, value, status, group) {
     if (value == 0x7F){
         engine.setValue(group, "pitch_up", 1);
@@ -725,6 +861,7 @@ DJCi500.pitchUpSemiTone = function (channel, control, value, status, group) {
         midi.sendShortMsg(status, control, 0x78); //78 //4C
     }
 };
+
 DJCi500.pitchDownSemiTone = function (channel, control, value, status, group) {
     if (value == 0x7F){
         engine.setValue(group, "pitch_down", 1);
@@ -767,6 +904,7 @@ DJCi500.pitchSliderIncrease = function (channel, control, value, status, group) 
         midi.sendShortMsg(status, control, 0x24); //36
     }
 };
+
 DJCi500.pitchSliderDecrease = function (channel, control, value, status, group) {
 
     if (value == 0x7F){
@@ -790,6 +928,7 @@ DJCi500.pitchSliderDecrease = function (channel, control, value, status, group) 
         midi.sendShortMsg(status, control, 0x37); //3B -- 33
     }
 };
+
 DJCi500.pitchSliderReset = function (channel, control, value, status, group) {
     if (value == 0x7F){
         var deck = 0;

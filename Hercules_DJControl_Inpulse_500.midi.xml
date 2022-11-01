@@ -39,6 +39,29 @@
 				<normal/>
 			</control>
 
+            <!-- Crossfader control -->
+            <control>
+                <group>[Mixer Profile]</group>
+                <key>DJCi500.crossfaderSetCurve</key>
+                <description>CROSS FADER CURVE</description>
+                <status>0x90</status>
+                <midino>0x18</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+
+            <control>
+                <group>[Mixer Profile]</group>
+                <key>DJCi500.crossfaderEnable</key>
+                <description>CROSS FADER ENABLE</description>
+                <status>0xB0</status>
+                <midino>0x0B</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+
 			<!-- NN's MIDI Channel 2 (0x91 Deck A - Standard MODE)-->
 
 			<!--Play-->
@@ -188,7 +211,7 @@
 					<normal />
 				</options>
 			</control>
-		<control>
+    		<control>
 				<group>[Channel1]</group>
 				<key>beatsync</key>
 				<description>Loop Encoder Push button Deck A</description>
@@ -2711,12 +2734,12 @@
 			<!--Browser encoder-->
 			<control>
 				<group>[Library]</group>
-				<key>MoveVertical</key>
+				<key>DJCi500.moveLibrary</key>
 				<description>Move Vertical (Browser Knob)</description>
 				<status>0xB0</status>
 				<midino>0x01</midino>
 				<options>
-					<selectknob />
+					<script-binding />
 				</options>
 			</control>
 			<control>
