@@ -243,8 +243,10 @@ DJCi500.hotcueEnabledCallback = function(value, group, control) {
     var color = engine.getValue(group, "hotcue_" + cueButton + "_color");
     var code = DJCi500.PadColorMapper.getValueForNearestColor(color);
     midi.sendShortMsg(0x96 + channel, cueButton - 1, code);
+    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, code);
   } else {
     midi.sendShortMsg(0x96 + channel, cueButton - 1, 0x52);
+    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, 0x52);
   }
 }
 
