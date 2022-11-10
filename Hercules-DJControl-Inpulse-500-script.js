@@ -167,9 +167,6 @@ DJCi500.init = function() {
   //var controlsToFunctions = {'beat_active': 'DJCi500.slicerBeatActive'};
   //script.bindConnections('[Channel1]', controlsToFunctions, true);
 
-  // Bind the hotcue colors
-  DJCi500.enableHotcueColors();
-
   // Ask the controller to send all current knob/slider values over MIDI, which will update
   // the corresponding GUI controls in MIXXX.
   midi.sendShortMsg(0xB0, 0x7F, 0x7F);
@@ -184,58 +181,69 @@ DJCi500.init = function() {
      midi.sendShortMsg(0x96+i, 0x46, 0x24);
    }
 
+  // Bind the hotcue colors
+  DJCi500.enableHotcueColors();
+  // Set base color for sampler buttons
+  DJCi500.enableSamplerBaseColors();
+
   DJCi500.FxLedtimer = engine.beginTimer(250,"DJCi500.blinkFxLed()");
 };
+
+// Enable base sampler color
+DJCi500.enableSamplerBaseColors = function () {
+  for (var channel = 1; channel <= 2; channel++) { 
+    for (var i = 0; i <= 7; i++) {
+      // Make them all light up in blue by default
+      midi.sendShortMsg(0x96 + (channel - 1), 0x30 + i, 0x00);
+    }
+  }
+}
 
 // Enable Hotcue colors
 DJCi500.enableHotcueColors = function () {
   DJCi500.padsColor = {};
   DJCi500.padsEnabled = {};
+
   for (var channel = 1; channel <= 2; channel++) { 
     for (var i = 0; i <= 7; i++) {
       DJCi500.padsColor[i + ((channel - 1) * 8)] = engine.makeConnection('[Channel' + channel +']', 'hotcue_' + (i + 1) + '_color', DJCi500.hotcueColorCallback);
-      DJCi500.padsEnabled[i + ((channel - 1) * 8)] = engine.connectControl('[Channel' + channel +']', 'hotcue_' + (i + 1) + '_enabled', "DJCi500.hotcueEnabledCallback", true);
+      DJCi500.padsEnabled[i + ((channel - 1) * 8)] = engine.makeConnection('[Channel' + channel +']', 'hotcue_' + (i + 1) + '_enabled', DJCi500.hotcueEnabledCallback);
+      // Make the default light gray, a dim white
+      midi.sendShortMsg(0x96 + (channel - 1), 0x00 + i, 0x52);
+      // Send the same color to the shifted cue button
+      midi.sendShortMsg(0x96 + (channel - 1), 0x08 + i, 0x52);
     }
   }
 }
 
 // Hotcue color callback
-// Setting the button to "no light" keeps it illuminated with a default
-// color. Setting it to gray as it is not used in Mixxx to identify a
-// non-set hotcue
+// Setting it to gray or dim white as it is not used in Mixxx 
+// color palette to identify a non-set hotcue
 DJCi500.hotcueColorCallback = function(value, group, control) {
   var channel = parseInt(group.charAt(8)) - 1;
-  print("Channel is " + channel);
-  print("Control received for hotcue color callback");
-  print(control);
   var cueButton = parseInt(control.split('_')[1]);
 
   if (value !== -1) {
-    print("Enabled, aiming for color " + value.toString(16));
     var color = DJCi500.PadColorMapper.getValueForNearestColor(value);
-    print("Setting color " + color);
     midi.sendShortMsg(0x96 + channel, cueButton - 1, color);
+    // Send the same color to the shifted cue button
+    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, color);
   } else {
-    print("Disabled");
     midi.sendShortMsg(0x96 + channel, cueButton - 1, 0x52);
+    // Send the same color to the shifted cue button
+    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, 0x52);
   }
 }
 
 DJCi500.hotcueEnabledCallback = function(value, group, control) {
   var channel = parseInt(group.charAt(8)) - 1;
-  print("Channel is " + channel);
-  print("Control received for hotcue enable callback");
-  print(control);
   var cueButton = parseInt(control.split('_')[1]);
 
   if (value) {
-    print("Enabling");
     var color = engine.getValue(group, "hotcue_" + cueButton + "_color");
     var code = DJCi500.PadColorMapper.getValueForNearestColor(color);
-    print("Aiming for color " + color.toString(16) + " got code " + code);
     midi.sendShortMsg(0x96 + channel, cueButton - 1, code);
   } else {
-    print("Disabled");
     midi.sendShortMsg(0x96 + channel, cueButton - 1, 0x52);
   }
 }
@@ -243,15 +251,11 @@ DJCi500.hotcueEnabledCallback = function(value, group, control) {
 // Crossfader control, set the curve
 DJCi500.crossfaderSetCurve = function(channel, control, value, _status, _group) {
     switch (value) {
-    case 0x7F:  // Picnic Bench / Fast Cut
-        engine.setValue("[Mixer Profile]", "xFaderMode", 0);
-        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.9);
-        engine.setValue("[Mixer Profile]", "xFaderCurve", 7.0);
+    case 0x7F:  // Scratching
+        script.crossfaderCurve(64,0,32);
         break;
     case 0x00:  // Constant Power
-        engine.setValue("[Mixer Profile]", "xFaderMode", 1);
-        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.3);
-        engine.setValue("[Mixer Profile]", "xFaderCurve", 0.6);
+        script.crossfaderCurve(64,0,127);
     }
 }
 
@@ -259,14 +263,10 @@ DJCi500.crossfaderSetCurve = function(channel, control, value, _status, _group) 
 DJCi500.crossfaderEnable = function(channel, control, value, _status, _group) {
     switch (value) {
     case 0x7F:  // Constant power
-        engine.setValue("[Mixer Profile]", "xFaderMode", 1);
-        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.3);
-        engine.setValue("[Mixer Profile]", "xFaderCurve", 0.6);
+        script.crossfaderCurve(64,0,127);
         break;
-    case 0x00:  // Linear, instead of disabling Power
-        engine.setValue("[Mixer Profile]", "xFaderMode", 0);
-        engine.setValue("[Mixer Profile]", "xFaderCalibration", 0.4);
-        engine.setValue("[Mixer Profile]", "xFaderCurve", 0.9);
+    case 0x00:  // Scratching instead of disabling Power
+        script.crossfaderCurve(64,0,32);
     }
 }
 

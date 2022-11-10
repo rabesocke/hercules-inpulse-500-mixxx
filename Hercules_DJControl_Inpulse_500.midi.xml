@@ -193,7 +193,7 @@
 			<!--Loop In/Out-->
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_activate</key>
+				<key>beatloop_4_activate</key>
 				<description>Loop In button</description>
 				<status>0x91</status>
 				<midino>0x09</midino>
@@ -352,7 +352,7 @@
 			<!--Loop In/Out-->
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_activate</key>
+				<key>beatloop_4_activate</key>
 				<description>Loop In button</description>
 				<status>0x92</status>
 				<midino>0x09</midino>
@@ -3460,7 +3460,7 @@
 				<on>0x05</on>
 				<off>0x10</off>
 			</output>
-			<!-- LED Assitant button-->
+			<!-- LED Assistant button-->
 			<output>
 				<group>[AutoDJ]</group>
 				<key>enabled</key>
@@ -3542,328 +3542,6 @@
 				<off>0x0</off>
 			</output>
 			-->
-			<!--LED HOT CUE (Normal Mode)-->
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_1_enabled</key>
-				<description>Hotcue 1 (Pad 1)</description>
-				<status>0x96</status>
-				<midino>0x00</midino>
-				<on>0x60</on>
-				<off>0x40</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_2_enabled</key>
-				<description>Hotcue 2 (Pad 2)</description>
-				<status>0x96</status>
-				<midino>0x01</midino>
-				<on>0x1C</on>
-				<off>0x10</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_3_enabled</key>
-				<description>Hotcue 3 (Pad 3)</description>
-				<status>0x96</status>
-				<midino>0x02</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_4_enabled</key>
-				<description>Hotcue 4 (Pad 4)</description>
-				<status>0x96</status>
-				<midino>0x03</midino>
-				<on>0x7C</on>
-				<off>0x50</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_5_enabled</key>
-				<description>Hotcue 5 (Pad 5)</description>
-				<status>0x96</status>
-				<midino>0x04</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_6_enabled</key>
-				<description>Hotcue 6 (Pad 6)</description>
-				<status>0x96</status>
-				<midino>0x05</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_7_enabled</key>
-				<description>Hotcue 7 (Pad 7)</description>
-				<status>0x96</status>
-				<midino>0x06</midino>
-				<on>0x73</on>
-				<off>0x7B</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_8_enabled</key>
-				<description>Hotcue 8 (Pad 8)</description>
-				<status>0x96</status>
-				<midino>0x07</midino>
-				<on>0x7F</on>
-				<off>0x52</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_1_enabled</key>
-				<description>Hotcue 1 (Pad 1)</description>
-				<status>0x97</status>
-				<midino>0x00</midino>
-				<on>0x60</on>
-				<off>0x40</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_2_enabled</key>
-				<description>Hotcue 2 (Pad 2)</description>
-				<status>0x97</status>
-				<midino>0x01</midino>
-				<on>0x1C</on>
-				<off>0x10</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_3_enabled</key>
-				<description>Hotcue 3 (Pad 3)</description>
-				<status>0x97</status>
-				<midino>0x02</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_4_enabled</key>
-				<description>Hotcue 4 (Pad 4)</description>
-				<status>0x97</status>
-				<midino>0x03</midino>
-				<on>0x7C</on>
-				<off>0x50</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_5_enabled</key>
-				<description>Hotcue 5 (Pad 5)</description>
-				<status>0x97</status>
-				<midino>0x04</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_6_enabled</key>
-				<description>Hotcue 6 (Pad 6)</description>
-				<status>0x97</status>
-				<midino>0x05</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_7_enabled</key>
-				<description>Hotcue 7 (Pad 7)</description>
-				<status>0x97</status>
-				<midino>0x06</midino>
-				<on>0x73</on>
-				<off>0x7B</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_8_enabled</key>
-				<description>Hotcue 8 (Pad 8)</description>
-				<status>0x97</status>
-				<midino>0x07</midino>
-				<on>0x7F</on>
-				<off>0x52</off>
-				<minimum>0.5</minimum>
-			</output>
-			<!--LED HOT CUE (SHIFT Mode)-->
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_1_enabled</key>
-				<description>Hotcue 1 (Pad 1 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x08</midino>
-				<on>0x60</on>
-				<off>0x40</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_2_enabled</key>
-				<description>Hotcue 2 (Pad 2 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x09</midino>
-				<on>0x1C</on>
-				<off>0x10</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_3_enabled</key>
-				<description>Hotcue 3 (Pad 3 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x0A</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_4_enabled</key>
-				<description>Hotcue 4 (Pad 4 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x0B</midino>
-				<on>0x7C</on>
-				<off>0x50</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_5_enabled</key>
-				<description>Hotcue 5 (Pad 5 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x0C</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_6_enabled</key>
-				<description>Hotcue 6 (Pad 6 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x0D</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_7_enabled</key>
-				<description>Hotcue 7 (Pad 7 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x0E</midino>
-				<on>0x73</on>
-				<off>0x7B</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>hotcue_8_enabled</key>
-				<description>Hotcue 8 (Pad 8 + L-Shift)</description>
-				<status>0x96</status>
-				<midino>0x0F</midino>
-				<on>0x7F</on>
-				<off>0x52</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_1_enabled</key>
-				<description>Hotcue 1 (Pad 1 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x08</midino>
-				<on>0x60</on>
-				<off>0x40</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_2_enabled</key>
-				<description>Hotcue 2 (Pad 2 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x09</midino>
-				<on>0x1C</on>
-				<off>0x10</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_3_enabled</key>
-				<description>Hotcue 3 (Pad 3 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x0A</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_4_enabled</key>
-				<description>Hotcue 4 (Pad 4 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x0B</midino>
-				<on>0x7C</on>
-				<off>0x50</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_5_enabled</key>
-				<description>Hotcue 5 (Pad 5 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x0C</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_6_enabled</key>
-				<description>Hotcue 6 (Pad 6 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x0D</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_7_enabled</key>
-				<description>Hotcue 7 (Pad 7 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x0E</midino>
-				<on>0x73</on>
-				<off>0x7B</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>hotcue_8_enabled</key>
-				<description>Hotcue 8 (Pad 8 + R-Shift)</description>
-				<status>0x97</status>
-				<midino>0x0F</midino>
-				<on>0x7F</on>
-				<off>0x52</off>
-				<minimum>0.5</minimum>
-			</output>
 			<!--LED Roll-->
 			<output>
 				<group>[Channel1]</group>
@@ -3872,7 +3550,7 @@
 				<status>0x96</status>
 				<midino>0x10</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3882,7 +3560,7 @@
 				<status>0x96</status>
 				<midino>0x11</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3892,7 +3570,7 @@
 				<status>0x96</status>
 				<midino>0x12</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3902,7 +3580,7 @@
 				<status>0x96</status>
 				<midino>0x13</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3912,7 +3590,7 @@
 				<status>0x96</status>
 				<midino>0x14</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3922,7 +3600,7 @@
 				<status>0x96</status>
 				<midino>0x15</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3932,7 +3610,7 @@
 				<status>0x96</status>
 				<midino>0x16</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3942,7 +3620,7 @@
 				<status>0x96</status>
 				<midino>0x17</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3952,7 +3630,7 @@
 				<status>0x97</status>
 				<midino>0x10</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3962,7 +3640,7 @@
 				<status>0x97</status>
 				<midino>0x11</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3972,7 +3650,7 @@
 				<status>0x97</status>
 				<midino>0x12</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3982,7 +3660,7 @@
 				<status>0x97</status>
 				<midino>0x13</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3992,7 +3670,7 @@
 				<status>0x97</status>
 				<midino>0x14</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4002,7 +3680,7 @@
 				<status>0x97</status>
 				<midino>0x15</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4012,7 +3690,7 @@
 				<status>0x97</status>
 				<midino>0x16</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4022,7 +3700,7 @@
 				<status>0x97</status>
 				<midino>0x17</midino>
 				<on>0x1C</on>
-				<off>0x08</off>
+				<off>0x60</off>
 				<minimum>0.5</minimum>
 			</output>
 
@@ -4313,7 +3991,6 @@
 
 
 			<!--LED BEATJUMP PAD 8-->
-			<!--
 			<output>
 				<group>[Channel1]</group>
 				<key>beatjump_1_backward</key>
@@ -4474,9 +4151,9 @@
 				<off>0x4C</off>
 				<minimum>0.5</minimum>
 			</output>
-			-->
 
 			<!--LED SAMPLER PAD 8-->
+            <!--
 			<output>
 				<group>[Sampler1]</group>
 				<key>play_indicator</key>
@@ -4637,17 +4314,17 @@
 				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
+            -->
 
 			<!--LED SAMPLER PAD 4-->
-			<!--
 			<output>
 				<group>[Sampler1]</group>
 				<key>play_indicator</key>
 				<description>(Pad 1 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x30</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4656,8 +4333,8 @@
 				<description>(Pad 1 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x30</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4666,8 +4343,8 @@
 				<description>(Pad 2 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x31</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4676,8 +4353,8 @@
 				<description>(Pad 2 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x31</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4686,8 +4363,8 @@
 				<description>(Pad 3 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x32</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4696,8 +4373,8 @@
 				<description>(Pad 3 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x32</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4706,8 +4383,8 @@
 				<description>(Pad 4 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x33</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4716,8 +4393,8 @@
 				<description>(Pad 4 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x33</midino>
-				<on>0x03</on>
-				<off>0x02</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4726,8 +4403,8 @@
 				<description>(Pad 5 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x34</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4736,8 +4413,8 @@
 				<description>(Pad 5 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x34</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4746,8 +4423,8 @@
 				<description>(Pad 6 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x35</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4756,8 +4433,8 @@
 				<description>(Pad 6 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x35</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4766,8 +4443,8 @@
 				<description>(Pad 7 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x36</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4776,8 +4453,8 @@
 				<description>(Pad 7 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x36</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4786,8 +4463,8 @@
 				<description>(Pad 8 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x37</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4796,12 +4473,171 @@
 				<description>(Pad 4 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x37</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
+				<on>0x74</on>
+				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
-			-->
-
+        <!-- Sampler loaded sample -->
+			<output>
+				<group>[Sampler1]</group>
+				<key>track_loaded</key>
+				<description>(Pad 1 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x30</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler1]</group>
+				<key>track_loaded</key>
+				<description>(Pad 1 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x30</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler2]</group>
+				<key>track_loaded</key>
+				<description>(Pad 2 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x31</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler2]</group>
+				<key>track_loaded</key>
+				<description>(Pad 2 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x31</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler3]</group>
+				<key>track_loaded</key>
+				<description>(Pad 3 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x32</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler3]</group>
+				<key>track_loaded</key>
+				<description>(Pad 3 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x32</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler4]</group>
+				<key>track_loaded</key>
+				<description>(Pad 4 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x33</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler4]</group>
+				<key>track_loaded</key>
+				<description>(Pad 4 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x33</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler5]</group>
+				<key>track_loaded</key>
+				<description>(Pad 5 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x34</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler5]</group>
+				<key>track_loaded</key>
+				<description>(Pad 5 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x34</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler6]</group>
+				<key>track_loaded</key>
+				<description>(Pad 6 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x35</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler6]</group>
+				<key>track_loaded</key>
+				<description>(Pad 6 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x35</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler7]</group>
+				<key>track_loaded</key>
+				<description>(Pad 7 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x36</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler7]</group>
+				<key>track_loaded</key>
+				<description>(Pad 7 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x36</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler8]</group>
+				<key>track_loaded</key>
+				<description>(Pad 8 DECK A)</description>
+				<status>0x96</status>
+				<midino>0x37</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
+			<output>
+				<group>[Sampler8]</group>
+				<key>track_loaded</key>
+				<description>(Pad 4 DECK B)</description>
+				<status>0x97</status>
+				<midino>0x37</midino>
+				<on>0x03</on>
+				<off>0x00</off>
+				<minimum>0.5</minimum>
+			</output>
 
 		</outputs>
 	</controller>
