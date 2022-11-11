@@ -42,8 +42,8 @@
             <!-- Crossfader control -->
             <control>
                 <group>[Mixer Profile]</group>
-                <key>DJCi500.crossfaderSetCurve</key>
-                <description>CROSS FADER CURVE</description>
+                <key>DJCi500.crossfaderEnable</key>
+                <description>CROSS FADER ENABLE</description>
                 <status>0x90</status>
                 <midino>0x18</midino>
                 <options>
@@ -53,8 +53,8 @@
 
             <control>
                 <group>[Mixer Profile]</group>
-                <key>DJCi500.crossfaderEnable</key>
-                <description>CROSS FADER ENABLE</description>
+                <key>DJCi500.crossfaderSetCurve</key>
+                <description>CROSS FADER SET CURVE</description>
                 <status>0xB0</status>
                 <midino>0x0B</midino>
                 <options>
@@ -2723,12 +2723,12 @@
 			<!--Crossfader-->
 			<control>
 				<group>[Master]</group>
-				<key>crossfader</key>
+				<key>DJCi500.crossfader</key>
 				<description>Crossfader</description>
 				<status>0xB0</status>
 				<midino>0x00</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Browser encoder-->
@@ -3706,6 +3706,7 @@
 
 
 			<!--LED BEATJUMP PAD 4-->
+            <!--
 			<output>
 				<group>[Channel1]</group>
 				<key>beatjump_1_backward</key>
@@ -3866,8 +3867,10 @@
 				<off>0x4C</off>
 				<minimum>0.5</minimum>
 			</output>
+            -->
 
 			<!-- SHIFT -->
+            <!--
 			<output>
 				<group>[Channel1]</group>
 				<key>beatjump_16_backward</key>
@@ -3988,6 +3991,7 @@
 				<off>0x33</off>
 				<minimum>0.5</minimum>
 			</output>
+            -->
 
 
 			<!--LED BEATJUMP PAD 8-->
@@ -4477,168 +4481,6 @@
 				<off>0x03</off>
 				<minimum>0.5</minimum>
 			</output>
-        <!-- Sampler loaded sample -->
-			<output>
-				<group>[Sampler1]</group>
-				<key>track_loaded</key>
-				<description>(Pad 1 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x30</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler1]</group>
-				<key>track_loaded</key>
-				<description>(Pad 1 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x30</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler2]</group>
-				<key>track_loaded</key>
-				<description>(Pad 2 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x31</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler2]</group>
-				<key>track_loaded</key>
-				<description>(Pad 2 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x31</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler3]</group>
-				<key>track_loaded</key>
-				<description>(Pad 3 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x32</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler3]</group>
-				<key>track_loaded</key>
-				<description>(Pad 3 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x32</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler4]</group>
-				<key>track_loaded</key>
-				<description>(Pad 4 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x33</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler4]</group>
-				<key>track_loaded</key>
-				<description>(Pad 4 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x33</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler5]</group>
-				<key>track_loaded</key>
-				<description>(Pad 5 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x34</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler5]</group>
-				<key>track_loaded</key>
-				<description>(Pad 5 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x34</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler6]</group>
-				<key>track_loaded</key>
-				<description>(Pad 6 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x35</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler6]</group>
-				<key>track_loaded</key>
-				<description>(Pad 6 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x35</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler7]</group>
-				<key>track_loaded</key>
-				<description>(Pad 7 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x36</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler7]</group>
-				<key>track_loaded</key>
-				<description>(Pad 7 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x36</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler8]</group>
-				<key>track_loaded</key>
-				<description>(Pad 8 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x37</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler8]</group>
-				<key>track_loaded</key>
-				<description>(Pad 4 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x37</midino>
-				<on>0x03</on>
-				<off>0x00</off>
-				<minimum>0.5</minimum>
-			</output>
-
 		</outputs>
 	</controller>
 </MixxxMIDIPreset>

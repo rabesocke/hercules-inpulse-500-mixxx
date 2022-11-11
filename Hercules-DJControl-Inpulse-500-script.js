@@ -131,6 +131,9 @@ DJCi500.init = function() {
 
   DJCi500.AutoHotcueColors = true;
 
+  // Take care of the status of the crossfader status
+  DJCi500.crossfaderEnabled = true;
+
   // Turn On Vinyl buttons LED(one for each deck).
   midi.sendShortMsg(0x91, 0x03, 0x7F);
   midi.sendShortMsg(0x92, 0x03, 0x7F);
@@ -184,7 +187,7 @@ DJCi500.init = function() {
   // Bind the hotcue colors
   DJCi500.enableHotcueColors();
   // Set base color for sampler buttons
-  DJCi500.enableSamplerBaseColors();
+  // DJCi500.enableSamplerBaseColors();
 
   DJCi500.FxLedtimer = engine.beginTimer(250,"DJCi500.blinkFxLed()");
 };
@@ -252,24 +255,32 @@ DJCi500.hotcueEnabledCallback = function(value, group, control) {
 
 // Crossfader control, set the curve
 DJCi500.crossfaderSetCurve = function(channel, control, value, _status, _group) {
-    switch (value) {
-    case 0x7F:  // Scratching
-        script.crossfaderCurve(64,0,32);
-        break;
-    case 0x00:  // Constant Power
-        script.crossfaderCurve(64,0,127);
-    }
+  switch(value) {
+    case 0x00:
+      // Mix
+      script.crossfaderCurve(0,0,127);
+      break;
+    case 0x7F:
+      // Scratch
+      script.crossfaderCurve(127,0,127);
+  }
 }
 
 // Crossfader enable or disable
 DJCi500.crossfaderEnable = function(channel, control, value, _status, _group) {
-    switch (value) {
-    case 0x7F:  // Constant power
-        script.crossfaderCurve(64,0,127);
-        break;
-    case 0x00:  // Scratching instead of disabling Power
-        script.crossfaderCurve(64,0,32);
-    }
+  if(value) {  
+    DJCi500.crossfaderEnabled = true;
+  } else {
+    DJCi500.crossfaderEnabled = false;
+    engine.setValue("[Master]", "crossfader", 0);    // Set the crossfader in the middle
+  }
+}
+
+// Crossfader function
+DJCi500.crossfader = function(channel, control, value, status, group) {
+  if (DJCi500.crossfaderEnabled) {
+    engine.setValue(group, "crossfader", (value/64)-1);
+  }
 }
 
 // Browser button. We move it to a custom JS function to avoid having to focus the Mixxx window for it to respond
