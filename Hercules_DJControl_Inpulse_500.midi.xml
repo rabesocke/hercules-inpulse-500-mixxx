@@ -783,7 +783,7 @@
 			<!--Pad MODE 2 - Loop-->
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_0.125_toggle</key>
+				<key>beatlooproll_0.125_activate</key>
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x96</status>
 				<midino>0x10</midino>
@@ -793,7 +793,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_0.25_toggle</key>
+				<key>beatlooproll_0.25_activate</key>
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x96</status>
 				<midino>0x11</midino>
@@ -803,7 +803,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_0.5_toggle</key>
+				<key>beatlooproll_0.5_activate</key>
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x96</status>
 				<midino>0x12</midino>
@@ -813,7 +813,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_1_toggle</key>
+				<key>beatlooproll_1_activate</key>
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x96</status>
 				<midino>0x13</midino>
@@ -823,7 +823,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_2_toggle</key>
+				<key>beatlooproll_2_activate</key>
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x96</status>
 				<midino>0x14</midino>
@@ -833,7 +833,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_4_toggle</key>
+				<key>beatlooproll_4_activate</key>
 				<description>Loop 2 Beat (Pad 6)</description>
 				<status>0x96</status>
 				<midino>0x15</midino>
@@ -843,7 +843,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_8_toggle</key>
+				<key>beatlooproll_8_activate</key>
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x96</status>
 				<midino>0x16</midino>
@@ -853,7 +853,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatloop_16_toggle</key>
+				<key>beatlooproll_16_activate</key>
 				<description>Loop 2 Beat (Pad 8)</description>
 				<status>0x96</status>
 				<midino>0x17</midino>
@@ -1869,7 +1869,7 @@
 			<!--Pad MODE 2 - Loop-->
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_0.125_toggle</key>
+				<key>beatlooproll_0.125_activate</key>
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x97</status>
 				<midino>0x10</midino>
@@ -1879,7 +1879,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_0.25_toggle</key>
+				<key>beatlooproll_0.25_activate</key>
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x97</status>
 				<midino>0x11</midino>
@@ -1889,7 +1889,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_0.5_toggle</key>
+				<key>beatlooproll_0.5_activate</key>
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x97</status>
 				<midino>0x12</midino>
@@ -1899,7 +1899,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_1_toggle</key>
+				<key>beatlooproll_1_activate</key>
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x97</status>
 				<midino>0x13</midino>
@@ -1909,7 +1909,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_2_toggle</key>
+				<key>beatlooproll_2_activate</key>
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x97</status>
 				<midino>0x14</midino>
@@ -1919,7 +1919,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_4_toggle</key>
+				<key>beatlooproll_4_activate</key>
 				<description>Loop 2 Beat (Pad 6)</description>
 				<status>0x97</status>
 				<midino>0x15</midino>
@@ -1929,7 +1929,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_8_toggle</key>
+				<key>beatlooproll_8_activate</key>
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x97</status>
 				<midino>0x16</midino>
@@ -1939,7 +1939,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatloop_16_toggle</key>
+				<key>beatlooproll_16_activate</key>
 				<description>Loop 2 Beat (Pad 8)</description>
 				<status>0x97</status>
 				<midino>0x17</midino>
@@ -3549,8 +3549,8 @@
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x96</status>
 				<midino>0x10</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3559,8 +3559,8 @@
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x96</status>
 				<midino>0x11</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3569,8 +3569,8 @@
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x96</status>
 				<midino>0x12</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3579,8 +3579,8 @@
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x96</status>
 				<midino>0x13</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3589,8 +3589,8 @@
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x96</status>
 				<midino>0x14</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3599,8 +3599,8 @@
 				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x96</status>
 				<midino>0x15</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3609,8 +3609,8 @@
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x96</status>
 				<midino>0x16</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3619,8 +3619,8 @@
 				<description>Loop 16 Beat (Pad 8)</description>
 				<status>0x96</status>
 				<midino>0x17</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3629,8 +3629,8 @@
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x97</status>
 				<midino>0x10</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3639,8 +3639,8 @@
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x97</status>
 				<midino>0x11</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3649,8 +3649,8 @@
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x97</status>
 				<midino>0x12</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3659,8 +3659,8 @@
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x97</status>
 				<midino>0x13</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3669,8 +3669,8 @@
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x97</status>
 				<midino>0x14</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3679,8 +3679,8 @@
 				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x97</status>
 				<midino>0x15</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3689,8 +3689,8 @@
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x97</status>
 				<midino>0x16</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -3699,8 +3699,8 @@
 				<description>Loop 16 Beat (Pad 8)</description>
 				<status>0x97</status>
 				<midino>0x17</midino>
-				<on>0x1C</on>
-				<off>0x60</off>
+				<on>0x5C</on>
+				<off>0x30</off>
 				<minimum>0.5</minimum>
 			</output>
 
@@ -4327,8 +4327,8 @@
 				<description>(Pad 1 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x30</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4337,8 +4337,8 @@
 				<description>(Pad 1 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x30</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4347,8 +4347,8 @@
 				<description>(Pad 2 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x31</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4357,8 +4357,8 @@
 				<description>(Pad 2 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x31</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4367,8 +4367,8 @@
 				<description>(Pad 3 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x32</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4377,8 +4377,8 @@
 				<description>(Pad 3 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x32</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4387,8 +4387,8 @@
 				<description>(Pad 4 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x33</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4397,8 +4397,8 @@
 				<description>(Pad 4 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x33</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4407,8 +4407,8 @@
 				<description>(Pad 5 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x34</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4417,8 +4417,8 @@
 				<description>(Pad 5 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x34</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4427,8 +4427,8 @@
 				<description>(Pad 6 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x35</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4437,8 +4437,8 @@
 				<description>(Pad 6 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x35</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4447,8 +4447,8 @@
 				<description>(Pad 7 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x36</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4457,8 +4457,8 @@
 				<description>(Pad 7 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x36</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4467,8 +4467,8 @@
 				<description>(Pad 8 DECK A)</description>
 				<status>0x96</status>
 				<midino>0x37</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
@@ -4477,8 +4477,8 @@
 				<description>(Pad 4 DECK B)</description>
 				<status>0x97</status>
 				<midino>0x37</midino>
-				<on>0x74</on>
-				<off>0x03</off>
+				<on>0x63</on>
+				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 		</outputs>
