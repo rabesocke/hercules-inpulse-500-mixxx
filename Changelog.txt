@@ -1,3 +1,13 @@
+8:
+	Hotcues now react to the colors of mix.
+	Returned the sampler to the pad 4 (if we want this to be accepted in mixxx
+	repo, we should adjust to the labels)
+
+	Loop buttons now light in red. 
+	Sampler light in blue, yellow when playing.
+	Crossfader curve setting is working.
+	Browser wheel now issues SelectTrackKnob to avoid having to focus on Mixxx
+	to move around songs.
 
 7:
 	Added BeatAlign and Tempo OK
