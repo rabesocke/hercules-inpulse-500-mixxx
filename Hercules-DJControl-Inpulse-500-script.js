@@ -186,18 +186,44 @@ DJCi500.init = function() {
 
   // Bind the hotcue colors
   DJCi500.enableHotcueColors();
-  // Set base color for sampler buttons
-  // DJCi500.enableSamplerBaseColors();
+  // Bind the sampler buttons
+  DJCi500.enableSamplerButtons();
 
   DJCi500.FxLedtimer = engine.beginTimer(250,"DJCi500.blinkFxLed()");
 };
 
-// Enable base sampler color
-DJCi500.enableSamplerBaseColors = function () {
+// Enable base sampler buttons
+DJCi500.enableSamplerButtons = function () {
+  DJCi500.samplerButtonsDeckA = {};
+  DJCi500.samplerButtonsDeckB = {};
+
   for (var channel = 1; channel <= 2; channel++) { 
     for (var i = 0; i <= 7; i++) {
-      // Make them all light up in blue by default
-      midi.sendShortMsg(0x96 + (channel - 1), 0x30 + i, 0x00);
+      if (channel === 1) {
+        DJCi500.samplerButtonsDeckA[i] = new components.SamplerButton({
+          midi: [0x96, 0x30 + i],
+          number: i + 1,
+          shiftOffset: 8,
+          shiftControl: true,
+          sendShifted: true,
+          loaded: 0x42,
+          empty: 0x00,
+          playing: 0x63,
+          looping: 0x74,
+        });
+      } else {
+        DJCi500.samplerButtonsDeckB[i] = new components.SamplerButton({
+          midi: [0x97, 0x30 + i],
+          number: i + 1,
+          shiftOffset: 8,
+          shiftControl: true,
+          sendShifted: true,
+          loaded: 0x42,
+          empty: 0x00,
+          playing: 0x63,
+          looping: 0x74,
+        });
+      }
     }
   }
 }

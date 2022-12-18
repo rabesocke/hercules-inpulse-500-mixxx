@@ -780,10 +780,11 @@
 					<normal />
 				</options>
 			</control>
+
 			<!--Pad MODE 2 - Loop-->
 			<control>
 				<group>[Channel1]</group>
-				<key>beatlooproll_0.125_activate</key>
+				<key>beatloop_0.125_activate</key>
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x96</status>
 				<midino>0x10</midino>
@@ -793,7 +794,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatlooproll_0.25_activate</key>
+				<key>beatloop_0.25_activate</key>
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x96</status>
 				<midino>0x11</midino>
@@ -803,7 +804,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatlooproll_0.5_activate</key>
+				<key>beatloop_0.5_activate</key>
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x96</status>
 				<midino>0x12</midino>
@@ -813,7 +814,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatlooproll_1_activate</key>
+				<key>beatloop_1_activate</key>
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x96</status>
 				<midino>0x13</midino>
@@ -823,7 +824,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatlooproll_2_activate</key>
+				<key>beatloop_2_activate</key>
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x96</status>
 				<midino>0x14</midino>
@@ -833,7 +834,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatlooproll_4_activate</key>
+				<key>beatloop_4_activate</key>
 				<description>Loop 2 Beat (Pad 6)</description>
 				<status>0x96</status>
 				<midino>0x15</midino>
@@ -843,7 +844,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>beatlooproll_8_activate</key>
+				<key>beatloop_8_activate</key>
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x96</status>
 				<midino>0x16</midino>
@@ -853,691 +854,406 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
+                <key>beatloop_16_activate</key>
+                <description>Loop 2 Beat (Pad 8)</description>
+                <status>0x96</status>
+                <midino>0x17</midino>
+                <options>
+                    <normal />
+                </options>
+            </control>
+
+            <!--Pad MODE 3 - Slicer-->
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 1</description>
+                <status>0x96</status>
+                <midino>0x20</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 2</description>
+                <status>0x96</status>
+                <midino>0x21</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 3</description>
+                <status>0x96</status>
+                <midino>0x22</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 4</description>
+                <status>0x96</status>
+                <midino>0x23</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 5</description>
+                <status>0x96</status>
+                <midino>0x24</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 6</description>
+                <status>0x96</status>
+                <midino>0x25</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 7</description>
+                <status>0x96</status>
+                <midino>0x26</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.slicerButtons</key>
+                <description>PAD 8</description>
+                <status>0x96</status>
+                <midino>0x27</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+
+            <!--Pad MODE 4 - Sampler-->
+            <control>
+                <group>[Sampler1]</group>
+                <key>DJCi500.samplerButtonsDeckA[0].input</key>
+                <description>PAD 1</description>
+                <status>0x96</status>
+                <midino>0x30</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler2]</group>
+                <key>DJCi500.samplerButtonsDeckA[1].input</key>
+                <description>PAD 2</description>
+                <status>0x96</status>
+                <midino>0x31</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler3]</group>
+                <key>DJCi500.samplerButtonsDeckA[2].input</key>
+                <description>PAD 3</description>
+                <status>0x96</status>
+                <midino>0x32</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler4]</group>
+                <key>DJCi500.samplerButtonsDeckA[3].input</key>
+                <description>PAD 4</description>
+                <status>0x96</status>
+                <midino>0x33</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler5]</group>
+                <key>DJCi500.samplerButtonsDeckA[4].input</key>
+                <description>PAD 5</description>
+                <status>0x96</status>
+                <midino>0x34</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler6]</group>
+                <key>DJCi500.samplerButtonsDeckA[5].input</key>
+                <description>PAD 6</description>
+                <status>0x96</status>
+                <midino>0x35</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler7]</group>
+                <key>DJCi500.samplerButtonsDeckA[6].input</key>
+                <description>PAD 7</description>
+                <status>0x96</status>
+                <midino>0x36</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler8]</group>
+                <key>DJCi500.samplerButtonsDeckA[7].input</key>
+                <description>PAD 8</description>
+                <status>0x96</status>
+                <midino>0x37</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+
+            <!--Pad MODE 4 (SHIFT mode) - Sampler Pause (aka cue)-->
+            <control>
+                <group>[Sampler1]</group>
+                <key>DJCi500.samplerButtonsDeckA[0].input</key>
+                <description>PAD 1</description>
+                <status>0x96</status>
+                <midino>0x38</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler2]</group>
+                <key>DJCi500.samplerButtonsDeckA[1].input</key>
+                <description>PAD 2</description>
+                <status>0x96</status>
+                <midino>0x39</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler3]</group>
+                <key>DJCi500.samplerButtonsDeckA[2].input</key>
+                <description>PAD 3</description>
+                <status>0x96</status>
+                <midino>0x3A</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler4]</group>
+                <key>DJCi500.samplerButtonsDeckA[3].input</key>
+                <description>PAD 4</description>
+                <status>0x96</status>
+                <midino>0x3B</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler5]</group>
+                <key>DJCi500.samplerButtonsDeckA[4].input</key>
+                <description>PAD 5</description>
+                <status>0x96</status>
+                <midino>0x3C</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler6]</group>
+                <key>DJCi500.samplerButtonsDeckA[5].input</key>
+                <description>PAD 6</description>
+                <status>0x96</status>
+                <midino>0x3D</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler7]</group>
+                <key>DJCi500.samplerButtonsDeckA[6].input</key>
+                <description>PAD 7</description>
+                <status>0x96</status>
+                <midino>0x3E</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler8]</group>
+                <key>DJCi500.samplerButtonsDeckA[7].input</key>
+                <description>PAD 8</description>
+                <status>0x96</status>
+                <midino>0x3F</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+
+            <!--Pad MODE 5 - 0x40 to 0x47-->
+            <!--Personalized Pads-->
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.pitchUpSemiTone</key>
+                <description>Pitch up - semitone</description>
+                <status>0x96</status>
+                <midino>0x42</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.pitchDownSemiTone</key>
+                <description>Pitch down - semitone</description>
+                <status>0x96</status>
+                <midino>0x41</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.pitchUpTone</key>
+                <description>Pitch up - tone</description>
+                <status>0x96</status>
+                <midino>0x43</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.pitchDownTone</key>
+                <description>Pitch down - tone</description>
+                <status>0x96</status>
+                <midino>0x40</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.pitchSliderIncrease</key>
+                <description>Pitch slider increase resolution</description>
+                <status>0x96</status>
+                <midino>0x46</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>DJCi500.pitchSliderDecrease</key>
+                <description>Pitch slider Decrease resolution</description>
+                <status>0x96</status>
+                <midino>0x45</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+
+                <!--Pad MODE 6 - Beatloop rolls: 0x50 to 0x57-->
+            <control>
+				<group>[Channel1]</group>
+				<key>beatlooproll_0.125_activate</key>
+				<description>Loop 1/8 Beat (Pad 1)</description>
+				<status>0x96</status>
+				<midino>0x50</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatlooproll_0.25_activate</key>
+				<description>Loop 1/4 Beat (Pad 2)</description>
+				<status>0x96</status>
+				<midino>0x51</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatlooproll_0.5_activate</key>
+				<description>Loop 1/2 Beat (Pad 3)</description>
+				<status>0x96</status>
+				<midino>0x52</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatlooproll_1_activate</key>
+				<description>Loop 1 Beat (Pad 4)</description>
+				<status>0x96</status>
+				<midino>0x53</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatlooproll_2_activate</key>
+				<description>Loop 2 Beat (Pad 5)</description>
+				<status>0x96</status>
+				<midino>0x54</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatlooproll_4_activate</key>
+				<description>Loop 2 Beat (Pad 6)</description>
+				<status>0x96</status>
+				<midino>0x55</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatlooproll_8_activate</key>
+				<description>Loop 8 Beat (Pad 7)</description>
+				<status>0x96</status>
+				<midino>0x56</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
 				<key>beatlooproll_16_activate</key>
 				<description>Loop 2 Beat (Pad 8)</description>
 				<status>0x96</status>
-				<midino>0x17</midino>
+				<midino>0x57</midino>
 				<options>
 					<normal />
 				</options>
 			</control>
-			<!--Pad MODE 3 - Slicer-->
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 1</description>
-				<status>0x96</status>
-				<midino>0x20</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 2</description>
-				<status>0x96</status>
-				<midino>0x21</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 3</description>
-				<status>0x96</status>
-				<midino>0x22</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 4</description>
-				<status>0x96</status>
-				<midino>0x23</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 5</description>
-				<status>0x96</status>
-				<midino>0x24</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 6</description>
-				<status>0x96</status>
-				<midino>0x25</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x26</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.slicerButtons</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x27</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-
-			<!--Pad MODE 4 - BeatJump: 0x70 to 0x77-->
-            <!--
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_1_backward</key>
-				<description>PAD 1</description>
-				<status>0x96</status>
-				<midino>0x30</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_1_forward</key>
-				<description>PAD 2</description>
-				<status>0x96</status>
-				<midino>0x31</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_2_backward</key>
-				<description>PAD 3</description>
-				<status>0x96</status>
-				<midino>0x32</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_2_forward</key>
-				<description>PAD 4</description>
-				<status>0x96</status>
-				<midino>0x33</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_4_backward</key>
-				<description>PAD 5</description>
-				<status>0x96</status>
-				<midino>0x34</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_4_forward</key>
-				<description>PAD 6</description>
-				<status>0x96</status>
-				<midino>0x35</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_8_backward</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x36</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_8_forward</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x37</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-
-			SHIFT 
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_16_backward</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x38</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_16_forward</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x39</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_32_backward</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x3A</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_32_forward</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x3B</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_64_backward</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x3C</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>beatjump_64_forward</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x3D</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-            -->
-
-			<!--Pad MODE 4 - Sampler-->
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 1</description>
-				<status>0x96</status>
-				<midino>0x30</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 2</description>
-				<status>0x96</status>
-				<midino>0x31</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 3</description>
-				<status>0x96</status>
-				<midino>0x32</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 4</description>
-				<status>0x96</status>
-				<midino>0x33</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 5</description>
-				<status>0x96</status>
-				<midino>0x34</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 6</description>
-				<status>0x96</status>
-				<midino>0x35</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x36</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x37</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-
-			<!--Pad MODE 4 (SHIFT mode) - Sampler Pause (aka cue)-->
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_default</key>
-				<description>PAD 1</description>
-				<status>0x96</status>
-				<midino>0x38</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_default</key>
-				<description>PAD 2</description>
-				<status>0x96</status>
-				<midino>0x39</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_default</key>
-				<description>PAD 3</description>
-				<status>0x96</status>
-				<midino>0x3A</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_default</key>
-				<description>PAD 4</description>
-				<status>0x96</status>
-				<midino>0x3B</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_default</key>
-				<description>PAD 5</description>
-				<status>0x96</status>
-				<midino>0x3C</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_default</key>
-				<description>PAD 6</description>
-				<status>0x96</status>
-				<midino>0x3D</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_default</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x3E</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_default</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x3F</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-
-			<!--Pad MODE 5 - 0x40 to 0x47-->
-			<!--Personalized Pads-->
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.pitchUpSemiTone</key>
-				<description>Pitch up - semitone</description>
-				<status>0x96</status>
-				<midino>0x42</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.pitchDownSemiTone</key>
-				<description>Pitch down - semitone</description>
-				<status>0x96</status>
-				<midino>0x41</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.pitchUpTone</key>
-				<description>Pitch up - tone</description>
-				<status>0x96</status>
-				<midino>0x43</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.pitchDownTone</key>
-				<description>Pitch down - tone</description>
-				<status>0x96</status>
-				<midino>0x40</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.pitchSliderIncrease</key>
-				<description>Pitch slider increase resolution</description>
-				<status>0x96</status>
-				<midino>0x46</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.pitchSliderDecrease</key>
-				<description>Pitch slider Decrease resolution</description>
-				<status>0x96</status>
-				<midino>0x45</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-
-			<!-- to Comment -->
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.TestColor</key>
-				<description>testing color</description>
-				<status>0x96</status>
-				<midino>0x44</midino>
-				<options>
-					<script-binding />
-				</options>
-			</control>
-
-			<!-- Shift -->
-			<control>
-				<group>[Channel1]</group>
-				<key>reset_key</key>
-				<description>KeyReset</description>
-				<status>0x96</status>
-				<midino>0x48</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>reset_key</key>
-				<description>KeyReset</description>
-				<status>0x96</status>
-				<midino>0x49</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>reset_key</key>
-				<description>KeyReset</description>
-				<status>0x96</status>
-				<midino>0x4A</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>reset_key</key>
-				<description>KeyReset</description>
-				<status>0x96</status>
-				<midino>0x4B</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-
-			<!--Pad MODE 6 - Not assigned: 0x50 to 0x57-->
 			<!--Pad MODE 7 - Not assigned: 0x60 to 0x67-->
-
-			<!--Pad MODE 8 - Sampler-->
-            <!--
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 1</description>
-				<status>0x96</status>
-				<midino>0x70</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 2</description>
-				<status>0x96</status>
-				<midino>0x71</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 3</description>
-				<status>0x96</status>
-				<midino>0x72</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 4</description>
-				<status>0x96</status>
-				<midino>0x73</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 5</description>
-				<status>0x96</status>
-				<midino>0x74</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 6</description>
-				<status>0x96</status>
-				<midino>0x75</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x76</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x77</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			Pad MODE 8 (SHIFT mode) - Sampler Pause (aka cue)
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_default</key>
-				<description>PAD 1</description>
-				<status>0x96</status>
-				<midino>0x78</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_default</key>
-				<description>PAD 2</description>
-				<status>0x96</status>
-				<midino>0x79</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_default</key>
-				<description>PAD 3</description>
-				<status>0x96</status>
-				<midino>0x7A</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_default</key>
-				<description>PAD 4</description>
-				<status>0x96</status>
-				<midino>0x7B</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_default</key>
-				<description>PAD 5</description>
-				<status>0x96</status>
-				<midino>0x7C</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_default</key>
-				<description>PAD 6</description>
-				<status>0x96</status>
-				<midino>0x7D</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_default</key>
-				<description>PAD 7</description>
-				<status>0x96</status>
-				<midino>0x7E</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_default</key>
-				<description>PAD 8</description>
-				<status>0x96</status>
-				<midino>0x7F</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-            -->
-
 
 			<!--Pad MODE 8 - BeatJump: 0x70 to 0x77-->
 			<control>
@@ -1869,7 +1585,7 @@
 			<!--Pad MODE 2 - Loop-->
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_0.125_activate</key>
+				<key>beatloop_0.125_activate</key>
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x97</status>
 				<midino>0x10</midino>
@@ -1879,7 +1595,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_0.25_activate</key>
+				<key>beatloop_0.25_activate</key>
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x97</status>
 				<midino>0x11</midino>
@@ -1889,7 +1605,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_0.5_activate</key>
+				<key>beatloop_0.5_activate</key>
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x97</status>
 				<midino>0x12</midino>
@@ -1899,7 +1615,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_1_activate</key>
+				<key>beatloop_1_activate</key>
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x97</status>
 				<midino>0x13</midino>
@@ -1909,7 +1625,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_2_activate</key>
+				<key>beatloop_2_activate</key>
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x97</status>
 				<midino>0x14</midino>
@@ -1919,7 +1635,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_4_activate</key>
+				<key>beatloop_4_activate</key>
 				<description>Loop 2 Beat (Pad 6)</description>
 				<status>0x97</status>
 				<midino>0x15</midino>
@@ -1929,7 +1645,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_8_activate</key>
+				<key>beatloop_8_activate</key>
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x97</status>
 				<midino>0x16</midino>
@@ -1939,7 +1655,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>beatlooproll_16_activate</key>
+				<key>beatloop_16_activate</key>
 				<description>Loop 2 Beat (Pad 8)</description>
 				<status>0x97</status>
 				<midino>0x17</midino>
@@ -2029,315 +1745,169 @@
 				</options>
 			</control>
 
-			<!--Pad MODE 4  BeatJump: 0x70 to 0x77-->
-            <!--
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_1_backward</key>
-				<description>PAD 1</description>
-				<status>0x97</status>
-				<midino>0x30</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_1_forward</key>
-				<description>PAD 2</description>
-				<status>0x97</status>
-				<midino>0x31</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_2_backward</key>
-				<description>PAD 3</description>
-				<status>0x97</status>
-				<midino>0x32</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_2_forward</key>
-				<description>PAD 4</description>
-				<status>0x97</status>
-				<midino>0x33</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_4_backward</key>
-				<description>PAD 5</description>
-				<status>0x97</status>
-				<midino>0x34</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_4_forward</key>
-				<description>PAD 6</description>
-				<status>0x97</status>
-				<midino>0x35</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_8_backward</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x36</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_8_forward</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x37</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
+            <!--Pad MODE 4 - Sampler-->
+            <control>
+                <group>[Sampler1]</group>
+                <key>DJCi500.samplerButtonsDeckB[0].input</key>
+                <description>PAD 1</description>
+                <status>0x97</status>
+                <midino>0x30</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler2]</group>
+                <key>DJCi500.samplerButtonsDeckB[1].input</key>
+                <description>PAD 2</description>
+                <status>0x97</status>
+                <midino>0x31</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler3]</group>
+                <key>DJCi500.samplerButtonsDeckB[2].input</key>
+                <description>PAD 3</description>
+                <status>0x97</status>
+                <midino>0x32</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler4]</group>
+                <key>DJCi500.samplerButtonsDeckB[3].input</key>
+                <description>PAD 4</description>
+                <status>0x97</status>
+                <midino>0x33</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler5]</group>
+                <key>DJCi500.samplerButtonsDeckB[4].input</key>
+                <description>PAD 5</description>
+                <status>0x97</status>
+                <midino>0x34</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler6]</group>
+                <key>DJCi500.samplerButtonsDeckB[5].input</key>
+                <description>PAD 6</description>
+                <status>0x97</status>
+                <midino>0x35</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler7]</group>
+                <key>DJCi500.samplerButtonsDeckB[6].input</key>
+                <description>PAD 7</description>
+                <status>0x97</status>
+                <midino>0x36</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler8]</group>
+                <key>DJCi500.samplerButtonsDeckB[7].input</key>
+                <description>PAD 8</description>
+                <status>0x97</status>
+                <midino>0x37</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
 
-			SHIFT
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_16_backward</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x38</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_16_forward</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x39</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_32_backward</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x3A</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_32_forward</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x3B</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_64_backward</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x3C</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>beatjump_64_forward</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x3D</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-            -->
-
-			<!--Pad MODE 4 - Sampler-->
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 1</description>
-				<status>0x97</status>
-				<midino>0x30</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 2</description>
-				<status>0x97</status>
-				<midino>0x31</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 3</description>
-				<status>0x97</status>
-				<midino>0x32</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 1</description>
-				<status>0x97</status>
-				<midino>0x33</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 5</description>
-				<status>0x97</status>
-				<midino>0x34</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 6</description>
-				<status>0x97</status>
-				<midino>0x35</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x36</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x37</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-
-			<!--Pad MODE 4 (SHIFT mode) - Sampler Pause (aka cue)-->
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_default</key>
-				<description>PAD 1</description>
-				<status>0x97</status>
-				<midino>0x38</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_default</key>
-				<description>PAD 2</description>
-				<status>0x97</status>
-				<midino>0x39</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_default</key>
-				<description>PAD 3</description>
-				<status>0x97</status>
-				<midino>0x3A</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_default</key>
-				<description>PAD 4</description>
-				<status>0x97</status>
-				<midino>0x3B</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_default</key>
-				<description>PAD 5</description>
-				<status>0x97</status>
-				<midino>0x3C</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_default</key>
-				<description>PAD 6</description>
-				<status>0x97</status>
-				<midino>0x3D</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_default</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x3E</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_default</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x3F</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
+            <!--Pad MODE 4 (SHIFT mode) - Sampler Pause (aka cue)-->
+            <control>
+                <group>[Sampler1]</group>
+                <key>DJCi500.samplerButtonsDeckB[0].input</key>
+                <description>PAD 1</description>
+                <status>0x97</status>
+                <midino>0x38</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler2]</group>
+                <key>DJCi500.samplerButtonsDeckB[1].input</key>
+                <description>PAD 2</description>
+                <status>0x97</status>
+                <midino>0x39</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler3]</group>
+                <key>DJCi500.samplerButtonsDeckB[2].input</key>
+                <description>PAD 3</description>
+                <status>0x97</status>
+                <midino>0x3A</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler4]</group>
+                <key>DJCi500.samplerButtonsDeckB[3].input</key>
+                <description>PAD 4</description>
+                <status>0x97</status>
+                <midino>0x3B</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler5]</group>
+                <key>DJCi500.samplerButtonsDeckB[4].input</key>
+                <description>PAD 5</description>
+                <status>0x97</status>
+                <midino>0x3C</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler6]</group>
+                <key>DJCi500.samplerButtonsDeckB[5].input</key>
+                <description>PAD 6</description>
+                <status>0x97</status>
+                <midino>0x3D</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler7]</group>
+                <key>DJCi500.samplerButtonsDeckB[6].input</key>
+                <description>PAD 7</description>
+                <status>0x97</status>
+                <midino>0x3E</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
+            <control>
+                <group>[Sampler8]</group>
+                <key>DJCi500.samplerButtonsDeckB[7].input</key>
+                <description>PAD 8</description>
+                <status>0x97</status>
+                <midino>0x3F</midino>
+                <options>
+                    <script-binding />
+                </options>
+            </control>
 
 			<!--Pad MODE 5  : 0x40 to 0x47-->
 			<!-- Personalized Pad -->
@@ -2463,176 +2033,90 @@
 					<script-binding />
 				</options>
 			</control>
-			<!--Pad MODE 6  Not assigned: 0x50 to 0x57-->
+            
+			<!--Pad MODE 6  Beatloop rolls: 0x50 to 0x57-->
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_0.125_activate</key>
+				<description>Loop 1/8 Beat (Pad 1)</description>
+				<status>0x97</status>
+				<midino>0x50</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_0.25_activate</key>
+				<description>Loop 1/4 Beat (Pad 2)</description>
+				<status>0x97</status>
+				<midino>0x51</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_0.5_activate</key>
+				<description>Loop 1/2 Beat (Pad 3)</description>
+				<status>0x97</status>
+				<midino>0x52</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_1_activate</key>
+				<description>Loop 1 Beat (Pad 4)</description>
+				<status>0x97</status>
+				<midino>0x53</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_2_activate</key>
+				<description>Loop 2 Beat (Pad 5)</description>
+				<status>0x97</status>
+				<midino>0x54</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_4_activate</key>
+				<description>Loop 2 Beat (Pad 6)</description>
+				<status>0x97</status>
+				<midino>0x55</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_8_activate</key>
+				<description>Loop 8 Beat (Pad 7)</description>
+				<status>0x97</status>
+				<midino>0x56</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>beatlooproll_16_activate</key>
+				<description>Loop 2 Beat (Pad 8)</description>
+				<status>0x97</status>
+				<midino>0x57</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+
 			<!--Pad MODE 7  Not assigned: 0x60 to 0x67-->
-
-			<!--Pad MODE 8 - Sampler-->
-            <!--
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 1</description>
-				<status>0x97</status>
-				<midino>0x70</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 2</description>
-				<status>0x97</status>
-				<midino>0x71</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 3</description>
-				<status>0x97</status>
-				<midino>0x72</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 1</description>
-				<status>0x97</status>
-				<midino>0x73</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 5</description>
-				<status>0x97</status>
-				<midino>0x74</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 6</description>
-				<status>0x97</status>
-				<midino>0x75</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x76</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_gotoandplay</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x77</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-            -->
-
-			<!--Pad MODE 8 (SHIFT mode) - Sampler Pause (aka cue)-->
-            <!--
-			<control>
-				<group>[Sampler1]</group>
-				<key>cue_default</key>
-				<description>PAD 1</description>
-				<status>0x97</status>
-				<midino>0x78</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler2]</group>
-				<key>cue_default</key>
-				<description>PAD 2</description>
-				<status>0x97</status>
-				<midino>0x79</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler3]</group>
-				<key>cue_default</key>
-				<description>PAD 3</description>
-				<status>0x97</status>
-				<midino>0x7A</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler4]</group>
-				<key>cue_default</key>
-				<description>PAD 4</description>
-				<status>0x97</status>
-				<midino>0x7B</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler5]</group>
-				<key>cue_default</key>
-				<description>PAD 5</description>
-				<status>0x97</status>
-				<midino>0x7C</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler6]</group>
-				<key>cue_default</key>
-				<description>PAD 6</description>
-				<status>0x97</status>
-				<midino>0x7D</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler7]</group>
-				<key>cue_default</key>
-				<description>PAD 7</description>
-				<status>0x97</status>
-				<midino>0x7E</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-			<control>
-				<group>[Sampler8]</group>
-				<key>cue_default</key>
-				<description>PAD 8</description>
-				<status>0x97</status>
-				<midino>0x7F</midino>
-				<options>
-					<normal />
-				</options>
-			</control>
-            -->
 
 			<!--Pad MODE 8  BeatJump: 0x70 to 0x77-->
 			<control>
@@ -3542,10 +3026,10 @@
 				<off>0x0</off>
 			</output>
 			-->
-			<!--LED Roll-->
+			<!--LED Loop-->
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_0.125_activate</key>
+				<key>beatloop_0.125_activate</key>
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x96</status>
 				<midino>0x10</midino>
@@ -3555,7 +3039,7 @@
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_0.25_activate</key>
+				<key>beatloop_0.25_activate</key>
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x96</status>
 				<midino>0x11</midino>
@@ -3565,7 +3049,7 @@
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_0.5_activate</key>
+				<key>beatloop_0.5_activate</key>
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x96</status>
 				<midino>0x12</midino>
@@ -3575,7 +3059,7 @@
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_1_activate</key>
+				<key>beatloop_1_activate</key>
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x96</status>
 				<midino>0x13</midino>
@@ -3585,7 +3069,7 @@
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_2_activate</key>
+				<key>beatloop_2_activate</key>
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x96</status>
 				<midino>0x14</midino>
@@ -3595,7 +3079,7 @@
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_4_activate</key>
+				<key>beatloop_4_activate</key>
 				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x96</status>
 				<midino>0x15</midino>
@@ -3605,7 +3089,7 @@
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_8_activate</key>
+				<key>beatloop_8_activate</key>
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x96</status>
 				<midino>0x16</midino>
@@ -3615,7 +3099,7 @@
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatlooproll_16_activate</key>
+				<key>beatloop_16_activate</key>
 				<description>Loop 16 Beat (Pad 8)</description>
 				<status>0x96</status>
 				<midino>0x17</midino>
@@ -3625,7 +3109,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_0.125_activate</key>
+				<key>beatloop_0.125_activate</key>
 				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x97</status>
 				<midino>0x10</midino>
@@ -3635,7 +3119,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_0.25_activate</key>
+				<key>beatloop_0.25_activate</key>
 				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x97</status>
 				<midino>0x11</midino>
@@ -3645,7 +3129,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_0.5_activate</key>
+				<key>beatloop_0.5_activate</key>
 				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x97</status>
 				<midino>0x12</midino>
@@ -3655,7 +3139,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_1_activate</key>
+				<key>beatloop_1_activate</key>
 				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x97</status>
 				<midino>0x13</midino>
@@ -3665,7 +3149,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_2_activate</key>
+				<key>beatloop_2_activate</key>
 				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x97</status>
 				<midino>0x14</midino>
@@ -3675,7 +3159,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_4_activate</key>
+				<key>beatloop_4_activate</key>
 				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x97</status>
 				<midino>0x15</midino>
@@ -3685,7 +3169,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_8_activate</key>
+				<key>beatloop_8_activate</key>
 				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x97</status>
 				<midino>0x16</midino>
@@ -3695,7 +3179,7 @@
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatlooproll_16_activate</key>
+				<key>beatloop_16_activate</key>
 				<description>Loop 16 Beat (Pad 8)</description>
 				<status>0x97</status>
 				<midino>0x17</midino>
@@ -3704,294 +3188,169 @@
 				<minimum>0.5</minimum>
 			</output>
 
-
-			<!--LED BEATJUMP PAD 4-->
-            <!--
+			<!--LED Rolls PAD 6-->
+            <!--Deck B beat loop leds -->
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_1_backward</key>
-				<description>(Beatjump 1 backward DECK A)</description>
+				<key>beatlooproll_0.125_activate</key>
+				<description>Loop 1/8 Beat (Pad 1)</description>
 				<status>0x96</status>
-				<midino>0x30</midino>
-				<on>0x0F</on>
-				<off>0x07</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>beatjump_1_backward</key>
-				<description>(Beatjump 1 backward DECK B)</description>
-				<status>0x97</status>
-				<midino>0x30</midino>
-				<on>0x0F</on>
-				<off>0x07</off>
+				<midino>0x50</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_1_forward</key>
-				<description>(Beatjump 1 forward DECK A)</description>
+				<key>beatlooproll_0.25_activate</key>
+				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x96</status>
-				<midino>0x31</midino>
-				<on>0x0F</on>
-				<off>0x07</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>beatjump_1_forward</key>
-				<description>(Beatjump 1 forward DECK B)</description>
-				<status>0x97</status>
-				<midino>0x31</midino>
-				<on>0x0F</on>
-				<off>0x07</off>
+				<midino>0x51</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_2_backward</key>
-				<description>(Beatjump 2 backward DECK A)</description>
+				<key>beatlooproll_0.5_activate</key>
+				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x96</status>
-				<midino>0x32</midino>
-				<on>0x64</on>
-				<off>0x44</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>beatjump_2_backward</key>
-				<description>(Beatjump 2 backward DECK B)</description>
-				<status>0x97</status>
-				<midino>0x32</midino>
-				<on>0x64</on>
-				<off>0x44</off>
+				<midino>0x52</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_2_forward</key>
-				<description>(Beatjump 2 forward DECK A)</description>
+				<key>beatlooproll_1_activate</key>
+				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x96</status>
-				<midino>0x33</midino>
-				<on>0x64</on>
-				<off>0x44</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>beatjump_2_forward</key>
-				<description>(Beatjump 2 forward DECK B)</description>
-				<status>0x97</status>
-				<midino>0x33</midino>
-				<on>0x64</on>
-				<off>0x44</off>
+				<midino>0x53</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_4_backward</key>
-				<description>(Beatjump 4 backward DECK A)</description>
+				<key>beatlooproll_2_activate</key>
+				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x96</status>
-				<midino>0x34</midino>
-				<on>0x2F</on>
-				<off>0x27</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>beatjump_4_backward</key>
-				<description>(Beatjump 4 backward DECK B)</description>
-				<status>0x97</status>
-				<midino>0x34</midino>
-				<on>0x2F</on>
-				<off>0x27</off>
+				<midino>0x54</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_4_forward</key>
-				<description>(Beatjump 4 forward DECK A)</description>
+				<key>beatlooproll_4_activate</key>
+				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x96</status>
-				<midino>0x35</midino>
-				<on>0x2F</on>
-				<off>0x27</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>beatjump_4_forward</key>
-				<description>(Beatjump 4 forward DECK B)</description>
-				<status>0x97</status>
-				<midino>0x35</midino>
-				<on>0x2F</on>
-				<off>0x27</off>
+				<midino>0x55</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_8_backward</key>
-				<description>(Beatjump 8 backward DECK A)</description>
+				<key>beatlooproll_8_activate</key>
+				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x96</status>
-				<midino>0x36</midino>
-				<on>0x6C</on>
-				<off>0x4C</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>beatjump_8_backward</key>
-				<description>(Beatjump 8 backward DECK B)</description>
-				<status>0x97</status>
-				<midino>0x36</midino>
-				<on>0x6C</on>
-				<off>0x4C</off>
+				<midino>0x56</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel1]</group>
-				<key>beatjump_8_forward</key>
-				<description>(Beatjump 8 forward DECK A)</description>
+				<key>beatlooproll_16_activate</key>
+				<description>Loop 16 Beat (Pad 8)</description>
 				<status>0x96</status>
-				<midino>0x37</midino>
-				<on>0x6C</on>
-				<off>0x4C</off>
+				<midino>0x57</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
+				<minimum>0.5</minimum>
+			</output>
+            <!--Deck B beat loop leds -->
+			<output>
+				<group>[Channel2]</group>
+				<key>beatlooproll_0.125_activate</key>
+				<description>Loop 1/8 Beat (Pad 1)</description>
+				<status>0x97</status>
+				<midino>0x50</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatjump_8_forward</key>
-				<description>(Beatjump 8 forward Deck B)</description>
+				<key>beatlooproll_0.25_activate</key>
+				<description>Loop 1/4 Beat (Pad 2)</description>
 				<status>0x97</status>
-				<midino>0x37</midino>
-				<on>0x6C</on>
-				<off>0x4C</off>
-				<minimum>0.5</minimum>
-			</output>
-            -->
-
-			<!-- SHIFT -->
-            <!--
-			<output>
-				<group>[Channel1]</group>
-				<key>beatjump_16_backward</key>
-				<description>(Beatjump 1 backward DECK A)</description>
-				<status>0x96</status>
-				<midino>0x38</midino>
-				<on>0x1B</on>
-				<off>0x13</off>
+				<midino>0x51</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatjump_16_backward</key>
-				<description>(Beatjump 1 backward DECK B)</description>
+				<key>beatlooproll_0.5_activate</key>
+				<description>Loop 1/2 Beat (Pad 3)</description>
 				<status>0x97</status>
-				<midino>0x38</midino>
-				<on>0x1B</on>
-				<off>0x13</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>beatjump_16_forward</key>
-				<description>(Beatjump 1 forward DECK A)</description>
-				<status>0x96</status>
-				<midino>0x39</midino>
-				<on>0x1B</on>
-				<off>0x13</off>
+				<midino>0x52</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatjump_16_forward</key>
-				<description>(Beatjump 1 forward DECK B)</description>
+				<key>beatlooproll_1_activate</key>
+				<description>Loop 1 Beat (Pad 4)</description>
 				<status>0x97</status>
-				<midino>0x39</midino>
-				<on>0x1B</on>
-				<off>0x13</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>beatjump_32_backward</key>
-				<description>(Beatjump 2 backward DECK A)</description>
-				<status>0x96</status>
-				<midino>0x3A</midino>
-				<on>0x65</on>
-				<off>0x45</off>
+				<midino>0x53</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatjump_32_backward</key>
-				<description>(Beatjump 2 backward DECK B)</description>
+				<key>beatlooproll_2_activate</key>
+				<description>Loop 2 Beat (Pad 5)</description>
 				<status>0x97</status>
-				<midino>0x3A</midino>
-				<on>0x65</on>
-				<off>0x45</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>beatjump_32_forward</key>
-				<description>(Beatjump 2 forward DECK A)</description>
-				<status>0x96</status>
-				<midino>0x3B</midino>
-				<on>0x65</on>
-				<off>0x45</off>
+				<midino>0x54</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatjump_32_forward</key>
-				<description>(Beatjump 2 forward DECK B)</description>
+				<key>beatlooproll_4_activate</key>
+				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x97</status>
-				<midino>0x3B</midino>
-				<on>0x65</on>
-				<off>0x45</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>beatjump_64_backward</key>
-				<description>(Beatjump 4 backward DECK A)</description>
-				<status>0x96</status>
-				<midino>0x3C</midino>
-				<on>0x3B</on>
-				<off>0x33</off>
+				<midino>0x55</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatjump_64_backward</key>
-				<description>(Beatjump 4 backward DECK B)</description>
+				<key>beatlooproll_8_activate</key>
+				<description>Loop 8 Beat (Pad 7)</description>
 				<status>0x97</status>
-				<midino>0x3C</midino>
-				<on>0x3B</on>
-				<off>0x33</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>beatjump_64_forward</key>
-				<description>(Beatjump 4 forward DECK A)</description>
-				<status>0x96</status>
-				<midino>0x3D</midino>
-				<on>0x3B</on>
-				<off>0x33</off>
+				<midino>0x56</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
 			<output>
 				<group>[Channel2]</group>
-				<key>beatjump_64_forward</key>
-				<description>(Beatjump 4 forward DECK B)</description>
+				<key>beatlooproll_16_activate</key>
+				<description>Loop 16 Beat (Pad 8)</description>
 				<status>0x97</status>
-				<midino>0x3D</midino>
-				<on>0x3B</on>
-				<off>0x33</off>
+				<midino>0x57</midino>
+				<on>0x1F</on>
+				<off>0x12</off>
 				<minimum>0.5</minimum>
 			</output>
-            -->
 
 
 			<!--LED BEATJUMP PAD 8-->
@@ -4153,332 +3512,6 @@
 				<midino>0x77</midino>
 				<on>0x6C</on>
 				<off>0x4C</off>
-				<minimum>0.5</minimum>
-			</output>
-
-			<!--LED SAMPLER PAD 8-->
-            <!--
-			<output>
-				<group>[Sampler1]</group>
-				<key>play_indicator</key>
-				<description>(Pad 1 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x70</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler1]</group>
-				<key>play_indicator</key>
-				<description>(Pad 1 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x70</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler2]</group>
-				<key>play_indicator</key>
-				<description>(Pad 2 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x71</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler2]</group>
-				<key>play_indicator</key>
-				<description>(Pad 2 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x71</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler3]</group>
-				<key>play_indicator</key>
-				<description>(Pad 3 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x72</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler3]</group>
-				<key>play_indicator</key>
-				<description>(Pad 3 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x72</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler4]</group>
-				<key>play_indicator</key>
-				<description>(Pad 4 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x73</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler4]</group>
-				<key>play_indicator</key>
-				<description>(Pad 4 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x73</midino>
-				<on>0x03</on>
-				<off>0x02</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler5]</group>
-				<key>play_indicator</key>
-				<description>(Pad 5 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x74</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler5]</group>
-				<key>play_indicator</key>
-				<description>(Pad 5 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x74</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler6]</group>
-				<key>play_indicator</key>
-				<description>(Pad 6 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x75</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler6]</group>
-				<key>play_indicator</key>
-				<description>(Pad 6 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x75</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler7]</group>
-				<key>play_indicator</key>
-				<description>(Pad 7 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x76</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler7]</group>
-				<key>play_indicator</key>
-				<description>(Pad 7 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x76</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler8]</group>
-				<key>play_indicator</key>
-				<description>(Pad 8 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x77</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler8]</group>
-				<key>play_indicator</key>
-				<description>(Pad 4 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x77</midino>
-				<on>0x1F</on>
-				<off>0x12</off>
-				<minimum>0.5</minimum>
-			</output>
-            -->
-
-			<!--LED SAMPLER PAD 4-->
-			<output>
-				<group>[Sampler1]</group>
-				<key>play_indicator</key>
-				<description>(Pad 1 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x30</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler1]</group>
-				<key>play_indicator</key>
-				<description>(Pad 1 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x30</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler2]</group>
-				<key>play_indicator</key>
-				<description>(Pad 2 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x31</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler2]</group>
-				<key>play_indicator</key>
-				<description>(Pad 2 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x31</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler3]</group>
-				<key>play_indicator</key>
-				<description>(Pad 3 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x32</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler3]</group>
-				<key>play_indicator</key>
-				<description>(Pad 3 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x32</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler4]</group>
-				<key>play_indicator</key>
-				<description>(Pad 4 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x33</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler4]</group>
-				<key>play_indicator</key>
-				<description>(Pad 4 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x33</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler5]</group>
-				<key>play_indicator</key>
-				<description>(Pad 5 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x34</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler5]</group>
-				<key>play_indicator</key>
-				<description>(Pad 5 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x34</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler6]</group>
-				<key>play_indicator</key>
-				<description>(Pad 6 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x35</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler6]</group>
-				<key>play_indicator</key>
-				<description>(Pad 6 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x35</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler7]</group>
-				<key>play_indicator</key>
-				<description>(Pad 7 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x36</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler7]</group>
-				<key>play_indicator</key>
-				<description>(Pad 7 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x36</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler8]</group>
-				<key>play_indicator</key>
-				<description>(Pad 8 DECK A)</description>
-				<status>0x96</status>
-				<midino>0x37</midino>
-				<on>0x63</on>
-				<off>0x42</off>
-				<minimum>0.5</minimum>
-			</output>
-			<output>
-				<group>[Sampler8]</group>
-				<key>play_indicator</key>
-				<description>(Pad 4 DECK B)</description>
-				<status>0x97</status>
-				<midino>0x37</midino>
-				<on>0x63</on>
-				<off>0x42</off>
 				<minimum>0.5</minimum>
 			</output>
 		</outputs>
