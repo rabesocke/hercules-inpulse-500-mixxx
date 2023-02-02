@@ -110,8 +110,8 @@ DJCi500.slicerLoopBeat8 = [0, 0, 0, 0];
 
 DJCi500.vuMeterUpdateMaster = function(value, _group, _control) {
   value = (value * 122) + 5;
-  midi.sendShortMsg(0xB0, 0x40, value);
-  midi.sendShortMsg(0xB0, 0x41, value);
+  var control = (control === "VuMeterL") ? 0x40 : 0x41;
+  midi.sendShortMsg(0xB0, control, value);
 };
 
 DJCi500.vuMeterUpdateDeck = function(value, group, _control, _status) {
@@ -133,6 +133,7 @@ DJCi500.init = function() {
 
   // Take care of the status of the crossfader status
   DJCi500.crossfaderEnabled = true;
+  DJCi500.xFaderScratch = false;
 
   // Turn On Vinyl buttons LED(one for each deck).
   midi.sendShortMsg(0x91, 0x03, 0x7F);
@@ -285,10 +286,13 @@ DJCi500.crossfaderSetCurve = function(channel, control, value, _status, _group) 
     case 0x00:
       // Mix
       script.crossfaderCurve(0,0,127);
+      DJCi500.xFaderScratch = false;
       break;
     case 0x7F:
       // Scratch
       script.crossfaderCurve(127,0,127);
+      DJCi500.xFaderScratch = true;
+      break;
   }
 }
 
@@ -305,7 +309,23 @@ DJCi500.crossfaderEnable = function(channel, control, value, _status, _group) {
 // Crossfader function
 DJCi500.crossfader = function(channel, control, value, status, group) {
   if (DJCi500.crossfaderEnabled) {
-    engine.setValue(group, "crossfader", (value/64)-1);
+    // Eventine's crossfader scratch mode
+    if (DJCi500.xFaderScratch) {
+        var result = 0;
+        if (value <= 0) {
+            result = -1;
+        } 
+        else if (value >= 127) {
+            result = 1;
+        }
+        else {
+            result = Math.tan((value-64)*Math.PI/2/63)/32;
+        }
+        engine.setValue(group, "crossfader", result);
+    }
+    else {
+        engine.setValue(group, "crossfader", (value/64)-1);
+    }
   }
 }
 
@@ -423,7 +443,7 @@ DJCi500.bendWheel = function(channel, control, value, _status, _group) {
 
 //Loop Encoder
 DJCi500.loopHalveDouble = function (channel, control, value, status, group) {
-    if (value > 64) {
+    if (value >= 0x40) {
         script.toggleControl(group, "loop_halve");
     } else {
         script.toggleControl(group, "loop_double");
