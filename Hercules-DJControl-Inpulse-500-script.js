@@ -108,7 +108,7 @@ DJCi500.activeSlicerMode = [
 DJCi500.slicerLoopBeat8 = [0, 0, 0, 0];
 ///////////////////////
 
-DJCi500.vuMeterUpdateMaster = function(value, _group, _control) {
+DJCi500.vuMeterUpdateMaster = function(value, _group, control) {
   value = (value * 122) + 5;
   var control = (control === "VuMeterL") ? 0x40 : 0x41;
   midi.sendShortMsg(0xB0, control, value);
