@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MixxxMIDIPreset mixxxVersion="2.2" schemaVersion="1">
+<MixxxMIDIPreset mixxxVersion="2.3" schemaVersion="1">
 	<info>
 		<name>Hercules DJControl Inpulse 500 1d</name>
 		<author>DJ Phatso for Hercules Technical Support</author>
@@ -118,6 +118,17 @@
 				<midino>0x0D</midino>
 				<options>
 					<normal />
+				</options>
+			</control>
+            <!-- SHIFT A key button -->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.shiftButton.input</key>
+				<description>Shift Deck A button</description>
+				<status>0x91</status>
+				<midino>0x04</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--SLIP A-->
@@ -316,6 +327,17 @@
 				<midino>0x0D</midino>
 				<options>
 					<normal />
+				</options>
+			</control>
+            <!-- SHIFT B key button -->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.shiftButton.input</key>
+				<description>Shift Deck A button</description>
+				<status>0x92</status>
+				<midino>0x04</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--SLIP B-->
@@ -1024,7 +1046,7 @@
             <!--Pad MODE 4 - Sampler-->
             <control>
                 <group>[Sampler1]</group>
-                <key>DJCi500.samplerButtonsDeckA[0].input</key>
+                <key>DJCi500.deckA.samplerButtons[1].input</key>
                 <description>PAD 1</description>
                 <status>0x96</status>
                 <midino>0x30</midino>
@@ -1034,7 +1056,7 @@
             </control>
             <control>
                 <group>[Sampler2]</group>
-                <key>DJCi500.samplerButtonsDeckA[1].input</key>
+                <key>DJCi500.deckA.samplerButtons[2].input</key>
                 <description>PAD 2</description>
                 <status>0x96</status>
                 <midino>0x31</midino>
@@ -1044,7 +1066,7 @@
             </control>
             <control>
                 <group>[Sampler3]</group>
-                <key>DJCi500.samplerButtonsDeckA[2].input</key>
+                <key>DJCi500.deckA.samplerButtons[3].input</key>
                 <description>PAD 3</description>
                 <status>0x96</status>
                 <midino>0x32</midino>
@@ -1054,7 +1076,7 @@
             </control>
             <control>
                 <group>[Sampler4]</group>
-                <key>DJCi500.samplerButtonsDeckA[3].input</key>
+                <key>DJCi500.deckA.samplerButtons[4].input</key>
                 <description>PAD 4</description>
                 <status>0x96</status>
                 <midino>0x33</midino>
@@ -1064,7 +1086,7 @@
             </control>
             <control>
                 <group>[Sampler5]</group>
-                <key>DJCi500.samplerButtonsDeckA[4].input</key>
+                <key>DJCi500.deckA.samplerButtons[5].input</key>
                 <description>PAD 5</description>
                 <status>0x96</status>
                 <midino>0x34</midino>
@@ -1074,7 +1096,7 @@
             </control>
             <control>
                 <group>[Sampler6]</group>
-                <key>DJCi500.samplerButtonsDeckA[5].input</key>
+                <key>DJCi500.deckA.samplerButtons[6].input</key>
                 <description>PAD 6</description>
                 <status>0x96</status>
                 <midino>0x35</midino>
@@ -1084,7 +1106,7 @@
             </control>
             <control>
                 <group>[Sampler7]</group>
-                <key>DJCi500.samplerButtonsDeckA[6].input</key>
+                <key>DJCi500.deckA.samplerButtons[7].input</key>
                 <description>PAD 7</description>
                 <status>0x96</status>
                 <midino>0x36</midino>
@@ -1094,7 +1116,7 @@
             </control>
             <control>
                 <group>[Sampler8]</group>
-                <key>DJCi500.samplerButtonsDeckA[7].input</key>
+                <key>DJCi500.deckA.samplerButtons[8].input</key>
                 <description>PAD 8</description>
                 <status>0x96</status>
                 <midino>0x37</midino>
@@ -1106,7 +1128,7 @@
             <!--Pad MODE 4 (SHIFT mode) - Sampler Pause (aka cue)-->
             <control>
                 <group>[Sampler1]</group>
-                <key>DJCi500.samplerButtonsDeckA[0].input</key>
+                <key>DJCi500.deckA.samplerButtons[1].input</key>
                 <description>PAD 1</description>
                 <status>0x96</status>
                 <midino>0x38</midino>
@@ -1116,7 +1138,7 @@
             </control>
             <control>
                 <group>[Sampler2]</group>
-                <key>DJCi500.samplerButtonsDeckA[1].input</key>
+                <key>DJCi500.deckA.samplerButtons[2].input</key>
                 <description>PAD 2</description>
                 <status>0x96</status>
                 <midino>0x39</midino>
@@ -1126,7 +1148,7 @@
             </control>
             <control>
                 <group>[Sampler3]</group>
-                <key>DJCi500.samplerButtonsDeckA[2].input</key>
+                <key>DJCi500.deckA.samplerButtons[3].input</key>
                 <description>PAD 3</description>
                 <status>0x96</status>
                 <midino>0x3A</midino>
@@ -1136,7 +1158,7 @@
             </control>
             <control>
                 <group>[Sampler4]</group>
-                <key>DJCi500.samplerButtonsDeckA[3].input</key>
+                <key>DJCi500.deckA.samplerButtons[4].input</key>
                 <description>PAD 4</description>
                 <status>0x96</status>
                 <midino>0x3B</midino>
@@ -1146,7 +1168,7 @@
             </control>
             <control>
                 <group>[Sampler5]</group>
-                <key>DJCi500.samplerButtonsDeckA[4].input</key>
+                <key>DJCi500.deckA.samplerButtons[5].input</key>
                 <description>PAD 5</description>
                 <status>0x96</status>
                 <midino>0x3C</midino>
@@ -1156,7 +1178,7 @@
             </control>
             <control>
                 <group>[Sampler6]</group>
-                <key>DJCi500.samplerButtonsDeckA[5].input</key>
+                <key>DJCi500.deckA.samplerButtons[6].input</key>
                 <description>PAD 6</description>
                 <status>0x96</status>
                 <midino>0x3D</midino>
@@ -1166,7 +1188,7 @@
             </control>
             <control>
                 <group>[Sampler7]</group>
-                <key>DJCi500.samplerButtonsDeckA[6].input</key>
+                <key>DJCi500.deckA.samplerButtons[7].input</key>
                 <description>PAD 7</description>
                 <status>0x96</status>
                 <midino>0x3E</midino>
@@ -1176,7 +1198,7 @@
             </control>
             <control>
                 <group>[Sampler8]</group>
-                <key>DJCi500.samplerButtonsDeckA[7].input</key>
+                <key>DJCi500.deckA.samplerButtons[8].input</key>
                 <description>PAD 8</description>
                 <status>0x96</status>
                 <midino>0x3F</midino>
@@ -1248,7 +1270,7 @@
                 </options>
             </control>
 
-                <!--Pad MODE 6 - Beatloop rolls: 0x50 to 0x57-->
+            <!--Pad MODE 6 - Beatloop rolls: 0x50 to 0x57-->
             <control>
 				<group>[Channel1]</group>
 				<key>beatlooproll_0.125_activate</key>
@@ -1329,7 +1351,253 @@
 					<normal />
 				</options>
 			</control>
-			<!--Pad MODE 7 - Not assigned: 0x60 to 0x67-->
+
+			<!--Pad MODE 7 - Effects: 0x60 to 0x67-->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[1].input</key>
+				<description>PAD 1</description>
+				<status>0x96</status>
+				<midino>0x60</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[2].input</key>
+				<description>PAD 2</description>
+				<status>0x96</status>
+				<midino>0x61</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[3].input</key>
+				<description>PAD 3</description>
+				<status>0x96</status>
+				<midino>0x62</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[4].input</key>
+				<description>PAD 4</description>
+				<status>0x96</status>
+				<midino>0x63</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[5].input</key>
+				<description>PAD 5</description>
+				<status>0x96</status>
+				<midino>0x64</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[6].input</key>
+				<description>PAD 6</description>
+				<status>0x96</status>
+				<midino>0x65</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[7].input</key>
+				<description>PAD 7</description>
+				<status>0x96</status>
+				<midino>0x66</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[8].input</key>
+				<description>PAD 8</description>
+				<status>0x96</status>
+				<midino>0x67</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+
+            <!-- Pad Mode 7 Effects +SHIFT -->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[1].input</key>
+				<description>PAD 1</description>
+				<status>0x96</status>
+				<midino>0x68</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[2].input</key>
+				<description>PAD 2</description>
+				<status>0x96</status>
+				<midino>0x69</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[3].input</key>
+				<description>PAD 3</description>
+				<status>0x96</status>
+				<midino>0x6A</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[4].input</key>
+				<description>PAD 4</description>
+				<status>0x96</status>
+				<midino>0x6B</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[5].input</key>
+				<description>PAD 5</description>
+				<status>0x96</status>
+				<midino>0x6C</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[6].input</key>
+				<description>PAD 6</description>
+				<status>0x96</status>
+				<midino>0x6D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[7].input</key>
+				<description>PAD 7</description>
+				<status>0x96</status>
+				<midino>0x6E</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.effectButtons[8].input</key>
+				<description>PAD 8</description>
+				<status>0x96</status>
+				<midino>0x6F</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+
+			<!--Pad MODE 8 - BeatJump: 0x70 to 0x77-->
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_1_backward</key>
+				<description>PAD 1</description>
+				<status>0x96</status>
+				<midino>0x70</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_1_forward</key>
+				<description>PAD 2</description>
+				<status>0x96</status>
+				<midino>0x71</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_2_backward</key>
+				<description>PAD 3</description>
+				<status>0x96</status>
+				<midino>0x72</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_2_forward</key>
+				<description>PAD 4</description>
+				<status>0x96</status>
+				<midino>0x73</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_4_backward</key>
+				<description>PAD 5</description>
+				<status>0x96</status>
+				<midino>0x74</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_4_forward</key>
+				<description>PAD 6</description>
+				<status>0x96</status>
+				<midino>0x75</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_8_backward</key>
+				<description>PAD 7</description>
+				<status>0x96</status>
+				<midino>0x76</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>beatjump_8_forward</key>
+				<description>PAD 8</description>
+				<status>0x96</status>
+				<midino>0x77</midino>
+				<options>
+					<normal />
+				</options>
+			</control>
+
 
 			<!--Pad MODE 8 - BeatJump: 0x70 to 0x77-->
 			<control>
@@ -1824,7 +2092,7 @@
             <!--Pad MODE 4 - Sampler-->
             <control>
                 <group>[Sampler1]</group>
-                <key>DJCi500.samplerButtonsDeckB[0].input</key>
+                <key>DJCi500.deckB.samplerButtons[1].input</key>
                 <description>PAD 1</description>
                 <status>0x97</status>
                 <midino>0x30</midino>
@@ -1834,7 +2102,7 @@
             </control>
             <control>
                 <group>[Sampler2]</group>
-                <key>DJCi500.samplerButtonsDeckB[1].input</key>
+                <key>DJCi500.deckB.samplerButtons[2].input</key>
                 <description>PAD 2</description>
                 <status>0x97</status>
                 <midino>0x31</midino>
@@ -1844,7 +2112,7 @@
             </control>
             <control>
                 <group>[Sampler3]</group>
-                <key>DJCi500.samplerButtonsDeckB[2].input</key>
+                <key>DJCi500.deckB.samplerButtons[3].input</key>
                 <description>PAD 3</description>
                 <status>0x97</status>
                 <midino>0x32</midino>
@@ -1854,7 +2122,7 @@
             </control>
             <control>
                 <group>[Sampler4]</group>
-                <key>DJCi500.samplerButtonsDeckB[3].input</key>
+                <key>DJCi500.deckB.samplerButtons[4].input</key>
                 <description>PAD 4</description>
                 <status>0x97</status>
                 <midino>0x33</midino>
@@ -1864,7 +2132,7 @@
             </control>
             <control>
                 <group>[Sampler5]</group>
-                <key>DJCi500.samplerButtonsDeckB[4].input</key>
+                <key>DJCi500.deckB.samplerButtons[5].input</key>
                 <description>PAD 5</description>
                 <status>0x97</status>
                 <midino>0x34</midino>
@@ -1874,7 +2142,7 @@
             </control>
             <control>
                 <group>[Sampler6]</group>
-                <key>DJCi500.samplerButtonsDeckB[5].input</key>
+                <key>DJCi500.deckB.samplerButtons[6].input</key>
                 <description>PAD 6</description>
                 <status>0x97</status>
                 <midino>0x35</midino>
@@ -1884,7 +2152,7 @@
             </control>
             <control>
                 <group>[Sampler7]</group>
-                <key>DJCi500.samplerButtonsDeckB[6].input</key>
+                <key>DJCi500.deckB.samplerButtons[7].input</key>
                 <description>PAD 7</description>
                 <status>0x97</status>
                 <midino>0x36</midino>
@@ -1894,7 +2162,7 @@
             </control>
             <control>
                 <group>[Sampler8]</group>
-                <key>DJCi500.samplerButtonsDeckB[7].input</key>
+                <key>DJCi500.deckB.samplerButtons[8].input</key>
                 <description>PAD 8</description>
                 <status>0x97</status>
                 <midino>0x37</midino>
@@ -1906,7 +2174,7 @@
             <!--Pad MODE 4 (SHIFT mode) - Sampler Pause (aka cue)-->
             <control>
                 <group>[Sampler1]</group>
-                <key>DJCi500.samplerButtonsDeckB[0].input</key>
+                <key>DJCi500.deckB.samplerButtons[1].input</key>
                 <description>PAD 1</description>
                 <status>0x97</status>
                 <midino>0x38</midino>
@@ -1916,7 +2184,7 @@
             </control>
             <control>
                 <group>[Sampler2]</group>
-                <key>DJCi500.samplerButtonsDeckB[1].input</key>
+                <key>DJCi500.deckB.samplerButtons[2].input</key>
                 <description>PAD 2</description>
                 <status>0x97</status>
                 <midino>0x39</midino>
@@ -1926,7 +2194,7 @@
             </control>
             <control>
                 <group>[Sampler3]</group>
-                <key>DJCi500.samplerButtonsDeckB[2].input</key>
+                <key>DJCi500.deckB.samplerButtons[3].input</key>
                 <description>PAD 3</description>
                 <status>0x97</status>
                 <midino>0x3A</midino>
@@ -1936,7 +2204,7 @@
             </control>
             <control>
                 <group>[Sampler4]</group>
-                <key>DJCi500.samplerButtonsDeckB[3].input</key>
+                <key>DJCi500.deckB.samplerButtons[4].input</key>
                 <description>PAD 4</description>
                 <status>0x97</status>
                 <midino>0x3B</midino>
@@ -1946,7 +2214,7 @@
             </control>
             <control>
                 <group>[Sampler5]</group>
-                <key>DJCi500.samplerButtonsDeckB[4].input</key>
+                <key>DJCi500.deckB.samplerButtons[5].input</key>
                 <description>PAD 5</description>
                 <status>0x97</status>
                 <midino>0x3C</midino>
@@ -1956,7 +2224,7 @@
             </control>
             <control>
                 <group>[Sampler6]</group>
-                <key>DJCi500.samplerButtonsDeckB[5].input</key>
+                <key>DJCi500.deckB.samplerButtons[6].input</key>
                 <description>PAD 6</description>
                 <status>0x97</status>
                 <midino>0x3D</midino>
@@ -1966,7 +2234,7 @@
             </control>
             <control>
                 <group>[Sampler7]</group>
-                <key>DJCi500.samplerButtonsDeckB[6].input</key>
+                <key>DJCi500.deckB.samplerButtons[7].input</key>
                 <description>PAD 7</description>
                 <status>0x97</status>
                 <midino>0x3E</midino>
@@ -1976,7 +2244,7 @@
             </control>
             <control>
                 <group>[Sampler8]</group>
-                <key>DJCi500.samplerButtonsDeckB[7].input</key>
+                <key>DJCi500.deckB.samplerButtons[8].input</key>
                 <description>PAD 8</description>
                 <status>0x97</status>
                 <midino>0x3F</midino>
@@ -2192,7 +2460,169 @@
 				</options>
 			</control>
 
-			<!--Pad MODE 7  Not assigned: 0x60 to 0x67-->
+			<!--Pad MODE 7 - Effects: 0x60 to 0x67-->
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[1].input</key>
+				<description>PAD 1</description>
+				<status>0x97</status>
+				<midino>0x60</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[2].input</key>
+				<description>PAD 2</description>
+				<status>0x97</status>
+				<midino>0x61</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[3].input</key>
+				<description>PAD 3</description>
+				<status>0x97</status>
+				<midino>0x62</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[4].input</key>
+				<description>PAD 4</description>
+				<status>0x97</status>
+				<midino>0x63</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[5].input</key>
+				<description>PAD 5</description>
+				<status>0x97</status>
+				<midino>0x64</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[6].input</key>
+				<description>PAD 6</description>
+				<status>0x97</status>
+				<midino>0x65</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[7].input</key>
+				<description>PAD 7</description>
+				<status>0x97</status>
+				<midino>0x66</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[8].input</key>
+				<description>PAD 8</description>
+				<status>0x97</status>
+				<midino>0x67</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+
+            <!-- PAD Mode 7: Effects +SHIFT -->
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[1].input</key>
+				<description>PAD 1</description>
+				<status>0x97</status>
+				<midino>0x68</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[2].input</key>
+				<description>PAD 2</description>
+				<status>0x97</status>
+				<midino>0x69</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[3].input</key>
+				<description>PAD 3</description>
+				<status>0x97</status>
+				<midino>0x6A</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[4].input</key>
+				<description>PAD 4</description>
+				<status>0x97</status>
+				<midino>0x6B</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[5].input</key>
+				<description>PAD 5</description>
+				<status>0x97</status>
+				<midino>0x6C</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[6].input</key>
+				<description>PAD 6</description>
+				<status>0x97</status>
+				<midino>0x6D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[7].input</key>
+				<description>PAD 7</description>
+				<status>0x97</status>
+				<midino>0x6E</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.effectButtons[8].input</key>
+				<description>PAD 8</description>
+				<status>0x97</status>
+				<midino>0x6F</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
 
 			<!--Pad MODE 8  BeatJump: 0x70 to 0x77-->
 			<control>
@@ -2383,7 +2813,7 @@
 			-->
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.filterKnob1</key>
+				<key>DJCi500.deckA.filterKnob.input</key>
 				<description>Filter Deck A</description>
 				<status>0xB1</status>
 				<midino>0x01</midino>
@@ -2514,7 +2944,7 @@
 			<!--Filter-->
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.filterKnob2</key>
+				<key>DJCi500.deckB.filterKnob.input</key>
 				<description>Filter Deck B</description>
 				<status>0xB2</status>
 				<midino>0x01</midino>
@@ -2736,55 +3166,6 @@
 
 		<!--LED Outputs -->
 		<outputs>
-			<!--LED FX-->
-			<!--
-			<output>
-				<group>[EffectRack1_EffectUnit1_Effect1]</group>
-				<key>enabled</key>
-				<description>FX1-LED</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x90</status>
-				<midino>0x14</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			<output>
-				<group>[EffectRack1_EffectUnit1_Effect2]</group>
-				<key>enabled</key>
-				<description>FX2-LED</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x90</status>
-				<midino>0x15</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			<output>
-				<group>[EffectRack1_EffectUnit1_Effect3]</group>
-				<key>enabled</key>
-				<description>FX3-LED</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x90</status>
-				<midino>0x16</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			-->
-			<!--
-			<output>
-				<group>[EffectRack1_EffectUnit2_Effect2]</group>
-				<key>enabled</key>
-				<description>FX4-LED</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x90</status>
-				<midino>0x17</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			-->
 			<!--LED Transport-->
 			<output>
 				<group>[Channel1]</group>
@@ -3059,76 +3440,6 @@
 				<on>0x7f</on>
 				<off>0x0</off>
 			</output>
-			<!-- Effect Unit On
-			<output>
-				<group>[EffectRack1_EffectUnit1_Effect3]</group>
-				<key>enabled</key>
-				<description>Effect On/Off button</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x91</status>
-				<midino>0x00</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			<output>
-				<group>[EffectRack1_EffectUnit2_Effect3]</group>
-				<key>enabled</key>
-				<description>Effect On/Off buttonn</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x92</status>
-				<midino>0x00</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			-->
-			<!-- LED Beat Align (Track end warning)
-			<output>
-				<group>[Channel1]</group>
-				<key>end_of_track</key>
-				<description>Auto DJ On</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x91</status>
-				<midino>0x1C</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			<output>
-				<group>[Channel1]</group>
-				<key>end_of_track</key>
-				<description>Auto DJ On</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x91</status>
-				<midino>0x1D</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>end_of_track</key>
-				<description>Auto DJ On</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x92</status>
-				<midino>0x1C</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			<output>
-				<group>[Channel2]</group>
-				<key>end_of_track</key>
-				<description>Auto DJ On</description>
-				<minimum>0.5</minimum>
-				<maximum>1</maximum>
-				<status>0x92</status>
-				<midino>0x1D</midino>
-				<on>0x7f</on>
-				<off>0x0</off>
-			</output>
-			-->
 			<!--LED Loop-->
 			<output>
 				<group>[Channel1]</group>
