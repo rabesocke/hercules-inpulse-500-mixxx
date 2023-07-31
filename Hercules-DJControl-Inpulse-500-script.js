@@ -9,6 +9,7 @@
 //  * Add effects to the PAD 7 mode
 //  * Create decks for future four channel mode
 //  * Move the sampler buttons to the Deck component as well as the new effect buttons
+//  * Made the filter knob have a function with filter, effect and filter + effect
 //
 // * Version 1.5c (Summer 2023)
 // * Forum: https://mixxx.discourse.group/t/hercules-djcontrol-inpulse-500/19739
@@ -25,7 +26,6 @@
 //
 // TO DO: 
 //
-//  * Make the knob a component and react to the new effects, add to Deck
 //  * Use the Hotcue component for hot cues
 //  * Use components for the Pads (and add to Deck): 
 //    - Loops
