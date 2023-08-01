@@ -67,7 +67,7 @@
 			<!--Play-->
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.play</key>
+				<key>DJCi500.deckA.playButton.input</key>
 				<description>Play button</description>
 				<status>0x91</status>
 				<midino>0x07</midino>
@@ -79,45 +79,45 @@
 			<!--CUE-->
 			<control>
 				<group>[Channel1]</group>
-				<key>cue_default</key>
+				<key>DJCi500.deckA.cueButton.input</key>
 				<description>Cue button</description>
 				<status>0x91</status>
 				<midino>0x06</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Sync-->
 			<control>
 				<group>[Channel1]</group>
-				<key>sync_enabled</key>
+				<key>DJCi500.deckA.syncButton.input</key>
 				<description>Sync button</description>
 				<status>0x91</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!-- PFL-->
 			<control>
 				<group>[Channel1]</group>
-				<key>pfl</key>
+				<key>DJCi500.deckA.pflButton.input</key>
 				<description>PFL button</description>
 				<status>0x91</status>
 				<midino>0x0C</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--LOAD A-->
 			<control>
 				<group>[Channel1]</group>
-				<key>LoadSelectedTrack</key>
+				<key>DJCi500.deckA.loadButton.input</key>
 				<description>LOAD A button</description>
 				<status>0x91</status>
 				<midino>0x0D</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
             <!-- SHIFT A key button -->
@@ -277,7 +277,7 @@
 			<!--Play-->
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.play</key>
+				<key>DJCi500.deckB.playButton.input</key>
 				<description>Play button</description>
 				<status>0x92</status>
 				<midino>0x07</midino>
@@ -288,45 +288,45 @@
 			<!--CUE-->
 			<control>
 				<group>[Channel2]</group>
-				<key>cue_default</key>
+				<key>DJCi500.deckB.cueButton.input</key>
 				<description>Cue button</description>
 				<status>0x92</status>
 				<midino>0x06</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Sync-->
 			<control>
 				<group>[Channel2]</group>
-				<key>sync_enabled</key>
+				<key>DJCi500.deckB.syncButton.input</key>
 				<description>Sync button</description>
 				<status>0x92</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!-- PFL-->
 			<control>
 				<group>[Channel2]</group>
-				<key>pfl</key>
+				<key>DJCi500.deckB.pflButton.input</key>
 				<description>PFL button</description>
 				<status>0x92</status>
 				<midino>0x0C</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--LOAD B-->
 			<control>
 				<group>[Channel2]</group>
-				<key>LoadSelectedTrack</key>
+				<key>DJCi500.deckB.loadButton.input</key>
 				<description>LOAD B button</description>
 				<status>0x92</status>
 				<midino>0x0D</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
             <!-- SHIFT B key button -->
@@ -510,34 +510,34 @@
 			<!--Play-->
 			<control>
 				<group>[Channel1]</group>
-				<key>play_stutter</key>
+				<key>DJCi500.deckA.playButton.input</key>
 				<description>SHIFT + Play: Play Stutter</description>
 				<status>0x94</status>
 				<midino>0x07</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--CUE-->
 			<control>
 				<group>[Channel1]</group>
-				<key>start_play</key>
+				<key>DJCi500.deckA.cueButton.input</key>
 				<description>SHIFT + Cue: REWIND to beginning</description>
 				<status>0x94</status>
 				<midino>0x06</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Sync-->
 			<control>
 				<group>[Channel1]</group>
-				<key>sync_key</key>
+				<key>DJCi500.deckA.syncButton.input</key>
 				<description>SHIFT + Sync: Match key</description>
 				<status>0x94</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Loop In/Out-->
@@ -580,7 +580,7 @@
 			<!--Play-->
 			<control>
 				<group>[Channel2]</group>
-				<key>play_stutter</key>
+				<key>DJCi500.deckB.playButton.input</key>
 				<description>SHIFT + Play: Play Stutter</description>
 				<status>0x95</status>
 				<midino>0x07</midino>
@@ -591,23 +591,23 @@
 			<!--CUE-->
 			<control>
 				<group>[Channel2]</group>
-				<key>start_play</key>
+				<key>DJCi500.deckB.cueButton.input</key>
 				<description>SHIFT + Cue: REWIND to beginning</description>
 				<status>0x95</status>
 				<midino>0x06</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Sync-->
 			<control>
 				<group>[Channel2]</group>
-				<key>sync_key</key>
+				<key>DJCi500.deckB.syncButton.input</key>
 				<description>SHIFT + Sync: Sync key</description>
 				<status>0x95</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Loop In/Out-->
@@ -636,7 +636,7 @@
 			<!-- Pad Select-->
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[1].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x0F</midino>
@@ -646,7 +646,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[2].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x10</midino>
@@ -656,7 +656,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[3].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x11</midino>
@@ -666,7 +666,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[4].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x12</midino>
@@ -676,7 +676,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[5].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x13</midino>
@@ -686,7 +686,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[6].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x14</midino>
@@ -696,7 +696,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[7].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x15</midino>
@@ -706,7 +706,7 @@
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckA.padSelectButtons[8].input</key>
 				<description>PAD select</description>
 				<status>0x91</status>
 				<midino>0x16</midino>
@@ -719,163 +719,163 @@
 			<!--Pad MODE 1 - Hot Cues (SET)-->
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_1_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[1].input</key>
 				<description>PAD 1</description>
 				<status>0x96</status>
 				<midino>0x00</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_2_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[2].input</key>
 				<description>PAD 2</description>
 				<status>0x96</status>
 				<midino>0x01</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_3_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[3].input</key>
 				<description>PAD 3</description>
 				<status>0x96</status>
 				<midino>0x02</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_4_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[4].input</key>
 				<description>PAD 4</description>
 				<status>0x96</status>
 				<midino>0x03</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_5_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[5].input</key>
 				<description>PAD 5</description>
 				<status>0x96</status>
 				<midino>0x04</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_6_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[6].input</key>
 				<description>PAD 6</description>
 				<status>0x96</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_7_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[7].input</key>
 				<description>PAD 7</description>
 				<status>0x96</status>
 				<midino>0x06</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_8_activate</key>
+				<key>DJCi500.deckA.hotcueButtons[8].input</key>
 				<description>PAD 8</description>
 				<status>0x96</status>
 				<midino>0x07</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Pad MODE 1 (SHIFT mode)- Hot-Cue(Delete)-->
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_1_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[1].input</key>
 				<description>PAD 1 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x08</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_2_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[2].input</key>
 				<description>PAD 2 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x09</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_3_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[3].input</key>
 				<description>PAD 3 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x0A</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_4_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[4].input</key>
 				<description>PAD 4 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x0B</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_5_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[5].input</key>
 				<description>PAD 5 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x0C</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_6_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[6].input</key>
 				<description>PAD 6 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x0D</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_7_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[7].input</key>
 				<description>PAD 7 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x0E</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel1]</group>
-				<key>hotcue_8_clear</key>
+				<key>DJCi500.deckA.hotcueButtons[8].input</key>
 				<description>PAD 8 + L-Shift</description>
 				<status>0x96</status>
 				<midino>0x0F</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 
@@ -1685,7 +1685,7 @@
 			<!-- Pad Select-->
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[1].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x0F</midino>
@@ -1695,7 +1695,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[2].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x10</midino>
@@ -1705,7 +1705,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[3].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x11</midino>
@@ -1715,7 +1715,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[4].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x12</midino>
@@ -1725,7 +1725,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[5].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x13</midino>
@@ -1735,7 +1735,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[6].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x14</midino>
@@ -1745,7 +1745,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[7].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x15</midino>
@@ -1755,7 +1755,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.padSelect</key>
+				<key>DJCi500.deckB.padSelectButtons[8].input</key>
 				<description>PAD select</description>
 				<status>0x92</status>
 				<midino>0x16</midino>
@@ -1767,163 +1767,163 @@
 			<!--Pad MODE 1 - Hot Cues (SET)-->
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_1_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[1].input</key>
 				<description>PAD 1</description>
 				<status>0x97</status>
 				<midino>0x00</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_2_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[2].input</key>
 				<description>PAD 2</description>
 				<status>0x97</status>
 				<midino>0x01</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_3_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[3].input</key>
 				<description>PAD 3</description>
 				<status>0x97</status>
 				<midino>0x02</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_4_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[4].input</key>
 				<description>PAD 4</description>
 				<status>0x97</status>
 				<midino>0x03</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_5_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[5].input</key>
 				<description>PAD 5</description>
 				<status>0x97</status>
 				<midino>0x04</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_6_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[6].input</key>
 				<description>PAD 6</description>
 				<status>0x97</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_7_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[7].input</key>
 				<description>PAD 7</description>
 				<status>0x97</status>
 				<midino>0x06</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_8_activate</key>
+				<key>DJCi500.deckB.hotcueButtons[8].input</key>
 				<description>PAD 8</description>
 				<status>0x97</status>
 				<midino>0x07</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Pad MODE 1 (SHIFT mode)- Hot-Cue (Delete)-->
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_1_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[1].input</key>
 				<description>PAD 1 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x08</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_2_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[2].input</key>
 				<description>PAD 2 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x09</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_3_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[3].input</key>
 				<description>PAD 3 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x0A</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_4_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[4].input</key>
 				<description>PAD 4 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x0B</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_5_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[5].input</key>
 				<description>PAD 5 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x0C</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_6_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[6].input</key>
 				<description>PAD 6 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x0D</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_7_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[7].input</key>
 				<description>PAD 7 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x0E</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>hotcue_8_clear</key>
+				<key>DJCi500.deckB.hotcueButtons[8].input</key>
 				<description>PAD 8 + R-Shift</description>
 				<status>0x97</status>
 				<midino>0x0F</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<!--Pad MODE 2 - Loop-->
@@ -2748,75 +2748,126 @@
 			<!-- Volume-->
 			<control>
 				<group>[Channel1]</group>
-				<key>volume</key>
+				<key>DJCi500.deckA.volume.inputMSB</key>
 				<description>Volume Deck A</description>
 				<status>0xB1</status>
 				<midino>0x00</midino>
 				<options>
-					<normal />
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.volume.inputLSB</key>
+				<description>Volume Deck A</description>
+				<status>0xB1</status>
+				<midino>0x20</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--EQ-->
+            <!-- LOW EQ Knob -->
 			<control>
 				<group>[EqualizerRack1_[Channel1]_Effect1]</group>
-				<key>parameter1</key>
+				<key>DJCi500.deckA.eqKnob[1].inputMSB</key>
 				<description>EQ LOW Deck A</description>
 				<status>0xB1</status>
 				<midino>0x02</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[EqualizerRack1_[Channel1]_Effect1]</group>
-				<key>parameter2</key>
+				<key>DJCi500.deckA.eqKnob[1].inputLSB</key>
+				<description>EQ LOW Deck A</description>
+				<status>0xB1</status>
+				<midino>0x22</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- MID EQ Knob -->
+			<control>
+				<group>[EqualizerRack1_[Channel1]_Effect1]</group>
+				<key>DJCi500.deckA.eqKnob[2].inputMSB</key>
 				<description>EQ MID Deck A</description>
 				<status>0xB1</status>
 				<midino>0x03</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[EqualizerRack1_[Channel1]_Effect1]</group>
-				<key>parameter3</key>
+				<key>DJCi500.deckA.eqKnob[2].inputLSB</key>
+				<description>EQ MID Deck A</description>
+				<status>0xB1</status>
+				<midino>0x23</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- HI EQ Knob -->
+			<control>
+				<group>[EqualizerRack1_[Channel1]_Effect1]</group>
+				<key>DJCi500.deckA.eqKnob[3].inputMSB</key>
 				<description>EQ HIGH Deck A</description>
 				<status>0xB1</status>
 				<midino>0x04</midino>
 				<options>
-					<normal />
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[EqualizerRack1_[Channel1]_Effect1]</group>
+				<key>DJCi500.deckA.eqKnob[3].inputLSB</key>
+				<description>EQ HIGH Deck A</description>
+				<status>0xB1</status>
+				<midino>0x24</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--Gain-->
 			<control>
 				<group>[Channel1]</group>
-				<key>pregain</key>
+				<key>DJCi500.deckA.gainKnob.inputMSB</key>
 				<description>Gain Deck A</description>
 				<status>0xB1</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.gainKnob.inputLSB</key>
+				<description>Gain Deck A</description>
+				<status>0xB1</status>
+				<midino>0x25</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--Filter-->
-			<!--
 			<control>
-				<group>[QuickEffectRack1_[Channel1]]</group>
-				<key>super1</key>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.filterKnob.inputMSB</key>
 				<description>Filter Deck A</description>
 				<status>0xB1</status>
 				<midino>0x01</midino>
 				<options>
-					<normal />
+					<script-binding/>
 				</options>
 			</control>
-			-->
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.deckA.filterKnob.input</key>
+				<key>DJCi500.deckA.filterKnob.inputLSB</key>
 				<description>Filter Deck A</description>
 				<status>0xB1</status>
-				<midino>0x01</midino>
+				<midino>0x21</midino>
 				<options>
 					<script-binding/>
 				</options>
@@ -2891,63 +2942,126 @@
 			<!-- Volume-->
 			<control>
 				<group>[Channel2]</group>
-				<key>volume</key>
-				<description>Volume Deck A</description>
+				<key>DJCi500.deckB.volume.inputMSB</key>
+				<description>Volume Deck B</description>
 				<status>0xB2</status>
 				<midino>0x00</midino>
 				<options>
-					<normal />
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.volume.inputLSB</key>
+				<description>Volume Deck B</description>
+				<status>0xB2</status>
+				<midino>0x20</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--EQ-->
+            <!-- LOW EQ Knob -->
 			<control>
 				<group>[EqualizerRack1_[Channel2]_Effect1]</group>
-				<key>parameter1</key>
-				<description>EQ LOW Deck A</description>
+				<key>DJCi500.deckB.eqKnob[1].inputMSB</key>
+				<description>EQ LOW Deck B</description>
 				<status>0xB2</status>
 				<midino>0x02</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[EqualizerRack1_[Channel2]_Effect1]</group>
-				<key>parameter2</key>
-				<description>EQ MID Deck A</description>
+				<key>DJCi500.deckB.eqKnob[1].inputLSB</key>
+				<description>EQ LOW Deck B</description>
+				<status>0xB2</status>
+				<midino>0x22</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- MID EQ Knob -->
+			<control>
+				<group>[EqualizerRack1_[Channel2]_Effect1]</group>
+				<key>DJCi500.deckB.eqKnob[2].inputMSB</key>
+				<description>EQ MID Deck B</description>
 				<status>0xB2</status>
 				<midino>0x03</midino>
 				<options>
-					<normal />
+					<script-binding />
 				</options>
 			</control>
 			<control>
 				<group>[EqualizerRack1_[Channel2]_Effect1]</group>
-				<key>parameter3</key>
-				<description>EQ HIGH Deck A</description>
+				<key>DJCi500.deckB.eqKnob[2].inputLSB</key>
+				<description>EQ MID Deck B</description>
+				<status>0xB2</status>
+				<midino>0x23</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- HI EQ Knob -->
+			<control>
+				<group>[EqualizerRack1_[Channel2]_Effect1]</group>
+				<key>DJCi500.deckB.eqKnob[3].inputMSB</key>
+				<description>EQ HIGH Deck B</description>
 				<status>0xB2</status>
 				<midino>0x04</midino>
 				<options>
-					<normal />
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[EqualizerRack1_[Channel2]_Effect1]</group>
+				<key>DJCi500.deckB.eqKnob[3].inputLSB</key>
+				<description>EQ HIGH Deck B</description>
+				<status>0xB2</status>
+				<midino>0x24</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--Gain-->
 			<control>
 				<group>[Channel2]</group>
-				<key>pregain</key>
+				<key>DJCi500.deckB.gainKnob.inputMSB</key>
 				<description>Gain Deck A</description>
 				<status>0xB2</status>
 				<midino>0x05</midino>
 				<options>
-					<normal />
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.gainKnob.inputLSB</key>
+				<description>Gain Deck A</description>
+				<status>0xB2</status>
+				<midino>0x05</midino>
+				<options>
+					<script-binding />
 				</options>
 			</control>
 			<!--Filter-->
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.deckB.filterKnob.input</key>
+				<key>DJCi500.deckB.filterKnob.inputMSB</key>
 				<description>Filter Deck B</description>
 				<status>0xB2</status>
 				<midino>0x01</midino>
+				<options>
+					<script-binding/>
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.filterKnob.inputLSB</key>
+				<description>Filter Deck B</description>
+				<status>0xB2</status>
+				<midino>0x21</midino>
 				<options>
 					<script-binding/>
 				</options>
