@@ -120,6 +120,17 @@
 					<script-binding />
 				</options>
 			</control>
+            <!-- SHIFT + LOAD A -->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loadButton.input</key>
+				<description>LOAD A button</description>
+				<status>0x94</status>
+				<midino>0x0D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
             <!-- SHIFT A key button -->
 			<control>
 				<group>[Channel1]</group>
@@ -324,6 +335,17 @@
 				<key>DJCi500.deckB.loadButton.input</key>
 				<description>LOAD B button</description>
 				<status>0x92</status>
+				<midino>0x0D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- SHIFT + LOAD B -->
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loadButton.input</key>
+				<description>LOAD B button</description>
+				<status>0x95</status>
 				<midino>0x0D</midino>
 				<options>
 					<script-binding />
@@ -2854,20 +2876,10 @@
 			<!--Filter-->
 			<control>
 				<group>[Channel1]</group>
-				<key>DJCi500.deckA.filterKnob.inputMSB</key>
+				<key>DJCi500.deckA.filterKnob.input</key>
 				<description>Filter Deck A</description>
 				<status>0xB1</status>
 				<midino>0x01</midino>
-				<options>
-					<script-binding/>
-				</options>
-			</control>
-			<control>
-				<group>[Channel1]</group>
-				<key>DJCi500.deckA.filterKnob.inputLSB</key>
-				<description>Filter Deck A</description>
-				<status>0xB1</status>
-				<midino>0x21</midino>
 				<options>
 					<script-binding/>
 				</options>
@@ -3048,20 +3060,10 @@
 			<!--Filter-->
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.deckB.filterKnob.inputMSB</key>
+				<key>DJCi500.deckB.filterKnob.input</key>
 				<description>Filter Deck B</description>
 				<status>0xB2</status>
 				<midino>0x01</midino>
-				<options>
-					<script-binding/>
-				</options>
-			</control>
-			<control>
-				<group>[Channel2]</group>
-				<key>DJCi500.deckB.filterKnob.inputLSB</key>
-				<description>Filter Deck B</description>
-				<status>0xB2</status>
-				<midino>0x21</midino>
 				<options>
 					<script-binding/>
 				</options>

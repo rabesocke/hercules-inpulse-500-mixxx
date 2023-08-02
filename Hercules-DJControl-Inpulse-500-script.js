@@ -150,7 +150,11 @@ DJCi500.vuMeterUpdateMaster = function(value, _group, control) {
 };
 
 DJCi500.vuMeterUpdateDeck = function(value, group, _control, _status) {
+  // TODO: Devise a way to know if the current channel is active on the 
+  // current deck (so we don't get mixed vu meters from deck 3 on deck 1,
+  // for example
 	value = (value * 122) + 5;
+  var channel = parseInt(group.charAt(8));
 	var status = (group === "[Channel1]") ? 0xB1 : 0xB2;
 	midi.sendShortMsg(status, 0x40, value);
 };
@@ -192,7 +196,36 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   this.loadButton = new components.Button({
     midi: [0x90 + midiChannel, 0x0D],
-    inKey: 'LoadSelectedTrack',
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    unshift: function () {
+      this.inKey = 'LoadSelectedTrack';
+    },
+    shift: function () {
+      this.input = function (channel, control, value, status, group) {
+        var deck = parseInt(group.charAt(8));
+        switch (deck) {
+          case 1:
+            engine.setValue(group, "CloneFromDeck", 2);
+            break;
+
+          case 2:
+            engine.setValue(group, "CloneFromDeck", 1);
+            break;
+
+          case 3:
+            engine.setValue(group, "CloneFromDeck", 4);
+            break;
+
+          case 4:
+            engine.setValue(group, "CloneFromDeck", 3);
+            break;
+
+        };
+      };
+    }
   });
 
   this.playButton = new components.PlayButton({
@@ -249,7 +282,8 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   });
 
   this.pflButton = new components.Button({
-    midi: [0x90 + channel, 0x0C],
+    midi: [0x90 + midiChannel, 0x0C],
+    type: components.Button.prototype.types.toggle,
     key: 'pfl',
   });
 
@@ -367,7 +401,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
           var fxNo = control - 0x63;
           var deckChan = parseInt(group.charAt(8));
           if (value == 0x7F){
-            deckData.filterAndEffectEnabled = !engine.getValue(group, "[EffectRack1_EffectUnit" + deckChan + "_Effect" + fxNo + "]", "enabled");
+            deckData.filterAndEffectEnabled = !engine.getValue("[EffectRack1_EffectUnit" + deckChan + "_Effect" + fxNo + "]", "enabled");
             deckData.onlyEffectEnabled = false;
             script.toggleControl("[EffectRack1_EffectUnit" + deckChan + "_Effect" + fxNo + "]", "enabled");
           }
@@ -386,27 +420,18 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     });
   };
 
-  // Kill all effects and restore filter knob
+  // For completeness, these buttons are, for now, just simply disabled.
   this.effectButtons[4] = new components.Button({
     midi: [0x95 + midiChannel, 0x63],
     number: 4,
     shiftOffset: 8,
     shiftControl: true,
     sendShifted: true,
-    output: function (_value, _group, _control) {
-      this.send(0x60);
-    },
     input: function (_channel, _control, _value, _status, group) {
-      var deckChan = parseInt(group.charAt(8));
-      deckData.onlyEffectEnabled = false;
-      deckData.filterAndEffectEnabled = false;
-      for (var i = 1; i <= 3; i++) {
-        engine.setValue("[EffectRack1_EffectUnit" + deckChan + "_Effect" + i + "]", "enabled", false);
-      }
+      ;;
     }
   });
 
-  // For completeness, these this button is, for now, just simply disabled.
   this.effectButtons[8] = new components.Button({
     midi: [0x95 + midiChannel, 0x67],
     number: 8,
@@ -425,9 +450,11 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     number: midiChannel,
     input: function (channel, control, value, status, group) {
      if ((deckData.onlyEffectEnabled) || (deckData.filterAndEffectEnabled)) {
+        // Move the effects knobs
         engine.setValue("[EffectRack1_EffectUnit" + this.number + "]", "super1", Math.abs(script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127) - 0.5)*2 );
      }
      if ((deckData.filterAndEffectEnabled) || (!deckData.onlyEffectEnabled)) {
+        // Move the filter knob
         engine.setValue("[QuickEffectRack1_" + group + "]", "super1", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
      }
     },
@@ -491,6 +518,11 @@ DJCi500.init = function() {
   engine.getValue("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
   engine.connectControl("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
   engine.getValue("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.connectControl("[Channel3]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.getValue("[Channel3]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.connectControl("[Channel4]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.getValue("[Channel4]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+
   engine.connectControl("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
   engine.connectControl("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
 
@@ -538,57 +570,6 @@ DJCi500.init = function() {
   DJCi500.deckA = new DJCi500.Deck([1, 3], 1);
   DJCi500.deckB = new DJCi500.Deck([2, 4], 2);
 };
-
-// Enable Hotcue colors
-DJCi500.enableHotcueColors = function () {
-  DJCi500.padsColor = {};
-  DJCi500.padsEnabled = {};
-
-  for (var channel = 1; channel <= 2; channel++) { 
-    for (var i = 0; i <= 7; i++) {
-      DJCi500.padsColor[i + ((channel - 1) * 8)] = engine.makeConnection('[Channel' + channel +']', 'hotcue_' + (i + 1) + '_color', DJCi500.hotcueColorCallback);
-      DJCi500.padsEnabled[i + ((channel - 1) * 8)] = engine.makeConnection('[Channel' + channel +']', 'hotcue_' + (i + 1) + '_enabled', DJCi500.hotcueEnabledCallback);
-      // Make the default light gray, a dim white
-      midi.sendShortMsg(0x96 + (channel - 1), 0x00 + i, 0x52);
-      // Send the same color to the shifted cue button
-      midi.sendShortMsg(0x96 + (channel - 1), 0x08 + i, 0x52);
-    }
-  }
-}
-
-// Hotcue color callback
-// Setting it to gray or dim white as it is not used in Mixxx 
-// color palette to identify a non-set hotcue
-DJCi500.hotcueColorCallback = function(value, group, control) {
-  var channel = parseInt(group.charAt(8)) - 1;
-  var cueButton = parseInt(control.split('_')[1]);
-
-  if (value !== -1) {
-    var color = DJCi500.PadColorMapper.getValueForNearestColor(value);
-    midi.sendShortMsg(0x96 + channel, cueButton - 1, color);
-    // Send the same color to the shifted cue button
-    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, color);
-  } else {
-    midi.sendShortMsg(0x96 + channel, cueButton - 1, 0x52);
-    // Send the same color to the shifted cue button
-    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, 0x52);
-  }
-}
-
-DJCi500.hotcueEnabledCallback = function(value, group, control) {
-  var channel = parseInt(group.charAt(8)) - 1;
-  var cueButton = parseInt(control.split('_')[1]);
-
-  if (value) {
-    var color = engine.getValue(group, "hotcue_" + cueButton + "_color");
-    var code = DJCi500.PadColorMapper.getValueForNearestColor(color);
-    midi.sendShortMsg(0x96 + channel, cueButton - 1, code);
-    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, code);
-  } else {
-    midi.sendShortMsg(0x96 + channel, cueButton - 1, 0x52);
-    midi.sendShortMsg(0x96 + channel, (cueButton - 1) + 8, 0x52);
-  }
-}
 
 // Crossfader control, set the curve
 DJCi500.crossfaderSetCurve = function(channel, control, value, _status, _group) {
@@ -766,50 +747,6 @@ DJCi500.loopHalveDouble = function (channel, control, value, status, group) {
     }
 };
 
-
-DJCi500.filterKnob1 = function (channel, control, value, status, group) {
-    var fx_active = (DJCi500.FxD1Active[0] || DJCi500.FxD1Active[1] || DJCi500.FxD1Active[2]);
-    var deck_sel = (DJCi500.FxDeckSel == 0) || (DJCi500.FxDeckSel == 1);
-    //engine.getValue(string group, string key);
-    if (fx_active && deck_sel) {
-        if (DJCi500.prevFilterUse[0] != 1)
-        {
-            engine.softTakeoverIgnoreNextValue("[EffectRack1_EffectUnit1]", "super1");
-        }
-        //engine.setValue("[EffectRack1_EffectUnit1]", "mix", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
-        engine.setValue("[EffectRack1_EffectUnit1]", "super1", Math.abs(script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127) - 0.5)*2 );
-        DJCi500.prevFilterUse[0] = 1;
-    } else {
-        if (DJCi500.prevFilterUse[0] != 0)
-        {
-            engine.softTakeoverIgnoreNextValue("[QuickEffectRack1_[Channel1]]", "super1");
-        }
-        engine.setValue("[QuickEffectRack1_[Channel1]]", "super1", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
-        DJCi500.prevFilterUse[0] = 0;
-    }
-};
-
-DJCi500.filterKnob2 = function (channel, control, value, status, group) {
-    var fx_active = (DJCi500.FxD2Active[0] || DJCi500.FxD2Active[1] || DJCi500.FxD2Active[2]);
-    var deck_sel = (DJCi500.FxDeckSel == 0) || (DJCi500.FxDeckSel == 2);
-    //engine.getValue(string group, string key);
-    if (fx_active && deck_sel) {
-        if (DJCi500.prevFilterUse[1] != 1)
-        {
-            engine.softTakeoverIgnoreNextValue("[EffectRack1_EffectUnit2]", "super1");
-        }
-        //engine.setValue("[EffectRack1_EffectUnit2]", "mix", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
-        engine.setValue("[EffectRack1_EffectUnit2]", "super1", Math.abs(script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127) - 0.5)*2 );
-        DJCi500.prevFilterUse[1] = 1;
-    } else {
-        if (DJCi500.prevFilterUse[1] != 0)
-        {
-            engine.softTakeoverIgnoreNextValue("[QuickEffectRack1_[Channel2]]", "super1");
-        }
-        engine.setValue("[QuickEffectRack1_[Channel2]]", "super1", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
-        DJCi500.prevFilterUse[1] = 0;
-    }
-};
 
 //Led
 DJCi500.tempoLEDs = function () {
