@@ -7,9 +7,18 @@
 // *    contributions by Kerrick Staley, Bentheshrubber, ThatOneRuffian
 //
 //  Version 1.6c: (August 2023) resetreboot
+//  * Requires Mixxx >= 2.3.4
+//  * Volume meters follow correctly the selected channel
 //  * Use the full 14 bits for knobs for more precission 
 //  * Add effects to the PAD 7 mode
-//  * Create decks for future four channel mode
+//  * Create decks for four channel mode
+//  * Change the behavior of the FX buttons, use them as Channel selector, using the LEDs
+//    as indicators of current channel.
+//
+//
+//  * When enabling multichannel, ensure:
+//    - Beat matching guide follows correctly the selected channels
+//
 //  * Move the sampler buttons to the Deck component as well as the new effect buttons
 //  * Made the filter knob have a function with filter, effect and filter + effect
 //  * Use the Hotcue component for hotcues
@@ -21,6 +30,22 @@
 //    - EQs
 //    - PFL
 //    - Pad Selectors
+//    - Loop PADs
+//    - Roll PADs
+//    - Beat jump PADs
+//    - Tone key PADs
+//    - Slicer
+//    - Loop pot
+//    - In and Out loop
+//    - Load button
+//    - Vinyl
+//    - Slip
+//    - Quant
+//    - Pitch fader
+//    - Jog wheels (Using the new JogWheelBasic component!
+//      - Also probably fixed the shift behavior not working properly
+//
+//  * Added option so the browser knob can behave with out of focus window
 //
 // * Version 1.5c (Summer 2023)
 // * Forum: https://mixxx.discourse.group/t/hercules-djcontrol-inpulse-500/19739
@@ -37,89 +62,50 @@
 //
 // TO DO: 
 //
-//  * Use components for the Pads (and add to Deck): 
-//    - Loops
-//    - Loop rolls
-//    - Slicer -> gonna be a tricky one
-//    - Beat jump
-//    - Tone key
-//
-//  * Use components and add for the rest of the controls:
-//    - Pitch fader
-//    - Vinyl
-//    - Slip
-//    - Quant
-//    - Loop pot
-//    - In and Out loop
-//    - Load button
-//
-//  * Change the behavior of the FX buttons, use them as Channel selector, using the LEDs
-//    as indicators of current channel.
-//
-//  * When enabling multichannel, ensure:
-//    - Beat matching guide follow correctly the selected channel
-//    - Volume meters follow correctly the selected channel
-//
 // ****************************************************************************
 var DJCi500 = {};
 ///////////////////////////////////////////////////////////////
 //                       USER OPTIONS                        //
 ///////////////////////////////////////////////////////////////
 
-// How fast scratching is.
-DJCi500.scratchScale = 1.0;
-
-// How much faster seeking (shift+scratch) is than scratching.
-DJCi500.scratchShiftMultiplier = 4;
-
-// How fast bending is.
-DJCi500.bendScale = 1.0;
-// Other scratch related options
-DJCi500.kScratchActionNone = 0;
-DJCi500.kScratchActionScratch = 1;
-DJCi500.kScratchActionSeek = 2;
-DJCi500.kScratchActionBend = 3;
 DJCi500.FxLedtimer;
+// If you are spinning your set list and you have your Mixxx window out
+// of focus and you want to be able to use the browser knob to traverse
+// the current crate or playlist, set to true. Especially useful to spin
+// when using Twitch, VRChat or Second Life
+DJCi500.browserOffFocusMode = false;
 
 // Colors
 DJCi500.PadColorMapper = new ColorMapper({
-    0xFF0000: 0x60,
-    0xFFFF00: 0x7C,
-    0x00FF00: 0x1C,
-    0x00FFFF: 0x1F,
-    0x0000FF: 0x03,
-    0xFF00FF: 0x42,
-    0xFF88FF: 0x63,
-    0xFFFFFF: 0x7F,
-    0x000088: 0x02,
-    0x008800: 0x10,
-    0x008888: 0x12,
-    0x228800: 0x30,
-    0x880000: 0x40,
-    0x882200: 0x4C,
-    0x888800: 0x50,
-    0x888888: 0x52,
-    0x88FF00: 0x5C,
-    0xFF8800: 0x74,
+  0xFF0000: 0x60,
+  0xFFFF00: 0x7C,
+  0x00FF00: 0x1C,
+  0x00FFFF: 0x1F,
+  0x0000FF: 0x03,
+  0xFF00FF: 0x42,
+  0xFF88FF: 0x63,
+  0xFFFFFF: 0x7F,
+  0x000088: 0x02,
+  0x008800: 0x10,
+  0x008888: 0x12,
+  0x228800: 0x30,
+  0x880000: 0x40,
+  0x882200: 0x4C,
+  0x888800: 0x50,
+  0x888888: 0x52,
+  0x88FF00: 0x5C,
+  0xFF8800: 0x74,
 });
 
 
-//Ev3nt1ne Global Var:
-DJCi500.FxD1Active = [0, 0, 0]; //Here I decided to put only 3 effects
-DJCi500.FxD2Active = [0, 0, 0]; //Here I decided to put only 3 effects
-DJCi500.FxDeckSel = 0; // state variable for fx4 to decide the deck
-DJCi500.prevFilterUse = [0, 0]; //id of the array, one for each deck
-DJCi500.pitchRanges = [0.08, 0.32, 1]; //select pitch range
-DJCi500.pitchRangesId = [0, 0]; //id of the array, one for each deck
-DJCi500.slowPauseSetState = [0, 0];
 ///////////////////////////////////////////////////////////////
 //                          SLICER                           //
 ///////////////////////////////////////////////////////////////
-//PioneerDDJSX.selectedSlicerQuantizeParam = [1, 1, 1, 1];
-//PioneerDDJSX.selectedSlicerQuantization = [1 / 4, 1 / 4, 1 / 4, 1 / 4];
-//PioneerDDJSX.slicerQuantizations = [1 / 8, 1 / 4, 1 / 2, 1];
-//PioneerDDJSX.selectedSlicerDomainParam = [0, 0, 0, 0];
-DJCi500.selectedSlicerDomain = [8, 8, 8, 8]; //length of the Slicer domain
+  //PioneerDDJSX.selectedSlicerQuantizeParam = [1, 1, 1, 1];
+  //PioneerDDJSX.selectedSlicerQuantization = [1 / 4, 1 / 4, 1 / 4, 1 / 4];
+  //PioneerDDJSX.slicerQuantizations = [1 / 8, 1 / 4, 1 / 2, 1];
+  //PioneerDDJSX.selectedSlicerDomainParam = [0, 0, 0, 0];
+  DJCi500.selectedSlicerDomain = [8, 8, 8, 8]; //length of the Slicer domain
 //PioneerDDJSX.slicerDomains = [8, 16, 32, 64];
 
 // slicer storage:
@@ -131,32 +117,33 @@ DJCi500.slicerActive = [false, false, false, false];
 DJCi500.slicerAlreadyJumped = [false, false, false, false];
 DJCi500.slicerButton = [-1, -1, -1, -1];
 DJCi500.slicerModes = {
-    'contSlice': 0,
-    'loopSlice': 1
+  'contSlice': 0,
+  'loopSlice': 1
 };
 DJCi500.activeSlicerMode = [
-    DJCi500.slicerModes.contSlice,
-    DJCi500.slicerModes.contSlice,
-    DJCi500.slicerModes.contSlice,
-    DJCi500.slicerModes.contSlice
+  DJCi500.slicerModes.contSlice,
+  DJCi500.slicerModes.contSlice,
+  DJCi500.slicerModes.contSlice,
+  DJCi500.slicerModes.contSlice
 ];
 DJCi500.slicerLoopBeat8 = [0, 0, 0, 0];
 ///////////////////////
 
 DJCi500.vuMeterUpdateMaster = function(value, _group, control) {
-  value = (value * 122) + 5;
+  // value = (value * 122) + 5;
+  value = script.absoluteLinInverse(value, 0.0, 1.0, 0, 127);
   var control = (control === "VuMeterL") ? 0x40 : 0x41;
   midi.sendShortMsg(0xB0, control, value);
 };
 
 DJCi500.vuMeterUpdateDeck = function(value, group, _control, _status) {
-  // TODO: Devise a way to know if the current channel is active on the 
-  // current deck (so we don't get mixed vu meters from deck 3 on deck 1,
-  // for example
-	value = (value * 122) + 5;
-  var channel = parseInt(group.charAt(8));
-	var status = (group === "[Channel1]") ? 0xB1 : 0xB2;
-	midi.sendShortMsg(status, 0x40, value);
+  // value = (value * 122) + 5;
+  value = script.absoluteLinInverse(value, 0.0, 1.0, 0, 127);
+  if (DJCi500.deckA.currentDeck == group) {
+    midi.sendShortMsg(0xB1, 0x40, value);
+  } else if (DJCi500.deckB.currentDeck == group) {
+    midi.sendShortMsg(0xB2, 0x40, value);
+  }
 };
 
 DJCi500.Deck = function (deckNumbers, midiChannel) {
@@ -164,11 +151,22 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   // Allow components to access deck variables
   var deckData = this;
 
+  // For loop and looprolls
+  var fractions = ['0.125', '0.25', '0.5', '1', '2', '4', '8'];
+
+  // For key shift pads and beat jump pads
+  var pairColorsOn = [0x1F, 0x1F, 0x03, 0x03, 0x74, 0x74, 0x60, 0x60]; 
+  var pairColorsOff = [0x12, 0x12, 0x02, 0x02, 0x4C, 0x4C, 0x40, 0x40]; 
+
   // Brake status for this deck
   this.slowPauseSetState = false;
 
-  // slicerMode status
-  this.slicerActive = false;
+  // Vinyl button state
+  this.scratchButtonState = true;
+
+  // Pitch ranges and status
+  this.pitchRanges = [0.08, 0.32, 1]; //select pitch range
+  this.pitchRangeId = 0; //id of the array, one for each deck
 
   // Effect section components
   this.onlyEffectEnabled = false;
@@ -228,6 +226,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     }
   });
 
+  // Transport section
   this.playButton = new components.PlayButton({
     midi: [0x90 + midiChannel, 0x07],
     shiftOffset: 3,
@@ -287,6 +286,60 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     key: 'pfl',
   });
 
+  // Top controls
+  // Vinyl button
+  this.vinylButton = new components.Button({
+    midi: [0x90 + midiChannel, 0x03],
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    unshift: function () {
+      this.input = function(_channel, _control, value, status, _group) {
+        if (value) {
+          deckData.jogWheel.vinylMode = !deckData.jogWheel.vinylMode;
+          var new_status = deckData.jogWheel.vinylMode ? 0x7F : 0x00;
+          midi.sendShortMsg(status, 0x03, new_status);
+        }
+      };
+    },
+    shift: function () {
+      this.input = function (channel, control, value, status, group) {
+        if (value == 0x7F){
+          deckData.slowPauseSetState = !deckData.slowPauseSetState;
+        }
+      };
+    }
+  });
+
+  // SLIP mode button
+  this.slipButton = new components.Button({
+    midi: [0x90 + midiChannel, 0x01],
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    key: 'slip_enabled',
+  });
+
+  // Quant button
+  this.quantButton =  new components.Button({
+    midi: [0x90 + midiChannel, 0x03],
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    unshift: function () {
+      this.outKey = 'quantize';
+      this.inKey = 'quantize';
+    },
+    shift: function () {
+      this.outKey = 'keylock';
+      this.inKey = 'keylock';
+    },
+  });
+
+
   // Knobs
   this.volume = new components.Pot({
     midi: [0xB0 + midiChannel, 0x00],
@@ -307,6 +360,138 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     inKey: 'pregain',
   });
 
+  // Pitch-tempo fader
+  this.pitchFader = new components.Pot({
+    midi: [0xB0 + midiChannel, 0x08],
+    inKey: 'rate',
+  });
+
+  // Jog Wheel
+  // TODO: Handle with less repeat the shift key for this
+  this.jogWheel = new components.JogWheelBasic({
+    midi: [0xB0 + midiChannel, 0x0A],
+    deck: midiChannel, // whatever deck this jogwheel controls, in this case we ignore it
+    wheelResolution: 248, // how many ticks per revolution the jogwheel has
+    alpha: 1/8,
+    beta: 1/8/32,
+    rpm: 33 + 1/3,
+    inputWheel: function(_channel, _control, value, _status, group) {
+      var deck = parseInt(group.charAt(8));
+      value = this.inValueScale(value);
+      if (engine.isScratching(deck)) {
+        engine.scratchTick(deck, value);
+      } else {
+        this.inSetValue(value);
+      }
+    },
+    inputTouch: function(channel, control, value, status, group) {
+      var deck = parseInt(group.charAt(8));
+      if (this.isPress(channel, control, value, status) && this.vinylMode) {
+        engine.scratchEnable(deck,
+          this.wheelResolution,
+          this.rpm,
+          this.alpha,
+          this.beta);
+      } else {
+        engine.scratchDisable(this.deck);
+      }
+    },
+  });
+
+  this.jogWheelShift = new components.JogWheelBasic({
+    midi: [0xB3 + midiChannel, 0x0A],
+    deck: midiChannel, // whatever deck this jogwheel controls, in this case we ignore it
+    wheelResolution: 248, // how many ticks per revolution the jogwheel has
+    alpha: 1/8,
+    beta: 1/8/32,
+    rpm: 33 + 1/3,
+    inputWheel: function(_channel, _control, value, _status, group) {
+      var deck = parseInt(group.charAt(8));
+      value = this.inValueScale(value) * 4; 
+      if (engine.isScratching(deck)) {
+        engine.scratchTick(deck, value);
+      } else {
+        this.inSetValue(value);
+      }
+    },
+    inputTouch: function(channel, control, value, status, group) {
+      var deck = parseInt(group.charAt(8));
+      if (this.isPress(channel, control, value, status) && this.vinylMode) {
+        engine.scratchEnable(deck,
+          this.wheelResolution,
+          this.rpm,
+          this.alpha,
+          this.beta);
+      } else {
+        engine.scratchDisable(this.deck);
+      }
+    },
+  });
+
+  // Loop controls
+  this.loopInButton = new components.Button({
+    midi: [0x90 + midiChannel, 0x09],
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    outKey: 'loop_enabled',    // TODO: Check with loop_in?
+    unshift: function () {
+      this.inKey = 'loop_in';
+    },
+    shift: function () {
+      this.inKey = 'loop_in_goto';
+    },
+  });
+
+  this.loopOutButton = new components.Button({
+    midi: [0x90 + midiChannel, 0x0A],
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    outKey: 'loop_enabled',    // TODO: Check with loop_in?
+    unshift: function () {
+      this.inKey = 'loop_out';
+    },
+    shift: function () {
+      this.inKey = 'loop_out_goto';
+    },
+  });
+
+  // Loop rotary encoder functions
+  //
+  // Push the rotary encoder
+  this.loopEncoderPush = new components.Button({
+    midi: [0x90 + midiChannel, 0x2C],
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    unshift: function () {
+      this.inKey = 'reloop_toggle';
+    },
+    shift: function () {
+      this.inKey = 'beatloop_4_activate';
+    },
+  });
+
+  // Loop encoder
+  this.loopEncoder = new components.Encoder({
+    midi: [0xB0 + midiChannel, 0x0E],
+    shiftOffset: 3,
+    shiftControl: false,
+    shiftChannel: true,
+    sendShifted: true,
+    input: function (channel, control, value, status, group) {
+      if (value >= 0x40) {
+        script.toggleControl(group, "loop_halve");
+      } else {
+        script.toggleControl(group, "loop_double");
+      }
+    }
+  });
+
   // We only check and attach for slicer mode, but we have all
   // pad buttons here if we need something extra!
   this.padSelectButtons = [];
@@ -314,16 +499,17 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     this.padSelectButtons[i] = new components.Button({
       midi: [0x90 + midiChannel, 0x0F + (i - 1)],
       input: function(channel, control, value, status, group) {
+        var deck = parseInt(group.charAt(8)) - 1;
         if (control == 0x11) {
-          deckData.slicerActive = true;
+          DJCi500.slicerActive[deck] = true;
         } else {
-          deckData.slicerActive = false;
+          DJCi500.slicerActive[deck] = false;
         }
       },
     });
   }
-  
-  // Hotcue buttons
+
+  // Hotcue buttons (PAD Mode 1)
   this.hotcueButtons = [];
   for (var i = 1; i <= 8; i++) {
     this.hotcueButtons[i] = new components.HotcueButton({
@@ -337,6 +523,184 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     });
   };
 
+  // Loop buttons (PAD Mode 2)
+  this.loopButtons = [];
+  for (var i = 1; i <= 8; i++) {
+    this.loopButtons[i] = new components.Button({
+      midi: [0x95 + midiChannel, 0x10 + (i - 1)],
+      type: components.Button.prototype.types.toggle,
+      number: i,
+      shiftOffset: 8,
+      shiftControl: true,
+      sendShifted: true,
+      on: 0x5C,
+      off: 0x30,
+      key: 'beatloop_' + fractions[i] + 'toggle',
+    });
+  };
+
+  // Slicer buttons (PAD Mode 3)
+  this.slicerButtons = [];
+  for (var i = 1; i <= 8; i++) {
+    this.slicerButtons[i] = new components.Button({
+      midi: [0x95 + midiChannel, 0x20 + (i - 1)],
+      number: i,
+      shiftOffset: 8,
+      shiftControl: true,
+      sendShifted: true,
+      input: DJCi500.slicerButtonFunc,
+    });
+  };
+
+  // Sampler buttons (PAD Mode 4)
+  this.samplerButtons = [];
+  for (var i = 1; i <= 8; i++) {
+    this.samplerButtons[i] = new components.SamplerButton({
+      midi: [0x95 + midiChannel, 0x30 + (i - 1)],
+      number: i,
+      shiftOffset: 8,
+      shiftControl: true,
+      sendShifted: true,
+      loaded: 0x42,
+      empty: 0x00,
+      playing: 0x63,
+      looping: 0x74,
+    });
+  };
+
+  // Pitch buttons (PAD Mode 5)
+  this.pitchDownTone = new components.Button({
+    midi: [0x95 + midiChannel, 0x40],
+    on: pairColorsOn[0],
+    off: pairColorsOff[0],
+    input: function (channel, control, value, status, group) {
+      if (value == 0x7F){
+        engine.setValue(group, "pitch_adjust", -2.0);
+        midi.sendShortMsg(status, control, this.on);
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off);
+      }
+    },
+  });
+
+  this.pitchDownSemiTone = new components.Button({
+    midi: [0x95 + midiChannel, 0x41],
+    on: pairColorsOn[1],
+    off: pairColorsOff[1],
+    input: function (channel, control, value, status, group) {
+      if (value == 0x7F){
+        engine.setValue(group, "pitch_down", 1);
+        midi.sendShortMsg(status, control, this.on);
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off);
+      }
+    },
+  });
+
+  this.pitchUpSemiTone = new components.Button({
+    midi: [0x95 + midiChannel, 0x42],
+    on: pairColorsOn[2],
+    off: pairColorsOff[2],
+    input: function (channel, control, value, status, group) {
+      if (value == 0x7F){
+        engine.setValue(group, "pitch_up", 1);
+        midi.sendShortMsg(status, control, this.on);
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off);
+      }
+    },
+  });
+
+  this.pitchUpTone = new components.Button({
+    midi: [0x95 + midiChannel, 0x43],
+    on: pairColorsOn[3],
+    off: pairColorsOff[3],
+    input: function (channel, control, value, status, group) {
+      if (value == 0x7F){
+        engine.setValue(group, "pitch_adjust", 2.0);
+        midi.sendShortMsg(status, control, this.on);
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off);
+      }
+    },
+  });
+
+  this.pitchSliderIncrease = new components.Button({
+    midi: [0x95 + midiChannel, 0x44],
+    on: pairColorsOn[4],
+    off: pairColorsOff[4],
+    input: function (channel, control, value, status, group) {
+      if (value == 0x7F){
+        deckData.pitchRangeId++;
+        if (deckData.pitchRangeId > 2)
+        {
+          deckData.pitchRangeId = 2;
+        }
+        engine.setValue(group, "rateRange", deckData.pitchRanges[deckData.pitchRangeId]);
+        midi.sendShortMsg(status, control, this.on); //17 -- 3B
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off); //3B -- 33
+      }
+    },
+  });
+
+  this.pitchSliderDecrease = new components.Button({
+    midi: [0x95 + midiChannel, 0x45],
+    on: pairColorsOn[5],
+    off: pairColorsOff[5],
+    input: function (channel, control, value, status, group) {
+      if (value == 0x7F){
+        deckData.pitchRangeId = deckData.pitchRangeId - 1;
+        if (deckData.pitchRangeId < 0)
+        {
+          deckData.pitchRangeId = 0;
+        }
+        engine.setValue(group, "rateRange", deckData.pitchRanges[deckData.pitchRangeId]);
+        midi.sendShortMsg(status, control, this.on); //17 -- 3B
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off); //3B -- 33
+      }
+    },
+  });
+
+  this.pitchSliderReset = new components.Button({
+    midi: [0x95 + midiChannel, 0x46],
+    on: pairColorsOn[6],
+    off: pairColorsOff[6],
+    input: function (channel, control, value, status, group) {
+      if (value == 0x7F){
+        deckData.pitchRangeId = 0;
+        engine.setValue(group, "rateRange", deckData.pitchRanges[deckData.pitchRangeId]);
+        midi.sendShortMsg(status, control, this.on); //17 -- 3B
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off); //3B -- 33
+      }
+    },
+  });
+
+  // Beatloop rolls buttons (PAD Mode 6)
+  this.rollButtons = [];
+  for (var i = 1; i <= 8; i++) {
+    this.rollButtons[i] = new components.Button({
+      midi: [0x95 + midiChannel, 0x10 + (i - 1)],
+      number: i,
+      shiftOffset: 8,
+      shiftControl: true,
+      sendShifted: true,
+      on: 0x1F,
+      off: 0x12,
+      key: 'beatlooproll_' + fractions[i] + 'activate',
+    });
+  };
+
+  // Effect buttons (PAD Mode 7)
   this.effectButtons = [];
   for (var i = 1; i <= 3; i++) {
     // First top row effects buttons, just the effect, disable HPF/LPF knob
@@ -445,35 +809,34 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     }
   });
 
+  // Filter knob is here since it is affected by effects pads
   this.filterKnob = new components.Pot({
     midi: [0xB0 + midiChannel, 0x01],
     number: midiChannel,
     input: function (channel, control, value, status, group) {
-     if ((deckData.onlyEffectEnabled) || (deckData.filterAndEffectEnabled)) {
+      if ((deckData.onlyEffectEnabled) || (deckData.filterAndEffectEnabled)) {
         // Move the effects knobs
         engine.setValue("[EffectRack1_EffectUnit" + this.number + "]", "super1", Math.abs(script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127) - 0.5)*2 );
-     }
-     if ((deckData.filterAndEffectEnabled) || (!deckData.onlyEffectEnabled)) {
+      }
+      if ((deckData.filterAndEffectEnabled) || (!deckData.onlyEffectEnabled)) {
         // Move the filter knob
         engine.setValue("[QuickEffectRack1_" + group + "]", "super1", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
-     }
+      }
     },
   });
 
-  // Sampler buttons
-  this.samplerButtons = [];
+  // Beat jump (PAD Mode 8)
+  this.beatJumpButtons = [];
+  var values = [1, 1, 2, 2, 4, 4, 8, 8];
   for (var i = 1; i <= 8; i++) {
-      this.samplerButtons[i] = new components.SamplerButton({
-        midi: [0x95 + midiChannel, 0x30 + (i - 1)],
-        number: i,
-        shiftOffset: 8,
-        shiftControl: true,
-        sendShifted: true,
-        loaded: 0x42,
-        empty: 0x00,
-        playing: 0x63,
-        looping: 0x74,
-      });
+    var movement = (i % 2 == 0) ? '_backward' : '_forward';
+    this.beatJumpButtons[i] = new components.Button({
+      midi: [0x95 + midiChannel, 0x70 + (i - 1)],
+      number: i,
+      on: pairColorsOn[i-1],
+      off: pairColorsOff[i-1],
+      key: 'beatjump_' + values[i] + movement,
+    });
   };
 
   // As per Mixxx wiki, set the group properties
@@ -487,15 +850,8 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 // Give the custom Deck all the methods of the generic deck
 DJCi500.Deck.prototype = new components.Deck();
 
+// INIT for the controller and decks
 DJCi500.init = function() {
-  // Scratch button state
-  DJCi500.scratchButtonState = true;
-  // Scratch Action
-  DJCi500.scratchAction = {
-    1: DJCi500.kScratchActionNone,
-    2: DJCi500.kScratchActionNone
-  };
-
   DJCi500.AutoHotcueColors = true;
 
   // Take care of the status of the crossfader status
@@ -505,13 +861,19 @@ DJCi500.init = function() {
   // Turn On Vinyl buttons LED(one for each deck).
   midi.sendShortMsg(0x91, 0x03, 0x7F);
   midi.sendShortMsg(0x92, 0x03, 0x7F);
+
   //Turn On Browser button LED
   midi.sendShortMsg(0x90, 0x05, 0x10);
+
   //Softtakeover for Pitch fader
   engine.softTakeover("[Channel1]", "rate", true);
   engine.softTakeover("[Channel2]", "rate", true);
+  engine.softTakeover("[Channel3]", "rate", true);
+  engine.softTakeover("[Channel3]", "rate", true);
   engine.softTakeoverIgnoreNextValue("[Channel1]", "rate");
   engine.softTakeoverIgnoreNextValue("[Channel2]", "rate");
+  engine.softTakeoverIgnoreNextValue("[Channel3]", "rate");
+  engine.softTakeoverIgnoreNextValue("[Channel4]", "rate");
 
   // Connect the VUMeters
   engine.connectControl("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
@@ -530,18 +892,10 @@ DJCi500.init = function() {
   engine.getValue("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
   engine.getValue("[Controls]", "AutoHotcueColors", "DJCi500.AutoHotcueColors");
 
-  /* 
-  //Ev3nt1ne Code
-  var fx1D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect1]', 'enabled', DJCi500.fx1D1Callback);
-  var fx2D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect2]', 'enabled', DJCi500.fx2D1Callback);
-  var fx3D1Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect3]', 'enabled', DJCi500.fx3D1Callback);
-  var fx1D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect1]', 'enabled', DJCi500.fx1D2Callback);
-  var fx2D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect2]', 'enabled', DJCi500.fx2D2Callback);
-  var fx3D2Connection = engine.makeConnection('[EffectRack1_EffectUnit2_Effect3]', 'enabled', DJCi500.fx3D2Callback);
-  //var fx4Connection = engine.makeConnection('[EffectRack1_EffectUnit1_Effect4]', 'enabled', DJCi500.fx4Callback);
-  */
   var slicerBeatConnection1 = engine.makeConnection('[Channel1]', 'beat_active', DJCi500.slicerBeatActive);
   var slicerBeatConnection2 = engine.makeConnection('[Channel2]', 'beat_active', DJCi500.slicerBeatActive);
+  var slicerBeatConnection3 = engine.makeConnection('[Channel3]', 'beat_active', DJCi500.slicerBeatActive);
+  var slicerBeatConnection4 = engine.makeConnection('[Channel4]', 'beat_active', DJCi500.slicerBeatActive);
   //var controlsToFunctions = {'beat_active': 'DJCi500.slicerBeatActive'};
   //script.bindConnections('[Channel1]', controlsToFunctions, true);
 
@@ -551,20 +905,19 @@ DJCi500.init = function() {
 
   // Turn on lights:
   for (var i = 0; i < 2; i++) {
-     midi.sendShortMsg(0x96+i, 0x40, 0x2);
-     midi.sendShortMsg(0x96+i, 0x41, 0x2);
-     midi.sendShortMsg(0x96+i, 0x42, 0x78);
-     midi.sendShortMsg(0x96+i, 0x43, 0x78);
-     midi.sendShortMsg(0x96+i, 0x45, 0x37);
-     midi.sendShortMsg(0x96+i, 0x46, 0x24);
-   }
+    midi.sendShortMsg(0x96+i, 0x40, 0x2);
+    midi.sendShortMsg(0x96+i, 0x41, 0x2);
+    midi.sendShortMsg(0x96+i, 0x42, 0x78);
+    midi.sendShortMsg(0x96+i, 0x43, 0x78);
+    midi.sendShortMsg(0x96+i, 0x45, 0x37);
+    midi.sendShortMsg(0x96+i, 0x46, 0x24);
+  }
 
-  // Bind the hotcue colors
-  // DJCi500.enableHotcueColors();
-  // Bind the sampler buttons
-  // DJCi500.enableSamplerButtons();
+  DJCi500.tempoTimer = engine.beginTimer(250,"DJCi500.tempoLEDs()");
 
-  DJCi500.FxLedtimer = engine.beginTimer(250,"DJCi500.tempoLEDs()");
+  // FX buttons, light them to signal the current deck 1 and 2 as active
+  midi.sendShortMsg(0x90, 0x14, 0x7F);
+  midi.sendShortMsg(0x90, 0x15, 0x7F);
 
   // Create the deck objects
   DJCi500.deckA = new DJCi500.Deck([1, 3], 1);
@@ -602,20 +955,20 @@ DJCi500.crossfader = function(channel, control, value, status, group) {
   if (DJCi500.crossfaderEnabled) {
     // Eventine's crossfader scratch mode
     if (DJCi500.xFaderScratch) {
-        var result = 0;
-        if (value <= 0) {
-            result = -1;
-        } 
-        else if (value >= 127) {
-            result = 1;
-        }
-        else {
-            result = Math.tan((value-64)*Math.PI/2/63)/32;
-        }
-        engine.setValue(group, "crossfader", result);
+      var result = 0;
+      if (value <= 0) {
+        result = -1;
+      } 
+      else if (value >= 127) {
+        result = 1;
+      }
+      else {
+        result = Math.tan((value-64)*Math.PI/2/63)/32;
+      }
+      engine.setValue(group, "crossfader", result);
     }
     else {
-        engine.setValue(group, "crossfader", (value/64)-1);
+      engine.setValue(group, "crossfader", (value/64)-1);
     }
   }
 }
@@ -623,612 +976,324 @@ DJCi500.crossfader = function(channel, control, value, status, group) {
 // Browser button. We move it to a custom JS function to avoid having to focus the Mixxx window for it to respond
 DJCi500.moveLibrary = function(channel, control, value, status, group) {
   if (value > 0x3F) {
-    engine.setValue('[Playlist]', 'SelectTrackKnob', -1);
+    if (DJCi500.browserOffFocusMode) {
+      engine.setValue('[Playlist]', 'SelectTrackKnob', -1);
+    } else {
+      engine.setValue('[Library]', 'MoveUp', 1);
+    }
   } else {
-    engine.setValue('[Playlist]', 'SelectTrackKnob', 1);
+    if (DJCi500.browserOffFocusMode) {
+      engine.setValue('[Playlist]', 'SelectTrackKnob', 1);
+    } else {
+      engine.setValue('[Library]', 'MoveDown', 1);
+    }
   }
 }
 
-// The Vinyl button, used to enable or disable scratching on the jog wheels (One per deck).
-
-DJCi500.vinylButton = function(_channel, _control, value, status, _group) {
-    if (value) {
-        if (DJCi500.scratchButtonState) {
-            DJCi500.scratchButtonState = false;
-            midi.sendShortMsg(status, 0x03, 0x00);
-
-        } else {
-            DJCi500.scratchButtonState = true;
-            midi.sendShortMsg(status, 0x03, 0x7F);
-
-        }
-    }
-};
-
-DJCi500._scratchEnable = function(deck) {
-    var alpha = 1.0/8;
-    var beta = alpha/32;
-    engine.scratchEnable(deck, 248, 33 + 1/3, alpha, beta);
-};
-
-
-DJCi500._convertWheelRotation = function (value) {
-    // When you rotate the jogwheel, the controller always sends either 0x1
-    // (clockwise) or 0x7F (counter clockwise). 0x1 should map to 1, 0x7F
-    // should map to -1 (IOW it's 7-bit signed).
-    return value < 0x40 ? 1 : -1;
-};
-
-
-// The touch action on the jog wheel's top surface
-DJCi500.wheelTouch = function(channel, control, value, _status, _group) {
-    var deck = channel;
-    if (value > 0) {
-        //  Touching the wheel.
-        if (engine.getValue("[Channel" + deck + "]", "play") !== 1 || DJCi500.scratchButtonState) {
-            DJCi500._scratchEnable(deck);
-            DJCi500.scratchAction[deck] = DJCi500.kScratchActionScratch;
-        } else {
-            DJCi500.scratchAction[deck] = DJCi500.kScratchActionBend;
-        }
-    } else {
-        // Released the wheel.
-        engine.scratchDisable(deck);
-        DJCi500.scratchAction[deck] = DJCi500.kScratchActionNone;
-    }
-};
-
-
-// The touch action on the jog wheel's top surface while holding shift
-DJCi500.wheelTouchShift = function(channel, control, value, _status, _group) {
-    var deck = channel - 3;
-    // We always enable scratching regardless of button state.
-    if (value > 0) {
-        DJCi500._scratchEnable(deck);
-        DJCi500.scratchAction[deck] = DJCi500.kScratchActionSeek;
-
-    } else {
-        // Released the wheel.
-        engine.scratchDisable(deck);
-        DJCi500.scratchAction[deck] = DJCi500.kScratchActionNone;
-    }
-};
-
-
-// Scratching on the jog wheel (rotating it while pressing the top surface)
-DJCi500.scratchWheel = function(channel, control, value, status, _group) {
-    var deck;
-    switch (status) {
-    case 0xB1:
-    case 0xB4:
-        deck  = 1;
-        break;
-    case 0xB2:
-    case 0xB5:
-        deck  = 2;
-        break;
-    default:
-        return;
-    }
-    var interval = DJCi500._convertWheelRotation(value);
-    var scratchAction = DJCi500.scratchAction[deck];
-
-    if (scratchAction === DJCi500.kScratchActionScratch) {
-        engine.scratchTick(deck, interval * DJCi500.scratchScale);
-    } else if (scratchAction === DJCi500.kScratchActionSeek) {
-        engine.scratchTick(deck,
-            interval *  DJCi500.scratchScale *
-            DJCi500.scratchShiftMultiplier);
-    } else {
-        engine.setValue(
-            "[Channel" + deck + "]", "jog", interval * DJCi500.bendScale);
-    }
-};
-
-// Bending on the jog wheel (rotating using the edge)
-DJCi500.bendWheel = function(channel, control, value, _status, _group) {
-    var interval = DJCi500._convertWheelRotation(value);
-    engine.setValue(
-        "[Channel" + channel + "]", "jog", interval * DJCi500.bendScale);
-};
-
 DJCi500.spinback_button = function(channel, control, value, status, group) {
-        var deck = parseInt(group.substring(8,9)); // work out which deck we are using
-        engine.spinback(deck, value > 0, 2.5); // use default starting rate of -10 but decrease speed more quickly
-    }
-
-
-//Loop Encoder
-DJCi500.loopHalveDouble = function (channel, control, value, status, group) {
-    if (value >= 0x40) {
-        script.toggleControl(group, "loop_halve");
-    } else {
-        script.toggleControl(group, "loop_double");
-    }
-};
-
+  var deck = parseInt(group.substring(8,9)); // work out which deck we are using
+  engine.spinback(deck, value > 0, 2.5); // use default starting rate of -10 but decrease speed more quickly
+}
 
 //Led
 DJCi500.tempoLEDs = function () {
-    //Tempo:
-    var tempo1 = engine.getValue("[Channel1]", "bpm");
-    var tempo2 = engine.getValue("[Channel2]", "bpm");
-    var diff = tempo1 - tempo2;
+  // Current active decks
+  var deckA = DJCi500.deckA.currentDeck;
+  var deckB = DJCi500.deckB.currentDeck;
 
-    //Check double tempo:
-    var doubleTempo = 0;
-    if (diff > 0){
-        if ((tempo1 / tempo2) > 1.5){doubleTempo = 1; diff = tempo1/2 - tempo2;}
-    }
-    else{
-        if ((tempo2 / tempo1) > 1.5){doubleTempo = 1; diff = tempo1 - tempo2/2;}
-    }
 
-    if ( diff < -0.25)
-    {
-        //Deck1
-        midi.sendShortMsg(0x91, 0x1E, 0x0);
-        midi.sendShortMsg(0x91, 0x1F, 0x7F);
-        midi.sendShortMsg(0x91, 0x2C, 0x0);
-        //Deck2
-        midi.sendShortMsg(0x92, 0x1F, 0x0);
-        midi.sendShortMsg(0x92, 0x1E, 0x7F);
-        midi.sendShortMsg(0x92, 0x2C, 0x0);
+  //Tempo:
+  var tempo1 = engine.getValue(deckA, "bpm");
+  var tempo2 = engine.getValue(deckB, "bpm");
+  var diff = tempo1 - tempo2;
 
-        //clear beatalign leds
+  //Check double tempo:
+  var doubleTempo = 0;
+  if (diff > 0){
+    if ((tempo1 / tempo2) > 1.5){doubleTempo = 1; diff = tempo1/2 - tempo2;}
+  }
+  else{
+    if ((tempo2 / tempo1) > 1.5){doubleTempo = 1; diff = tempo1 - tempo2/2;}
+  }
+
+  if ( diff < -0.25)
+  {
+    //Deck1
+    midi.sendShortMsg(0x91, 0x1E, 0x0);
+    midi.sendShortMsg(0x91, 0x1F, 0x7F);
+    midi.sendShortMsg(0x91, 0x2C, 0x0);
+    //Deck2
+    midi.sendShortMsg(0x92, 0x1F, 0x0);
+    midi.sendShortMsg(0x92, 0x1E, 0x7F);
+    midi.sendShortMsg(0x92, 0x2C, 0x0);
+
+    //clear beatalign leds
+    //Deck1
+    midi.sendShortMsg(0x91, 0x1C, 0x0);
+    midi.sendShortMsg(0x91, 0x1D, 0x0);
+    midi.sendShortMsg(0x91, 0x2D, 0x0);
+    //Deck2
+    midi.sendShortMsg(0x92, 0x1C, 0x0);
+    midi.sendShortMsg(0x92, 0x1D, 0x0);
+    midi.sendShortMsg(0x92, 0x2D, 0x0);
+  }
+  else if ( diff > 0.25)
+  {
+    //Deck1
+    midi.sendShortMsg(0x91, 0x1F, 0x0);
+    midi.sendShortMsg(0x91, 0x1E, 0x7F);
+    midi.sendShortMsg(0x91, 0x2C, 0x0);
+    //Deck2
+    midi.sendShortMsg(0x92, 0x1E, 0x0);
+    midi.sendShortMsg(0x92, 0x1F, 0x7F);
+    midi.sendShortMsg(0x92, 0x2C, 0x0);
+
+    //clear beatalign leds
+    //Deck1
+    midi.sendShortMsg(0x91, 0x1C, 0x0);
+    midi.sendShortMsg(0x91, 0x1D, 0x0);
+    midi.sendShortMsg(0x91, 0x2D, 0x0);
+    //Deck2
+    midi.sendShortMsg(0x92, 0x1C, 0x0);
+    midi.sendShortMsg(0x92, 0x1D, 0x0);
+    midi.sendShortMsg(0x92, 0x2D, 0x0);
+  }
+  else {
+    //Deck1
+    midi.sendShortMsg(0x91, 0x1E, 0x0);
+    midi.sendShortMsg(0x91, 0x1F, 0x0);
+    midi.sendShortMsg(0x91, 0x2C, 0x7F);
+    //Deck2
+    midi.sendShortMsg(0x92, 0x1E, 0x0);
+    midi.sendShortMsg(0x92, 0x1F, 0x0);
+    midi.sendShortMsg(0x92, 0x2C, 0x7F);
+
+    //Do beat alignement only if the tracks are already on Tempo
+    // and only if they are playing
+    if ( (engine.getValue(deckA, "play_latched")) && (engine.getValue(deckB, "play_latched")) ){
+
+      var beat1 = engine.getValue(deckA, "beat_distance");
+      var beat2 = engine.getValue(deckB, "beat_distance");
+      if (doubleTempo){
+        if (tempo1 > tempo2){
+          if (beat2 > 0.5){
+            beat2 -= 0.5;
+          }
+          beat2 *= 2;
+        }
+        else{ //tempo2 >(=) tempo1
+          if (beat1 > 0.5){
+            beat1 -= 0.5;
+          }
+          beat1 *= 2;
+        }
+      }
+      diff = beat1 - beat2;
+      if (diff < 0){
+        diff = 1+diff;
+      }
+      if ((diff < 0.02) || (diff > 1-0.02))
+      {
         //Deck1
         midi.sendShortMsg(0x91, 0x1C, 0x0);
         midi.sendShortMsg(0x91, 0x1D, 0x0);
-        midi.sendShortMsg(0x91, 0x2D, 0x0);
+        midi.sendShortMsg(0x91, 0x2D, 0x7F);
         //Deck2
         midi.sendShortMsg(0x92, 0x1C, 0x0);
         midi.sendShortMsg(0x92, 0x1D, 0x0);
-        midi.sendShortMsg(0x92, 0x2D, 0x0);
-    }
-    else if ( diff > 0.25)
-    {
-        //Deck1
-        midi.sendShortMsg(0x91, 0x1F, 0x0);
-        midi.sendShortMsg(0x91, 0x1E, 0x7F);
-        midi.sendShortMsg(0x91, 0x2C, 0x0);
-        //Deck2
-        midi.sendShortMsg(0x92, 0x1E, 0x0);
-        midi.sendShortMsg(0x92, 0x1F, 0x7F);
-        midi.sendShortMsg(0x92, 0x2C, 0x0);
-
-        //clear beatalign leds
+        midi.sendShortMsg(0x92, 0x2D, 0x7F);
+      }
+      else if ( diff < 0.5)
+      {
         //Deck1
         midi.sendShortMsg(0x91, 0x1C, 0x0);
+        midi.sendShortMsg(0x91, 0x1D, 0x7F);
+        midi.sendShortMsg(0x91, 0x2D, 0x0);
+        //Deck2
+        midi.sendShortMsg(0x92, 0x1D, 0x0);
+        midi.sendShortMsg(0x92, 0x1C, 0x7F);
+        midi.sendShortMsg(0x91, 0x2D, 0x0);
+      }
+      else {
+        //Deck1
         midi.sendShortMsg(0x91, 0x1D, 0x0);
+        midi.sendShortMsg(0x91, 0x1C, 0x7F);
         midi.sendShortMsg(0x91, 0x2D, 0x0);
         //Deck2
         midi.sendShortMsg(0x92, 0x1C, 0x0);
-        midi.sendShortMsg(0x92, 0x1D, 0x0);
+        midi.sendShortMsg(0x92, 0x1D, 0x7F);
         midi.sendShortMsg(0x92, 0x2D, 0x0);
-    }
+      }
+    }//if playing
     else {
-        //Deck1
-        midi.sendShortMsg(0x91, 0x1E, 0x0);
-        midi.sendShortMsg(0x91, 0x1F, 0x0);
-        midi.sendShortMsg(0x91, 0x2C, 0x7F);
-        //Deck2
-        midi.sendShortMsg(0x92, 0x1E, 0x0);
-        midi.sendShortMsg(0x92, 0x1F, 0x0);
-        midi.sendShortMsg(0x92, 0x2C, 0x7F);
-
-        //Do beat alignement only if the tracks are already on Tempo
-        // and only if they are playing
-        if ( (engine.getValue("[Channel1]", "play_latched")) && (engine.getValue("[Channel2]", "play_latched")) ){
-
-            var beat1 = engine.getValue("[Channel1]", "beat_distance");
-            var beat2 = engine.getValue("[Channel2]", "beat_distance");
-            if (doubleTempo){
-                if (tempo1 > tempo2){
-                    if (beat2 > 0.5){
-                        beat2 -= 0.5;
-                    }
-                    beat2 *= 2;
-                }
-                else{ //tempo2 >(=) tempo1
-                    if (beat1 > 0.5){
-                        beat1 -= 0.5;
-                    }
-                    beat1 *= 2;
-                }
-            }
-            diff = beat1 - beat2;
-            if (diff < 0){
-                diff = 1+diff;
-            }
-            if ((diff < 0.02) || (diff > 1-0.02))
-            {
-                //Deck1
-                midi.sendShortMsg(0x91, 0x1C, 0x0);
-                midi.sendShortMsg(0x91, 0x1D, 0x0);
-                midi.sendShortMsg(0x91, 0x2D, 0x7F);
-                //Deck2
-                midi.sendShortMsg(0x92, 0x1C, 0x0);
-                midi.sendShortMsg(0x92, 0x1D, 0x0);
-                midi.sendShortMsg(0x92, 0x2D, 0x7F);
-            }
-            else if ( diff < 0.5)
-            {
-                //Deck1
-                midi.sendShortMsg(0x91, 0x1C, 0x0);
-                midi.sendShortMsg(0x91, 0x1D, 0x7F);
-                midi.sendShortMsg(0x91, 0x2D, 0x0);
-                //Deck2
-                midi.sendShortMsg(0x92, 0x1D, 0x0);
-                midi.sendShortMsg(0x92, 0x1C, 0x7F);
-                midi.sendShortMsg(0x91, 0x2D, 0x0);
-            }
-            else {
-                //Deck1
-                midi.sendShortMsg(0x91, 0x1D, 0x0);
-                midi.sendShortMsg(0x91, 0x1C, 0x7F);
-                midi.sendShortMsg(0x91, 0x2D, 0x0);
-                //Deck2
-                midi.sendShortMsg(0x92, 0x1C, 0x0);
-                midi.sendShortMsg(0x92, 0x1D, 0x7F);
-                midi.sendShortMsg(0x92, 0x2D, 0x0);
-            }
-        }//if playing
-        else {
-            //Deck1
-            midi.sendShortMsg(0x91, 0x1C, 0x0);
-            midi.sendShortMsg(0x91, 0x1D, 0x0);
-            midi.sendShortMsg(0x91, 0x2D, 0x0);
-            //Deck2
-            midi.sendShortMsg(0x92, 0x1C, 0x0);
-            midi.sendShortMsg(0x92, 0x1D, 0x0);
-            midi.sendShortMsg(0x92, 0x2D, 0x0);
-        }
-    }//else tempo
-
-
+      //Deck1
+      midi.sendShortMsg(0x91, 0x1C, 0x0);
+      midi.sendShortMsg(0x91, 0x1D, 0x0);
+      midi.sendShortMsg(0x91, 0x2D, 0x0);
+      //Deck2
+      midi.sendShortMsg(0x92, 0x1C, 0x0);
+      midi.sendShortMsg(0x92, 0x1D, 0x0);
+      midi.sendShortMsg(0x92, 0x2D, 0x0);
+    }
+  }//else tempo
 };
 
-///Pad 7
-DJCi500.pitchUpTone = function (channel, control, value, status, group) {
-    if (value == 0x7F){
-        engine.setValue(group, "pitch_up", 1);
-        engine.setValue(group, "pitch_up", 1);
-        midi.sendShortMsg(status, control, 0x70); //104 //68
-    }
-    else {
-        midi.sendShortMsg(status, control, 0x78); //36 //24
-    }
-};
-
-DJCi500.pitchDownTone = function (channel, control, value, status, group) {
-    if (value == 0x7F){
-        engine.setValue(group, "pitch_down", 1);
-        engine.setValue(group, "pitch_down", 1);
-        midi.sendShortMsg(status, control, 0x3);
-    }
-    else {
-        midi.sendShortMsg(status, control, 0x2);
-    }
-};
-
-DJCi500.pitchUpSemiTone = function (channel, control, value, status, group) {
-    if (value == 0x7F){
-        engine.setValue(group, "pitch_up", 1);
-        midi.sendShortMsg(status, control, 0x70); //120
-    }
-    else {
-        midi.sendShortMsg(status, control, 0x78); //78 //4C
-    }
-};
-
-DJCi500.pitchDownSemiTone = function (channel, control, value, status, group) {
-    if (value == 0x7F){
-        engine.setValue(group, "pitch_down", 1);
-        midi.sendShortMsg(status, control, 0x3); //104
-    }
-    else {
-        midi.sendShortMsg(status, control, 0x2); //36
-    }
-};
-
-DJCi500.pitchSliderIncrease = function (channel, control, value, status, group) {
-
-    if (value == 0x7F){
-        var deck = 0;
-        if (group == "[Channel1]") {
-            deck = 0;
-        }
-        else if (group == "[Channel2]") {
-            deck = 1;
-        }
-
-        DJCi500.pitchRangesId[deck] = DJCi500.pitchRangesId[deck] + 1;
-        if (DJCi500.pitchRangesId[deck] > 2)
-        {
-            DJCi500.pitchRangesId[deck] = 2;
-        }
-        engine.setValue(group, "rateRange", DJCi500.pitchRanges[DJCi500.pitchRangesId[deck]]);
-
-        midi.sendShortMsg(status, control, 0x64); //68(104)
-    }
-    else {
-        midi.sendShortMsg(status, control, 0x24); //36
-    }
-};
-
-DJCi500.pitchSliderDecrease = function (channel, control, value, status, group) {
-
-    if (value == 0x7F){
-        var deck = 0;
-        if (group == "[Channel1]") {
-            deck = 0;
-        }
-        else if (group == "[Channel2]") {
-            deck = 1;
-        }
-
-        DJCi500.pitchRangesId[deck] = DJCi500.pitchRangesId[deck] - 1;
-        if (DJCi500.pitchRangesId[deck] < 0)
-        {
-            DJCi500.pitchRangesId[deck] = 0;
-        }
-        engine.setValue(group, "rateRange", DJCi500.pitchRanges[DJCi500.pitchRangesId[deck]]);
-        midi.sendShortMsg(status, control, 0x3F); //17 -- 3B
-    }
-    else {
-        midi.sendShortMsg(status, control, 0x37); //3B -- 33
-    }
-};
-
-DJCi500.pitchSliderReset = function (channel, control, value, status, group) {
-    if (value == 0x7F){
-        var deck = 0;
-        if (group == "[Channel1]") {
-            deck = 0;
-        }
-        else if (group == "[Channel2]") {
-            deck = 1;
-        }
-        DJCi500.pitchRangesId[deck] = 0;
-        engine.setValue(group, "rateRange", DJCi500.pitchRanges[DJCi500.pitchRangesId[deck]]);
-    }
-};
-
-DJCi500.slowPauseSet = function (channel, control, value, status, group) {
-
-    if (value == 0x7F){
-        var deck = parseInt(group.substring(8, 9)) - 1;
-        DJCi500.slowPauseSetState[deck] = !DJCi500.slowPauseSetState[deck];
-    }
-
+// This is where we choose the channel using the FX buttons and light them
+// up correctly
+DJCi500.deckSelector = function(channel, control, value, status, group) {
+  var deckChosen = value - 0x13;   // FX1 is 0x14, so this will yield the number
+  switch (deckChosen) {
+    case 1:
+      DJCi500.deckA.setCurrentDeck("[Channel1]");
+      midi.sendShortMsg(0x90, 0x14, 0x7F);
+      midi.sendShortMsg(0x90, 0x16, 0x00);
+      break;
+    case 2:
+      DJCi500.deckB.setCurrentDeck("[Channel2]");
+      midi.sendShortMsg(0x90, 0x15, 0x7F);
+      midi.sendShortMsg(0x90, 0x17, 0x00);
+      break;
+    case 3:
+      DJCi500.deckA.setCurrentDeck("[Channel3]");
+      midi.sendShortMsg(0x90, 0x14, 0x00);
+      midi.sendShortMsg(0x90, 0x16, 0x7F);
+      break;
+    case 4:
+      DJCi500.deckB.setCurrentDeck("[Channel4]");
+      midi.sendShortMsg(0x90, 0x15, 0x00);
+      midi.sendShortMsg(0x90, 0x17, 0x7F);
+      break;
+  };
 };
 
 ///////////////////////////////////////////////////////////////
 //                          SLICER                           //
 ///////////////////////////////////////////////////////////////
-/*
-PioneerDDJSX.toggleSlicerMode = function(channel, control, value, status, group) {
-    var deck = PioneerDDJSX.channelGroups[group];
-    //SLICER
-    if (value) {
-        if (PioneerDDJSX.activePadMode[deck] === PioneerDDJSX.padModes.slicer &&
-            PioneerDDJSX.activeSlicerMode[deck] === PioneerDDJSX.slicerModes.contSlice) {
-            PioneerDDJSX.activeSlicerMode[deck] = PioneerDDJSX.slicerModes.loopSlice;
-            engine.setValue(group, "slip_enabled", true);
-        } else {
-            PioneerDDJSX.activeSlicerMode[deck] = PioneerDDJSX.slicerModes.contSlice;
+DJCi500.slicerButtonFunc = function(channel, control, value, status, group) {
+  var index = control - 0x20,
+    deck = parseInt(group.charAt(8)) - 1,
+    domain = DJCi500.selectedSlicerDomain[deck],
+    beatsToJump = 0,
+    passedTime = engine.getValue(group, "beat_distance"),
+    loopEnabled = engine.getValue(group, "loop_enabled");
+
+  if (value) {
+    DJCi500.slicerButton[deck] = index;
+    //Maybe I need to update this (seems sometimes it does not work.)
+    //DJCi500.slicerBeatsPassed[deck] = Math.floor((playposition * duration) * (bpm / 60.0));
+    beatsToJump = (index * (domain / 8)) - ((DJCi500.slicerBeatsPassed[deck] % domain));
+    beatsToJump -= passedTime;
+
+    //activate the one-shot timer for the slip end.
+    if (!DJCi500.slicerTimer[deck]){
+      DJCi500.slicerTimer[deck] = true;
+      var timer_ms = (1-passedTime)*60.0/engine.getValue(group, "bpm")*1000;
+
+      //quality of life fix for not-precise hands or beatgrid
+      // also good fix for really small timer_ms values.
+      if ( (passedTime >= 0.8) &&
+        //this is because while looping doing this thing on beat 8 break the flow.
+        ((!loopEnabled) || (DJCi500.slicerBeatsPassed[deck] % domain) != (domain-1)) ) {
+        timer_ms += 60.0/engine.getValue(group, "bpm")*1000;
+      }
+
+      engine.beginTimer( timer_ms,
+        //"DJCi500.slicerTimerCallback("+group+")", true);
+        function() {
+          //need to do this otherwise loop does not work on beat 8 because of slip.
+          if ((engine.getValue(group, "loop_enabled") == true)){
+            //on the wiki it says it returns an integer, but I tested and instead seems a Real value:
+            // But it does not work cuz the value does not relate to beat. they are samples.
+            //var endLoop = engine.getValue(group, "loop_end_position");
+            engine.setValue(group, "reloop_toggle", true); //false
             engine.setValue(group, "slip_enabled", false);
-        }
-        PioneerDDJSX.activePadMode[deck] = PioneerDDJSX.padModes.slicer;
-        PioneerDDJSX.nonPadLedControl(group, PioneerDDJSX.nonPadLeds.slicerMode, value);
+            //Aleatory behavior, probably because the slip does not always have completed before "returning"
+            //so I need to introduce a timer waiting the slip function to be completely resolved
+            engine.beginTimer( 2, function () {
+              var bpm_file = engine.getValue(group, "file_bpm"),
+                playposition = engine.getValue(group, "playposition"),
+                duration = engine.getValue(group, "duration");
+              /*
+                              if (Math.floor((playposition * duration) * (bpm_file / 60.0)) > endLoop) {
+                                  engine.setValue(group, "beatjump", -8);
+                              }*/
+              engine.setValue(group, "reloop_toggle", true);},
+              true);
+          }
+          else {
+            engine.setValue(group, "slip_enabled", false);
+          }
+          DJCi500.slicerTimer[deck] = false;
+          DJCi500.slicerButton[deck] = -1;},
+        true);
     }
-};
-*/
-////
-//Slicer Mode:
-/*
-if (ctrl === PioneerDDJSX.nonPadLeds.parameterLeftSlicerMode || ctrl === PioneerDDJSX.nonPadLeds.parameterRightSlicerMode) {
-    // change parameter set:
-    if (ctrl === PioneerDDJSX.nonPadLeds.parameterLeftSlicerMode && PioneerDDJSX.selectedSlicerQuantizeParam[deck] > 0) {
-        PioneerDDJSX.selectedSlicerQuantizeParam[deck] -= 1;
-    } else if (ctrl === PioneerDDJSX.nonPadLeds.parameterRightSlicerMode && PioneerDDJSX.selectedSlicerQuantizeParam[deck] < 3) {
-        PioneerDDJSX.selectedSlicerQuantizeParam[deck] += 1;
+
+    engine.setValue(group, "slip_enabled", true);
+
+    //Because of Mixxx beatjump implementation, we need to deactivate the loop before jumping
+    // also there is no "lopp_deactivate" and loop_activate false does not work.
+    if (loopEnabled) {
+      engine.setValue(group, "reloop_toggle", true);
     }
-    PioneerDDJSX.selectedSlicerQuantization[deck] = PioneerDDJSX.slicerQuantizations[PioneerDDJSX.selectedSlicerQuantizeParam[deck]];
-}
-//Slicer Mode + SHIFT:
-if (ctrl === PioneerDDJSX.nonPadLeds.shiftParameterLeftSlicerMode || ctrl === PioneerDDJSX.nonPadLeds.shiftParameterRightSlicerMode) {
-    // change parameter set:
-    if (ctrl === PioneerDDJSX.nonPadLeds.shiftParameterLeftSlicerMode && PioneerDDJSX.selectedSlicerDomainParam[deck] > 0) {
-        PioneerDDJSX.selectedSlicerDomainParam[deck] -= 1;
-    } else if (ctrl === PioneerDDJSX.nonPadLeds.shiftParameterRightSlicerMode && PioneerDDJSX.selectedSlicerDomainParam[deck] < 3) {
-        PioneerDDJSX.selectedSlicerDomainParam[deck] += 1;
+    engine.setValue(group, "beatjump", beatsToJump);
+    //This sadly does not work.
+    //engine.setValue(group, "loop_move", -beatsToJump);
+    if (loopEnabled){
+      engine.setValue(group, "reloop_toggle", true);
     }
-    PioneerDDJSX.selectedSlicerDomain[deck] = PioneerDDJSX.slicerDomains[PioneerDDJSX.selectedSlicerDomainParam[deck]];
-}
-*/
-/////
-//
-DJCi500.slicerButtons = function(channel, control, value, status, group) {
-    var index = control - 0x20,
-        deck = parseInt(group.substring(8, 9)) - 1,
-        domain = DJCi500.selectedSlicerDomain[deck],
-        beatsToJump = 0
-        passedTime = engine.getValue(group, "beat_distance"),
-        loopEnabled = engine.getValue(group, "loop_enabled");
-    /*
-    var bpm = engine.getValue(group, "file_bpm"),
-        playposition = engine.getValue(group, "playposition"),
-        duration = engine.getValue(group, "duration");
-    */
-
-    //DJCi500.slicerActive[deck] = value ? true : false;
-
-    if (value) {
-        DJCi500.slicerButton[deck] = index;
-        //Maybe I need to update this (seems sometimes it does not work.)
-        //DJCi500.slicerBeatsPassed[deck] = Math.floor((playposition * duration) * (bpm / 60.0));
-        beatsToJump = (index * (domain / 8)) - ((DJCi500.slicerBeatsPassed[deck] % domain));
-        beatsToJump -= passedTime;
-
-        //activate the one-shot timer for the slip end.
-        if (!DJCi500.slicerTimer[deck]){
-            DJCi500.slicerTimer[deck] = true;
-            var timer_ms = (1-passedTime)*60.0/engine.getValue(group, "bpm")*1000;
-
-            //quality of life fix for not-precise hands or beatgrid
-            // also good fix for really small timer_ms values.
-            if ( (passedTime >= 0.8) &&
-                //this is because while looping doing this thing on beat 8 break the flow.
-                ((!loopEnabled) || (DJCi500.slicerBeatsPassed[deck] % domain) != (domain-1)) ) {
-                timer_ms += 60.0/engine.getValue(group, "bpm")*1000;
-            }
-
-            engine.beginTimer( timer_ms,
-                //"DJCi500.slicerTimerCallback("+group+")", true);
-                function() {
-                    //need to do this otherwise loop does not work on beat 8 because of slip.
-                    if ((engine.getValue(group, "loop_enabled") == true)){
-                        //on the wiki it says it returns an integer, but I tested and instead seems a Real value:
-                        // But it does not work cuz the value does not relate to beat. they are samples.
-                        //var endLoop = engine.getValue(group, "loop_end_position");
-                        engine.setValue(group, "reloop_toggle", true); //false
-                        engine.setValue(group, "slip_enabled", false);
-                        //Aleatory behavior, probably because the slip does not always have completed before "returning"
-                        //so I need to introduce a timer waiting the slip function to be completely resolved
-                        engine.beginTimer( 2, function () {
-                                var bpm_file = engine.getValue(group, "file_bpm"),
-                                    playposition = engine.getValue(group, "playposition"),
-                                    duration = engine.getValue(group, "duration");
-                                /*
-                                if (Math.floor((playposition * duration) * (bpm_file / 60.0)) > endLoop) {
-                                    engine.setValue(group, "beatjump", -8);
-                                }*/
-                                engine.setValue(group, "reloop_toggle", true);},
-                            true);
-                    }
-                    else {
-                        engine.setValue(group, "slip_enabled", false);
-                    }
-                    DJCi500.slicerTimer[deck] = false;
-                    DJCi500.slicerButton[deck] = -1;},
-                true);
-        }
-
-        engine.setValue(group, "slip_enabled", true);
-
-        //Because of Mixxx beatjump implementation, we need to deactivate the loop before jumping
-        // also there is no "lopp_deactivate" and loop_activate false does not work.
-        if (loopEnabled) {
-            engine.setValue(group, "reloop_toggle", true);
-        }
-        engine.setValue(group, "beatjump", beatsToJump);
-        //This sadly does not work.
-        //engine.setValue(group, "loop_move", -beatsToJump);
-        if (loopEnabled){
-            engine.setValue(group, "reloop_toggle", true);
-        }
-        midi.sendShortMsg((0x96+deck), 0x20+index, 0x62);
-    } //if value
-
+    midi.sendShortMsg((0x96+deck), 0x20+index, 0x62);
+  } //if value
 };
 
 //this below is connected to beat_active
 DJCi500.slicerBeatActive = function(value, group, control) {
-    // This slicer implementation will work for constant beatgrids only!
-    var deck = parseInt(group.substring(8, 9)) - 1;
-        bpm = engine.getValue(group, "file_bpm"),
-        playposition = engine.getValue(group, "playposition"),
-        duration = engine.getValue(group, "duration"),
-        slicerPosInSection = 0,
-        ledBeatState = false,
-        domain = DJCi500.selectedSlicerDomain[deck];
+  // This slicer implementation will work for constant beatgrids only!
+  var deck = parseInt(group.charAt(8)) - 1;
 
-    //this works.
-    if (engine.getValue(group, "beat_closest") === engine.getValue(group, "beat_next")) {
-        return;
-    }
+  // Don't do anything if the deck we are calculating is NOT on display
+  if (deck % 2 == 0) && (DJCi500.deckA.currentDeck != group) {
+    return;
+  }
 
-    DJCi500.slicerBeatsPassed[deck] = Math.floor((playposition * duration) * (bpm / 60.0));
+  if (deck % 2 == 1) && (DJCi500.deckB.currentDeck != group) {
+    return;
+  }
 
-    if (DJCi500.slicerActive[deck]){
-        slicerPosInSection = Math.floor((DJCi500.slicerBeatsPassed[deck] % domain) / (domain / 8));
-/*
-        if (DJCi500.activeSlicerMode[deck] === DJCi500.slicerModes.loopSlice) {
-            ledBeatState = false;
-            if (((DJCi500.slicerBeatsPassed[deck] - 1) % domain) === (domain - 1) &&
-                !DJCi500.slicerAlreadyJumped[deck] &&
-                DJCi500.slicerPreviousBeatsPassed[deck] < DJCi500.slicerBeatsPassed[deck]) {
-                engine.setValue(group, "beatjump", -domain);
-                DJCi500.slicerAlreadyJumped[deck] = true;
-            } else {
-                DJCi500.slicerAlreadyJumped[deck] = false;
-            }
-        }
-*/
-        // PAD Led control:
-        if (DJCi500.slicerButton[deck] != slicerPosInSection) {
-            for (var i = 0; i < 8; i++) {
-                active = ((slicerPosInSection == i) ? ledBeatState : !ledBeatState) ? 0x03 : 0x7F;
-                midi.sendShortMsg((0x96+deck), 0x20+i, active);
-            }
-        } else {
-            midi.sendShortMsg((0x96+deck), 0x20+DJCi500.slicerButton[deck], 0x62);
-        }
+  bpm = engine.getValue(group, "file_bpm"),
+    playposition = engine.getValue(group, "playposition"),
+    duration = engine.getValue(group, "duration"),
+    slicerPosInSection = 0,
+    ledBeatState = false,
+    domain = DJCi500.selectedSlicerDomain[deck];
+
+  //this works.
+  if (engine.getValue(group, "beat_closest") === engine.getValue(group, "beat_next")) {
+    return;
+  }
+
+  DJCi500.slicerBeatsPassed[deck] = Math.floor((playposition * duration) * (bpm / 60.0));
+
+  if (DJCi500.slicerActive[deck]){
+    slicerPosInSection = Math.floor((DJCi500.slicerBeatsPassed[deck] % domain) / (domain / 8));
+    // PAD Led control:
+    if (DJCi500.slicerButton[deck] != slicerPosInSection) {
+      for (var i = 0; i < 8; i++) {
+        active = ((slicerPosInSection == i) ? ledBeatState : !ledBeatState) ? 0x03 : 0x7F;
+        midi.sendShortMsg((0x96+deck), 0x20+i, active);
+      }
     } else {
-        DJCi500.slicerAlreadyJumped[deck] = false;
-        DJCi500.slicerPreviousBeatsPassed[deck] = 0;
+      midi.sendShortMsg((0x96+deck), 0x20+DJCi500.slicerButton[deck], 0x62);
     }
-
+  } else {
+    DJCi500.slicerAlreadyJumped[deck] = false;
+    DJCi500.slicerPreviousBeatsPassed[deck] = 0;
+  }
 };
-
-
-/////
-// Control knob
-/*
-//1: fare un altro timer (1 sec)
-{
-        //1: define which is the main deck:
-
-        //A: Acquire the volume Faders
-        //B: Acquire the crossfader.
-        //Define the main deck:
-        //cases:
-        //only one deck playing
-        if deck1
-            if Deck2{
-                if volume1 > volume2 + slack {
-                    stateapp=deck1;
-                }
-                elseif volume2 > volume1 + slack
-                stateapp=Deck
-                else stateapp = 0
-                //stessa cosa per il cross Faders
-
-                se emntrambi 0 o differenti
-                state undefined, prendi la più a fine
-                altrimeti è lo stato.
-            }
-            else {
-                state = deck1
-            }
-        else {
-            state = deck2
-        }
-        //both deck playing
-        //s
-}
-*/
-
-
 
 DJCi500.shutdown = function() {
   //cleanup
   engine.stopTimer(DJCi500.FxLedtimer);
 
-  //var controlsToFunctions = {'beat_active': 'DJCi500.slicerBeatActive'}
-  //script.bindConnections('[Channel1]', controlsToFunctions, false);
-
   midi.sendShortMsg(0x90, 0x05, 0x00); //turn browser led off
-	midi.sendShortMsg(0xB0, 0x7F, 0x7E);
+  midi.sendShortMsg(0xB0, 0x7F, 0x7E);
 };
