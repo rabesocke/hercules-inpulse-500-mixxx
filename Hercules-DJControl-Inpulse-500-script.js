@@ -62,6 +62,9 @@
 //
 // TO DO: 
 //  * Browser knob has a ton of colors to do things!
+//  * Vinyl + SHIFT led should reflect brake status
+//  * Quant + SHIFT led should reflect key lock status
+//  * Add beat jump + SHIFT jumps
 //
 // ****************************************************************************
 var DJCi500 = {};
