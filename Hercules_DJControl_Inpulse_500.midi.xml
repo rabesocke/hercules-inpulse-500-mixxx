@@ -72,7 +72,6 @@
 				<status>0x91</status>
 				<midino>0x07</midino>
 				<options>
-					<!--<normal />-->
 					<script-binding />
 				</options>
 			</control>
@@ -912,7 +911,7 @@
             <!--Pad MODE 3 - Slicer-->
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[1].input</key>
                 <description>PAD 1</description>
                 <status>0x96</status>
                 <midino>0x20</midino>
@@ -922,7 +921,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[2].input</key>
                 <description>PAD 2</description>
                 <status>0x96</status>
                 <midino>0x21</midino>
@@ -932,7 +931,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[3].input</key>
                 <description>PAD 3</description>
                 <status>0x96</status>
                 <midino>0x22</midino>
@@ -942,7 +941,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[4].input</key>
                 <description>PAD 4</description>
                 <status>0x96</status>
                 <midino>0x23</midino>
@@ -952,7 +951,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[5].input</key>
                 <description>PAD 5</description>
                 <status>0x96</status>
                 <midino>0x24</midino>
@@ -962,7 +961,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[6].input</key>
                 <description>PAD 6</description>
                 <status>0x96</status>
                 <midino>0x25</midino>
@@ -972,7 +971,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[7].input</key>
                 <description>PAD 7</description>
                 <status>0x96</status>
                 <midino>0x26</midino>
@@ -982,7 +981,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckA.slicerButtons[8].input</key>
                 <description>PAD 8</description>
                 <status>0x96</status>
                 <midino>0x27</midino>
@@ -1884,7 +1883,7 @@
 			<!--Pad MODE 3 - Slicer -->
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[1].input</key>
 				<description>PAD 1</description>
 				<status>0x97</status>
 				<midino>0x20</midino>
@@ -1894,7 +1893,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[2].input</key>
 				<description>PAD 2</description>
 				<status>0x97</status>
 				<midino>0x21</midino>
@@ -1904,7 +1903,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[3].input</key>
 				<description>PAD 3</description>
 				<status>0x97</status>
 				<midino>0x22</midino>
@@ -1914,7 +1913,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[4].input</key>
 				<description>PAD 4</description>
 				<status>0x97</status>
 				<midino>0x23</midino>
@@ -1924,7 +1923,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[5].input</key>
 				<description>PAD 5</description>
 				<status>0x97</status>
 				<midino>0x24</midino>
@@ -1934,7 +1933,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[6].input</key>
 				<description>PAD 6</description>
 				<status>0x97</status>
 				<midino>0x25</midino>
@@ -1944,7 +1943,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[7].input</key>
 				<description>PAD 7</description>
 				<status>0x97</status>
 				<midino>0x26</midino>
@@ -1954,7 +1953,7 @@
 			</control>
 			<control>
 				<group>[Channel2]</group>
-				<key>DJCi500.slicerButtons</key>
+                <key>DJCi500.deckB.slicerButtons[8].input</key>
 				<description>PAD 8</description>
 				<status>0x97</status>
 				<midino>0x27</midino>
@@ -2703,12 +2702,22 @@
 				</options>
 			</control>
 			<!--Jog wheel A	-->
+   			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.jogWheel.inputTouch</key>
+				<description>Jog Wheel Touch Deck A</description>
+				<status>0x91</status>
+				<midino>0x08</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
 			<control>
 				<group>[Channel1]</group>
 				<key>DJCi500.deckA.jogWheel.inputTouch</key>
 				<description>Jog Wheel Touch Deck A</description>
 				<status>0xB1</status>
-				<midino>0x08</midino>
+				<midino>0x0C</midino>
 				<options>
 					<script-binding />
 				</options>
@@ -2734,12 +2743,22 @@
 				</options>
 			</control>
             <!-- SHIFT + Jog Wheel -->
+   			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.jogWheel.inputTouch</key>
+				<description>Jog Wheel Touch Deck A</description>
+				<status>0x94</status>
+				<midino>0x08</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
 			<control>
 				<group>[Channel1]</group>
 				<key>DJCi500.deckA.jogWheelShift.inputTouch</key>
 				<description>Jog Wheel Shift Touch Deck A</description>
 				<status>0xB4</status>
-				<midino>0x08</midino>
+				<midino>0x0C</midino>
 				<options>
 					<script-binding />
 				</options>
@@ -2867,7 +2886,7 @@
 				<key>DJCi500.deckB.gainKnob.inputLSB</key>
 				<description>Gain Deck A</description>
 				<status>0xB2</status>
-				<midino>0x05</midino>
+				<midino>0x25</midino>
 				<options>
 					<script-binding />
 				</options>
@@ -2903,12 +2922,22 @@
 				</options>
 			</control>
 			<!--Jog wheel B	-->
+   			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.jogWheel.inputTouch</key>
+				<description>Jog Wheel Touch Deck B</description>
+				<status>0x92</status>
+				<midino>0x08</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
 			<control>
 				<group>[Channel2]</group>
 				<key>DJCi500.deckB.jogWheel.inputTouch</key>
 				<description>Jog Wheel Touch Deck B</description>
 				<status>0xB2</status>
-				<midino>0x08</midino>
+				<midino>0x0C</midino>
 				<options>
 					<script-binding />
 				</options>
@@ -2934,12 +2963,22 @@
 				</options>
 			</control>
             <!-- SHIFT + Jog Wheel -->
+   			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.jogWheel.inputTouch</key>
+				<description>Jog Wheel Touch Deck B</description>
+				<status>0x95</status>
+				<midino>0x08</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
 			<control>
 				<group>[Channel2]</group>
 				<key>DJCi500.deckB.jogWheelShift.inputTouch</key>
 				<description>Jog Wheel Shift Touch Deck B</description>
 				<status>0xB5</status>
-				<midino>0x08</midino>
+				<midino>0x0C</midino>
 				<options>
 					<script-binding />
 				</options>
