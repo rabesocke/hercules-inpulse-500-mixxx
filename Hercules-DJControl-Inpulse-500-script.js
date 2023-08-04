@@ -61,7 +61,7 @@
 //  Version 1.0 - Based upon Inpulse 300 v1.2 (official)
 //
 // TO DO: 
-//  * Fix slicer for channels 3 and 4 not working
+//  * Browser knob has a ton of colors to do things!
 //
 // ****************************************************************************
 var DJCi500 = {};
@@ -486,7 +486,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     this.padSelectButtons[i] = new components.Button({
       midi: [0x90 + midiChannel, 0x0F + (i - 1)],
       input: function(channel, control, value, status, group) {
-        var deck = parseInt(group.charAt(8)) - 1;
+        var deck = parseInt(deckData.currentDeck.charAt(8)) - 1;
         if (control == 0x11) {
           DJCi500.slicerActive[deck] = true;
         } else {
@@ -1289,7 +1289,10 @@ DJCi500.slicerBeatActive = function(value, group, control) {
   var deck = parseInt(group.charAt(8)) - 1;
   var channel = deck % 2;
 
-  bpm = engine.getValue(group, "file_bpm"),
+  print("***** SLICER ACTIVE VALUE: " + DJCi500.slicerActive[deck]);
+  print("***** SLICER: deck " + deck + " channel " + channel);
+
+  var bpm = engine.getValue(group, "file_bpm"),
     playposition = engine.getValue(group, "playposition"),
     duration = engine.getValue(group, "duration"),
     slicerPosInSection = 0,
