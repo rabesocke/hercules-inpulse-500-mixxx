@@ -869,20 +869,20 @@ DJCi500.init = function() {
   engine.getValue("[Channel4]", "VuMeter", DJCi500.vuMeterUpdateDeck);
 
   // Connect number leds
-  engine.makeConnection("[Channel1]", "play_indicator", "DJCi500.numberIndicator");
-  engine.getValue("[Channel1]", "play_indicator", "DJCi500.numberIndicator");
-  engine.makeConnection("[Channel2]", "play_indicator", "DJCi500.numberIndicator");
-  engine.getValue("[Channel2]", "play_indicator", "DJCi500.numberIndicator");
-  engine.makeConnection("[Channel3]", "play_indicator", "DJCi500.numberIndicator");
-  engine.getValue("[Channel3]", "play_indicator", "DJCi500.numberIndicator");
-  engine.makeConnection("[Channel4]", "play_indicator", "DJCi500.numberIndicator");
-  engine.getValue("[Channel4]", "play_indicator", "DJCi500.numberIndicator");
+  engine.makeConnection("[Channel1]", "play_indicator", DJCi500.numberIndicator);
+  engine.getValue("[Channel1]", "play_indicator", DJCi500.numberIndicator);
+  engine.makeConnection("[Channel2]", "play_indicator", DJCi500.numberIndicator);
+  engine.getValue("[Channel2]", "play_indicator", DJCi500.numberIndicator);
+  engine.makeConnection("[Channel3]", "play_indicator", DJCi500.numberIndicator);
+  engine.getValue("[Channel3]", "play_indicator", DJCi500.numberIndicator);
+  engine.makeConnection("[Channel4]", "play_indicator", DJCi500.numberIndicator);
+  engine.getValue("[Channel4]", "play_indicator", DJCi500.numberIndicator);
 
-  engine.makeConnection("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
-  engine.makeConnection("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
+  engine.makeConnection("[Master]", "VuMeterL", DJCi500.vuMeterUpdateMaster);
+  engine.makeConnection("[Master]", "VuMeterR", DJCi500.vuMeterUpdateMaster);
 
-  engine.getValue("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
-  engine.getValue("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
+  engine.getValue("[Master]", "VuMeterL", DJCi500.vuMeterUpdateMaster);
+  engine.getValue("[Master]", "VuMeterR", DJCi500.vuMeterUpdateMaster);
   engine.getValue("[Controls]", "AutoHotcueColors", "DJCi500.AutoHotcueColors");
 
   DJCi500.slicerBeat1 = engine.makeConnection('[Channel1]', 'beat_active', DJCi500.slicerBeatActive);
