@@ -206,7 +206,12 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     shiftControl: false,
     shiftChannel: true,
     sendShifted: true,
-    inKey: 'LoadSelectedTrack',
+    unshift: function () {
+      this.inKey = 'LoadSelectedTrack';
+    },
+    shift: function () {
+      this.inKey = 'eject';
+    },
   });
 
   // Transport section
