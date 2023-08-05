@@ -859,27 +859,27 @@ DJCi500.init = function() {
   midi.sendShortMsg(0x90, 0x05, 0x10);
 
   // Connect the VUMeters
-  engine.connectControl("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-  engine.getValue("[Channel1]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-  engine.connectControl("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-  engine.getValue("[Channel2]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-  engine.connectControl("[Channel3]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-  engine.getValue("[Channel3]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-  engine.connectControl("[Channel4]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
-  engine.getValue("[Channel4]", "VuMeter", "DJCi500.vuMeterUpdateDeck");
+  engine.makeConnection("[Channel1]", "VuMeter", DJCi500.vuMeterUpdateDeck);
+  engine.getValue("[Channel1]", "VuMeter", DJCi500.vuMeterUpdateDeck);
+  engine.makeConnection("[Channel2]", "VuMeter", DJCi500.vuMeterUpdateDeck);
+  engine.getValue("[Channel2]", "VuMeter", DJCi500.vuMeterUpdateDeck);
+  engine.makeConnection("[Channel3]", "VuMeter", DJCi500.vuMeterUpdateDeck);
+  engine.getValue("[Channel3]", "VuMeter", DJCi500.vuMeterUpdateDeck);
+  engine.makeConnection("[Channel4]", "VuMeter", DJCi500.vuMeterUpdateDeck);
+  engine.getValue("[Channel4]", "VuMeter", DJCi500.vuMeterUpdateDeck);
 
   // Connect number leds
-  engine.connectControl("[Channel1]", "play_indicator", "DJCi500.numberIndicator");
+  engine.makeConnection("[Channel1]", "play_indicator", "DJCi500.numberIndicator");
   engine.getValue("[Channel1]", "play_indicator", "DJCi500.numberIndicator");
-  engine.connectControl("[Channel2]", "play_indicator", "DJCi500.numberIndicator");
+  engine.makeConnection("[Channel2]", "play_indicator", "DJCi500.numberIndicator");
   engine.getValue("[Channel2]", "play_indicator", "DJCi500.numberIndicator");
-  engine.connectControl("[Channel3]", "play_indicator", "DJCi500.numberIndicator");
+  engine.makeConnection("[Channel3]", "play_indicator", "DJCi500.numberIndicator");
   engine.getValue("[Channel3]", "play_indicator", "DJCi500.numberIndicator");
-  engine.connectControl("[Channel4]", "play_indicator", "DJCi500.numberIndicator");
+  engine.makeConnection("[Channel4]", "play_indicator", "DJCi500.numberIndicator");
   engine.getValue("[Channel4]", "play_indicator", "DJCi500.numberIndicator");
 
-  engine.connectControl("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
-  engine.connectControl("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
+  engine.makeConnection("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
+  engine.makeConnection("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
 
   engine.getValue("[Master]", "VuMeterL", "DJCi500.vuMeterUpdateMaster");
   engine.getValue("[Master]", "VuMeterR", "DJCi500.vuMeterUpdateMaster");
