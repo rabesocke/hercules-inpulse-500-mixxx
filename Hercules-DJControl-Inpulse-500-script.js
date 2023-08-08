@@ -370,7 +370,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     beta: (1/8)/32,
     rpm: 33 + 1/3,
     inputWheel: function(_channel, _control, value, _status, group) {
-      var deck = parseInt(group.charAt(8));
+      var deck = parseInt(deckData.currentDeck.charAt(8));
       value = this.inValueScale(value);
       if (engine.isScratching(deck)) {
         engine.scratchTick(deck, value);
@@ -379,7 +379,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
       }
     },
     inputTouch: function(channel, control, value, status, group) {
-      var deck = parseInt(group.charAt(8));
+      var deck = parseInt(deckData.currentDeck.charAt(8));
       if ((value == 0x7F) && deckData.vinylButtonState[deck - 1]) {
         engine.scratchEnable(deck,
           this.wheelResolution,
@@ -400,7 +400,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     beta: 1/8/32,
     rpm: 33 + 1/3,
     inputWheel: function(_channel, _control, value, _status, group) {
-      var deck = parseInt(group.charAt(8));
+      var deck = parseInt(deckData.currentDeck.charAt(8));
       value = this.inValueScale(value) * 4; 
       if (engine.isScratching(deck)) {
         engine.scratchTick(deck, value);
@@ -409,7 +409,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
       }
     },
     inputTouch: function(channel, control, value, status, group) {
-      var deck = parseInt(group.charAt(8));
+      var deck = parseInt(deckData.currentDeck.charAt(8));
       if (this.isPress(channel, control, value, status) && this.vinylMode) {
         engine.scratchEnable(deck,
           this.wheelResolution,
@@ -417,7 +417,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
           this.alpha,
           this.beta);
       } else {
-        engine.scratchDisable(this.deck);
+        engine.scratchDisable(deck);
       }
     },
   });
@@ -781,17 +781,42 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     });
   };
 
-  // For completeness, these buttons are, for now, just simply disabled.
+  // Set the current channel FX route with the two extra PADs
   this.effectButtons[4] = new components.Button({
     midi: [0x95 + midiChannel, 0x63],
     number: 4,
     shiftOffset: 8,
     shiftControl: true,
     sendShifted: true,
-    input: function (_channel, _control, _value, _status, group) {
-      ;;
+    group: "[EffectRack1_EffectUnit1]",
+    on: 0x74,
+    off: 0x00,
+    output: function (value, group, _control) {
+      var deckGroup = deckData.currentDeck;
+      var channel = parseInt(group.charAt(8));
+      var active = engine.getValue(this.group, 'group_' + deckGroup + '_enable');
+      if (value) {
+        midi.sendShortMsg(0x95 + channel, 0x63, 0x74);
+      } else {
+        midi.sendShortMsg(0x95 + channel, 0x63, 0x00);
+      }
+    },
+    input: function (channel, _control, value, _status, group) {
+      if (value == 0x7F) {
+        var deckGroup = deckData.currentDeck;
+        script.toggleControl(this.group, 'group_' + deckGroup + '_enable');
+      }
     }
   });
+
+  // Connect signals so we light up correctly
+  engine.makeConnection(this.effectButtons[4].group, 
+                        'group_[Channel' + midiChannel + ']_enable',
+                        this.effectButtons[4].output);
+
+  engine.makeConnection(this.effectButtons[4].group, 
+                        'group_[Channel' + (midiChannel + 2) + ']_enable',
+                        this.effectButtons[4].output);
 
   this.effectButtons[8] = new components.Button({
     midi: [0x95 + midiChannel, 0x67],
@@ -799,12 +824,34 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     shiftOffset: 8,
     shiftControl: true,
     sendShifted: false,
-    on: 0x00,
+    group: "[EffectRack1_EffectUnit2]",
+    on: 0x74,
     off: 0x00,
-    input: function (_channel, _control, _value, _status, _group) {
-      ;;
+    output: function (value, group, control) {
+      var deckGroup = deckData.currentDeck;
+      var channel = parseInt(group.charAt(8));
+      var active = engine.getValue(this.group, 'group_' + deckGroup + '_enable');
+      if (active) {
+        midi.sendShortMsg(0x95 + channel, 0x67, 0x74);
+      } else {
+        midi.sendShortMsg(0x95 + channel, 0x67, 0x00);
+      }
+    },
+    input: function (_channel, _control, value, _status, _group) {
+      if (value == 0x7F) {
+        var deckGroup = deckData.currentDeck;
+        script.toggleControl(this.group, 'group_' + deckGroup + '_enable');
+      }
     }
   });
+
+  engine.makeConnection(this.effectButtons[8].group, 
+                        'group_[Channel' + midiChannel + ']_enable',
+                        this.effectButtons[8].output);
+
+  engine.makeConnection(this.effectButtons[8].group, 
+                        'group_[Channel' + (midiChannel + 2) + ']_enable',
+                        this.effectButtons[8].output);
 
   // Filter knob is here since it is affected by effects pads
   this.filterKnob = new components.Pot({
