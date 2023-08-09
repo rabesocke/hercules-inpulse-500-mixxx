@@ -512,10 +512,11 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     sendShifted: true,
     input: function (channel, control, value, status, group) {
       // FIXME: Toggle for loop halve and double??
+      var deckGroup = deckData.currentDeck;
       if (value >= 0x40) {
-        engine.setValue(group, "loop_halve", true);
+        engine.setValue(deckGroup, "loop_halve", true);
       } else {
-        engine.setValue(group, "loop_double", true);
+        engine.setValue(deckGroup, "loop_double", true);
       }
     }
   });
