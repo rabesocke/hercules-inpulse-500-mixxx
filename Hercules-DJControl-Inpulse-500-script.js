@@ -154,6 +154,39 @@ DJCi500.numberIndicator = function(value, group, _control, _status) {
   }
 }
 
+DJCi500.fxSelIndicator = function(_value, group, _control, _status) {
+  var deckA = DJCi500.deckA.currentDeck;
+  var deckB = DJCi500.deckB.currentDeck;
+  var active = false;
+
+  if (group == "[EffectRack1_EffectUnit1]") {
+    active = engine.getValue(group, 'group_' + deckA + '_enable');
+    if (active) {
+      midi.sendShortMsg(0x96, 0x63, 0x74);
+    } else {
+      midi.sendShortMsg(0x96, 0x63, 0x00);
+    }
+    active = engine.getValue(group, 'group_' + deckB + '_enable');
+    if (active) {
+      midi.sendShortMsg(0x97, 0x63, 0x74);
+    } else {
+      midi.sendShortMsg(0x97, 0x63, 0x00);
+    }
+  } else {
+    active = engine.getValue(group, 'group_' + deckA + '_enable');
+    if (active) {
+      midi.sendShortMsg(0x96, 0x67, 0x74);
+    } else {
+      midi.sendShortMsg(0x96, 0x67, 0x00);
+    }
+    active = engine.getValue(group, 'group_' + deckB + '_enable');
+    if (active) {
+      midi.sendShortMsg(0x97, 0x67, 0x74);
+    } else {
+      midi.sendShortMsg(0x97, 0x67, 0x00);
+    }
+}
+
 DJCi500.Deck = function (deckNumbers, midiChannel) {
   components.Deck.call(this, deckNumbers);
   // Allow components to access deck variables
@@ -789,18 +822,6 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     shiftControl: true,
     sendShifted: true,
     group: "[EffectRack1_EffectUnit1]",
-    on: 0x74,
-    off: 0x00,
-    output: function (value, group, _control) {
-      var deckGroup = deckData.currentDeck;
-      var channel = parseInt(group.charAt(8));
-      var active = engine.getValue(this.group, 'group_' + deckGroup + '_enable');
-      if (value) {
-        midi.sendShortMsg(0x95 + channel, 0x63, 0x74);
-      } else {
-        midi.sendShortMsg(0x95 + channel, 0x63, 0x00);
-      }
-    },
     input: function (channel, _control, value, _status, group) {
       if (value == 0x7F) {
         var deckGroup = deckData.currentDeck;
@@ -809,15 +830,6 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     }
   });
 
-  // Connect signals so we light up correctly
-  engine.makeConnection(this.effectButtons[4].group, 
-                        'group_[Channel' + midiChannel + ']_enable',
-                        this.effectButtons[4].output);
-
-  engine.makeConnection(this.effectButtons[4].group, 
-                        'group_[Channel' + (midiChannel + 2) + ']_enable',
-                        this.effectButtons[4].output);
-
   this.effectButtons[8] = new components.Button({
     midi: [0x95 + midiChannel, 0x67],
     number: 8,
@@ -825,18 +837,6 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     shiftControl: true,
     sendShifted: false,
     group: "[EffectRack1_EffectUnit2]",
-    on: 0x74,
-    off: 0x00,
-    output: function (value, group, control) {
-      var deckGroup = deckData.currentDeck;
-      var channel = parseInt(group.charAt(8));
-      var active = engine.getValue(this.group, 'group_' + deckGroup + '_enable');
-      if (active) {
-        midi.sendShortMsg(0x95 + channel, 0x67, 0x74);
-      } else {
-        midi.sendShortMsg(0x95 + channel, 0x67, 0x00);
-      }
-    },
     input: function (_channel, _control, value, _status, _group) {
       if (value == 0x7F) {
         var deckGroup = deckData.currentDeck;
@@ -844,14 +844,6 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
       }
     }
   });
-
-  engine.makeConnection(this.effectButtons[8].group, 
-                        'group_[Channel' + midiChannel + ']_enable',
-                        this.effectButtons[8].output);
-
-  engine.makeConnection(this.effectButtons[8].group, 
-                        'group_[Channel' + (midiChannel + 2) + ']_enable',
-                        this.effectButtons[8].output);
 
   // Filter knob is here since it is affected by effects pads
   this.filterKnob = new components.Pot({
@@ -930,6 +922,7 @@ DJCi500.init = function() {
   engine.makeConnection("[Channel4]", "play_indicator", DJCi500.numberIndicator);
   engine.getValue("[Channel4]", "play_indicator", DJCi500.numberIndicator);
 
+  // Connect Master VU meter 
   engine.makeConnection("[Master]", "VuMeterL", DJCi500.vuMeterUpdateMaster);
   engine.makeConnection("[Master]", "VuMeterR", DJCi500.vuMeterUpdateMaster);
 
@@ -937,6 +930,17 @@ DJCi500.init = function() {
   engine.getValue("[Master]", "VuMeterR", DJCi500.vuMeterUpdateMaster);
   engine.getValue("[Controls]", "AutoHotcueColors", "DJCi500.AutoHotcueColors");
 
+  // Connect the FX selection leds
+  engine.makeConnection("[EffectRack1_EffectUnit1]", "group_[Channel1]_enable", DJCi500.fxSelIndicator);
+  engine.makeConnection("[EffectRack1_EffectUnit2]", "group_[Channel1]_enable", DJCi500.fxSelIndicator);
+  engine.makeConnection("[EffectRack1_EffectUnit1]", "group_[Channel2]_enable", DJCi500.fxSelIndicator);
+  engine.makeConnection("[EffectRack1_EffectUnit2]", "group_[Channel2]_enable", DJCi500.fxSelIndicator);
+  engine.makeConnection("[EffectRack1_EffectUnit1]", "group_[Channel3]_enable", DJCi500.fxSelIndicator);
+  engine.makeConnection("[EffectRack1_EffectUnit2]", "group_[Channel3]_enable", DJCi500.fxSelIndicator);
+  engine.makeConnection("[EffectRack1_EffectUnit1]", "group_[Channel4]_enable", DJCi500.fxSelIndicator);
+  engine.makeConnection("[EffectRack1_EffectUnit2]", "group_[Channel4]_enable", DJCi500.fxSelIndicator);
+
+  // Connect the slicer beats
   DJCi500.slicerBeat1 = engine.makeConnection('[Channel1]', 'beat_active', DJCi500.slicerBeatActive);
   DJCi500.slicerBeat2 = engine.makeConnection('[Channel2]', 'beat_active', DJCi500.slicerBeatActive);
   //var controlsToFunctions = {'beat_active': 'DJCi500.slicerBeatActive'};
@@ -1199,6 +1203,10 @@ DJCi500.updateDeckStatus = function(group) {
   midi.sendShortMsg(0x90 + channel, 0x03, (vinylState) ? 0x7F : 0x00);
   midi.sendShortMsg(0xB0 + channel, 0x40, volume);
   midi.sendShortMsg(0x90 + channel, 0x30, playing ? 0x7F : 0x00);
+
+  // Update the fx rack selection
+  DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit1]", 0, 0);
+  DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit2]", 0, 0);
 
   // Slicer
   switch(group) {
