@@ -138,7 +138,7 @@ DJCi500.vuMeterUpdateMaster = function(value, _group, control) {
 };
 
 DJCi500.vuMeterPeakLeftMaster = function(value, group, control, status) {
-  if (value === 0x7F) {
+  if (value) {
     midi.sendShortMsg(0x90, 0x0A, 0x7F);
   } else {
     midi.sendShortMsg(0x90, 0x0A, 0x00);
@@ -146,7 +146,7 @@ DJCi500.vuMeterPeakLeftMaster = function(value, group, control, status) {
 };
 
 DJCi500.vuMeterPeakRightMaster = function(value, group, control, status) {
-  if (value === 0x7F) {
+  if (value) {
     midi.sendShortMsg(0x90, 0x0F, 0x7F);
   } else {
     midi.sendShortMsg(0x90, 0x0F, 0x00);
