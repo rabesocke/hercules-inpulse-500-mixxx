@@ -643,7 +643,8 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     off: pairColorsOff[0],
     input: function (channel, control, value, status, group) {
       if (value === 0x7F){
-        engine.setValue(group, "pitch_adjust", -2.0);
+        engine.setValue(group, "pitch_down", 1);
+        engine.setValue(group, "pitch_down", 1);
         midi.sendShortMsg(status, control, this.on);
       }
       else {
@@ -688,7 +689,8 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     off: pairColorsOff[3],
     input: function (channel, control, value, status, group) {
       if (value === 0x7F){
-        engine.setValue(group, "pitch_adjust", 2.0);
+        engine.setValue(group, "pitch_up", 1);
+        engine.setValue(group, "pitch_up", 1);
         midi.sendShortMsg(status, control, this.on);
       }
       else {
