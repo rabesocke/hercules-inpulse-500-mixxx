@@ -202,7 +202,6 @@
             <!--Loop In/Out-->
 			<control>
 				<group>[Channel1]</group>
-				<!--<key>beatloop_4_activate</key>-->
 				<key>DJCi500.deckA.loopInButton.input</key>
 				<description>Loop In button</description>
 				<status>0x91</status>
@@ -224,7 +223,6 @@
 			<!--SHIFT + Loop In/Out-->
 			<control>
 				<group>[Channel1]</group>
-				<!--<key>beatloop_4_activate</key>-->
 				<key>DJCi500.deckA.loopInButton.input</key>
 				<description>S+Loop In button (loop in goto)</description>
 				<status>0x94</status>
@@ -880,7 +878,7 @@
 			<control>
 				<group>[Channel1]</group>
 				<key>DJCi500.deckA.loopButtons[6].input</key>
-				<description>Loop 2 Beat (Pad 6)</description>
+				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x96</status>
 				<midino>0x15</midino>
 				<options>
@@ -900,9 +898,92 @@
 			<control>
 				<group>[Channel1]</group>
 				<key>DJCi500.deckA.loopButtons[8].input</key>
-                <description>Loop 2 Beat (Pad 8)</description>
+                <description>Loop 16 Beat (Pad 8)</description>
                 <status>0x96</status>
                 <midino>0x17</midino>
+                <options>
+                    <normal />
+                </options>
+            </control>
+            <!-- PAD Mode 2 + SHIFT -->
+            <!-- Quarters -->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[1].input</key>
+				<description>Loop 3/4 Beat (Pad 1)</description>
+				<status>0x96</status>
+				<midino>0x18</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[2].input</key>
+				<description>Loop 5/4 Beat (Pad 2)</description>
+				<status>0x96</status>
+				<midino>0x19</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[3].input</key>
+				<description>Loop 6/4 Beat (Pad 3)</description>
+				<status>0x96</status>
+				<midino>0x1A</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[4].input</key>
+                <description>Loop 7/4 Beat (Pad 4)</description>
+				<status>0x96</status>
+				<midino>0x1B</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- Bigger beat counts -->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[5].input</key>
+				<description>Loop 32 Beat (Pad 5)</description>
+				<status>0x96</status>
+				<midino>0x1C</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[6].input</key>
+				<description>Loop 64 Beat (Pad 6)</description>
+				<status>0x96</status>
+				<midino>0x1D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[7].input</key>
+				<description>Loop 128 Beat (Pad 7)</description>
+				<status>0x96</status>
+				<midino>0x1E</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.loopShiftButtons[8].input</key>
+                <description>Loop 256 Beat (Pad 8)</description>
+                <status>0x96</status>
+                <midino>0x1F</midino>
                 <options>
                     <normal />
                 </options>
@@ -1853,7 +1934,7 @@
 			<control>
 				<group>[Channel2]</group>
 				<key>DJCi500.deckB.loopButtons[6].input</key>
-				<description>Loop 2 Beat (Pad 6)</description>
+				<description>Loop 4 Beat (Pad 6)</description>
 				<status>0x97</status>
 				<midino>0x15</midino>
 				<options>
@@ -1873,13 +1954,97 @@
 			<control>
 				<group>[Channel2]</group>
 				<key>DJCi500.deckB.loopButtons[8].input</key>
-				<description>Loop 2 Beat (Pad 8)</description>
+				<description>Loop 16 Beat (Pad 8)</description>
 				<status>0x97</status>
 				<midino>0x17</midino>
 				<options>
 					<script-binding />
 				</options>
 			</control>
+            <!-- PAD Mode 2 + SHIFT -->
+            <!-- Quarters -->
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[1].input</key>
+				<description>Loop 3/4 Beat (Pad 1)</description>
+				<status>0x97</status>
+				<midino>0x18</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[2].input</key>
+				<description>Loop 5/4 Beat (Pad 2)</description>
+				<status>0x97</status>
+				<midino>0x19</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[3].input</key>
+				<description>Loop 6/4 Beat (Pad 3)</description>
+				<status>0x97</status>
+				<midino>0x1A</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[4].input</key>
+                <description>Loop 7/4 Beat (Pad 4)</description>
+				<status>0x97</status>
+				<midino>0x1B</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- Bigger beat counts -->
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[5].input</key>
+				<description>Loop 32 Beat (Pad 5)</description>
+				<status>0x97</status>
+				<midino>0x1C</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[6].input</key>
+				<description>Loop 64 Beat (Pad 6)</description>
+				<status>0x97</status>
+				<midino>0x1D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[7].input</key>
+				<description>Loop 128 Beat (Pad 7)</description>
+				<status>0x97</status>
+				<midino>0x1E</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel2]</group>
+				<key>DJCi500.deckB.loopShiftButtons[8].input</key>
+                <description>Loop 256 Beat (Pad 8)</description>
+                <status>0x97</status>
+                <midino>0x1F</midino>
+                <options>
+                    <normal />
+                </options>
+            </control>
+
 			<!--Pad MODE 3 - Slicer -->
 			<control>
 				<group>[Channel2]</group>

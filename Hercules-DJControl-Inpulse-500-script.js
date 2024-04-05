@@ -100,6 +100,10 @@ DJCi500.PadColorMapper = new ColorMapper({
   0xFF8800: 0x74,
 });
 
+// Constants
+
+DJCi500.EFFECT_ONLY_MODE = 1;
+DJCi500.FILTER_AND_EFFECT_MODE = 2;
 
 ///////////////////////////////////////////////////////////////
 //                          SLICER                           //
@@ -231,6 +235,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   // For loop and looprolls
   var fractions = ['0.125', '0.25', '0.5', '1', '2', '4', '8', '16'];
+  var shiftFractions = ['0.75', '1.25', '1.5', '1.75', '32', '64', '128', '256'];
 
   // For key shift pads and beat jump pads
   var pairColorsOn = [0x1F, 0x1F, 0x03, 0x03, 0x74, 0x74, 0x60, 0x60]; 
@@ -243,7 +248,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   this.vinylButtonState = [true, true, true, true];
 
   // Pitch ranges and status
-  this.pitchRanges = [0.08, 0.32, 1]; //select pitch range
+  this.pitchRanges = [0.08, 0.15, 0.32]; //select pitch range
   this.pitchRangeId = 0; //id of the array, one for each deck
 
   // Effect section components
@@ -595,12 +600,27 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     this.loopButtons[i] = new components.Button({
       midi: [0x95 + midiChannel, 0x10 + (i - 1)],
       number: i,
-      shiftOffset: 8,
-      shiftControl: true,
-      sendShifted: true,
+      shiftControl: false,
+      sendShifted: false,
       on: 0x5C,
       off: 0x30,
-      key: 'beatloop_' + fractions[i - 1] + '_toggle',
+      outKey: 'beatloop_' + fractions[i - 1] + '_enabled',
+      inKey: 'beatloop_' + fractions[i - 1] + '_toggle',
+    });
+  };
+
+  // A bit repeated code, but I want the leds to react accordingly
+  this.loopShiftedButtons = [];
+  for (var i = 1; i <= 8; i++) {
+    this.loopButtons[i] = new components.Button({
+      midi: [0x95 + midiChannel, 0x10 + (i - 1) + 8],
+      number: i,
+      shiftControl: false,
+      sendShifted: false,
+      on: 0x5C,
+      off: 0x30,
+      outKey: 'beatloop_' + shiftFractions[i - 1] + '_enabled',
+      inKey: 'beatloop_' + shiftFractions[i - 1] + '_toggle',
     });
   };
 
@@ -782,8 +802,9 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
       sendShifted: true,
       group: "[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]",
       outKey: "enabled",
-      output: function (_value, group, control) {
-        if (deckData.onlyEffectEnabled) {
+      output: function (value, group, control) {
+        DJCi500.updateFilterKnobMode(deckData, unit, DJCi500.EFFECT_ONLY_MODE);
+        if ((value) && (deckData.onlyEffectEnabled)) {
           this.send(0x7F);
         } else {
           this.send(0x7C);
@@ -795,8 +816,6 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
           var fxNo = control - 0x5F;
           var unit = channel - 0x95;
           if (value === 0x7F){
-            deckData.filterAndEffectEnabled = false;
-            deckData.onlyEffectEnabled = !engine.getValue(this.group, "enabled");
             script.toggleControl(this.group, "enabled");
           }
         };
@@ -822,8 +841,9 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
       sendShifted: true,
       group: "[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]",
       outKey: "enabled",
-      output: function (_value, group, control) {
-        if (deckData.filterAndEffectEnabled) {
+      output: function (value, group, control) {
+        DJCi500.updateFilterKnobMode(deckData, unit, DJCi500.EFFECT_ONLY_MODE);
+        if ((value) && (deckData.filterAndEffectEnabled)) {
           this.send(0x7F);
         } else {
           this.send(0x7C);
@@ -835,8 +855,6 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
           var fxNo = control - 0x63;
           var unit = channel - 0x95;
           if (value === 0x7F){
-            deckData.filterAndEffectEnabled = !engine.getValue(this.group, "enabled");
-            deckData.onlyEffectEnabled = false;
             script.toggleControl(this.group, "enabled");
           }
         };
@@ -1096,7 +1114,7 @@ DJCi500.spinback_button = function(channel, control, value, status, group) {
   engine.spinback(deck, value > 0, 2.5); // use default starting rate of -10 but decrease speed more quickly
 }
 
-//Led
+// Update the Tempo and phase sync leds
 DJCi500.tempoLEDs = function () {
   // Current active decks
   var deckA = DJCi500.deckA.currentDeck;
@@ -1319,84 +1337,101 @@ DJCi500.deckSelector = function(channel, control, value, status, group) {
   };
 };
 
+// Update the filter knob mode for the given deck
+DJCi500.updateFilterKnobMode = function (deckData, midiChannel, mode) {
+  var status = false;
+
+  for (var i = 1; i++; i <=3) {
+    status = status || engine.getValue("[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]");
+  }
+
+  if (mode === DJCi500.EFFECT_ONLY_MODE) {
+    deckData.filterAndEffectEnabled = false;
+    deckData.onlyEffectEnabled = status;
+  } else {
+    deckData.onlyEffectEnabled = false;
+    deckData.filterAndEffectEnabled = status;
+  }
+}
+
 ///////////////////////////////////////////////////////////////
 //                          SLICER                           //
 ///////////////////////////////////////////////////////////////
-  DJCi500.slicerButtonFunc = function(channel, control, value, status, group) {
-    var index = control - 0x20,
-      deck = parseInt(group.charAt(8)) - 1,
-      domain = DJCi500.selectedSlicerDomain[deck],
-      beatsToJump = 0,
-      passedTime = engine.getValue(group, "beat_distance"),
-      loopEnabled = engine.getValue(group, "loop_enabled");
+DJCi500.slicerButtonFunc = function(channel, control, value, status, group) {
+  var index = control - 0x20,
+    deck = parseInt(group.charAt(8)) - 1,
+    domain = DJCi500.selectedSlicerDomain[deck],
+    beatsToJump = 0,
+    passedTime = engine.getValue(group, "beat_distance"),
+    loopEnabled = engine.getValue(group, "loop_enabled");
 
-    if (value) {
-      DJCi500.slicerButton[deck] = index;
-      //Maybe I need to update this (seems sometimes it does not work.)
-      //DJCi500.slicerBeatsPassed[deck] = Math.floor((playposition * duration) * (bpm / 60.0));
-      beatsToJump = (index * (domain / 8)) - ((DJCi500.slicerBeatsPassed[deck] % domain));
-      beatsToJump -= passedTime;
+  if (value) {
+    DJCi500.slicerButton[deck] = index;
+    //Maybe I need to update this (seems sometimes it does not work.)
+    //DJCi500.slicerBeatsPassed[deck] = Math.floor((playposition * duration) * (bpm / 60.0));
+    beatsToJump = (index * (domain / 8)) - ((DJCi500.slicerBeatsPassed[deck] % domain));
+    beatsToJump -= passedTime;
 
-      //activate the one-shot timer for the slip end.
-      if (!DJCi500.slicerTimer[deck]){
-        DJCi500.slicerTimer[deck] = true;
-        var timer_ms = (1-passedTime)*60.0/engine.getValue(group, "bpm")*1000;
+    //activate the one-shot timer for the slip end.
+    if (!DJCi500.slicerTimer[deck]){
+      DJCi500.slicerTimer[deck] = true;
+      var timer_ms = (1-passedTime)*60.0/engine.getValue(group, "bpm")*1000;
 
-        //quality of life fix for not-precise hands or beatgrid
-        // also good fix for really small timer_ms values.
-        if ( (passedTime >= 0.8) &&
-          //this is because while looping doing this thing on beat 8 break the flow.
-          ((!loopEnabled) || (DJCi500.slicerBeatsPassed[deck] % domain) !== (domain-1)) ) {
-          timer_ms += 60.0/engine.getValue(group, "bpm")*1000;
-        }
-
-        engine.beginTimer( timer_ms,
-          //"DJCi500.slicerTimerCallback("+group+")", true);
-          function() {
-            //need to do this otherwise loop does not work on beat 8 because of slip.
-            if ((engine.getValue(group, "loop_enabled") === true)){
-              //on the wiki it says it returns an integer, but I tested and instead seems a Real value:
-              // But it does not work cuz the value does not relate to beat. they are samples.
-              //var endLoop = engine.getValue(group, "loop_end_position");
-              engine.setValue(group, "reloop_toggle", true); //false
-              engine.setValue(group, "slip_enabled", false);
-              //Aleatory behavior, probably because the slip does not always have completed before "returning"
-              //so I need to introduce a timer waiting the slip function to be completely resolved
-              engine.beginTimer( 2, function () {
-                var bpm_file = engine.getValue(group, "file_bpm"),
-                  playposition = engine.getValue(group, "playposition"),
-                  duration = engine.getValue(group, "duration");
-                /*
-                if (Math.floor((playposition * duration) * (bpm_file / 60.0)) > endLoop) {
-                  engine.setValue(group, "beatjump", -8);
-                }*/
-                engine.setValue(group, "reloop_toggle", true);},
-                true);
-            }
-            else {
-              engine.setValue(group, "slip_enabled", false);
-            }
-            DJCi500.slicerTimer[deck] = false;
-            DJCi500.slicerButton[deck] = -1;},
-          true);
+      //quality of life fix for not-precise hands or beatgrid
+      // also good fix for really small timer_ms values.
+      if ( (passedTime >= 0.8) &&
+        //this is because while looping doing this thing on beat 8 break the flow.
+        ((!loopEnabled) || (DJCi500.slicerBeatsPassed[deck] % domain) !== (domain-1)) ) {
+        timer_ms += 60.0/engine.getValue(group, "bpm")*1000;
       }
 
-      engine.setValue(group, "slip_enabled", true);
+      engine.beginTimer( timer_ms,
+        //"DJCi500.slicerTimerCallback("+group+")", true);
+        function() {
+          //need to do this otherwise loop does not work on beat 8 because of slip.
+          if ((engine.getValue(group, "loop_enabled") === true)){
+            //on the wiki it says it returns an integer, but I tested and instead seems a Real value:
+            // But it does not work cuz the value does not relate to beat. they are samples.
+            //var endLoop = engine.getValue(group, "loop_end_position");
+            engine.setValue(group, "reloop_toggle", true); //false
+            engine.setValue(group, "slip_enabled", false);
+            //Aleatory behavior, probably because the slip does not always have completed before "returning"
+            //so I need to introduce a timer waiting the slip function to be completely resolved
+            engine.beginTimer( 2, function () {
+              var bpm_file = engine.getValue(group, "file_bpm"),
+                playposition = engine.getValue(group, "playposition"),
+                duration = engine.getValue(group, "duration");
+              /*
+              if (Math.floor((playposition * duration) * (bpm_file / 60.0)) > endLoop) {
+                engine.setValue(group, "beatjump", -8);
+              }*/
+              engine.setValue(group, "reloop_toggle", true);},
+              true);
+          }
+          else {
+            engine.setValue(group, "slip_enabled", false);
+          }
+          DJCi500.slicerTimer[deck] = false;
+          DJCi500.slicerButton[deck] = -1;},
+        true);
+    }
 
-      //Because of Mixxx beatjump implementation, we need to deactivate the loop before jumping
-      // also there is no "lopp_deactivate" and loop_activate false does not work.
-      if (loopEnabled) {
-        engine.setValue(group, "reloop_toggle", true);
-      }
-      engine.setValue(group, "beatjump", beatsToJump);
-      //This sadly does not work.
-      //engine.setValue(group, "loop_move", -beatsToJump);
-      if (loopEnabled){
-        engine.setValue(group, "reloop_toggle", true);
-      }
-      midi.sendShortMsg((0x96+(deck % 2)), 0x20+index, 0x62);
-    } //if value
-  };
+    engine.setValue(group, "slip_enabled", true);
+
+    //Because of Mixxx beatjump implementation, we need to deactivate the loop before jumping
+    // also there is no "lopp_deactivate" and loop_activate false does not work.
+    if (loopEnabled) {
+      engine.setValue(group, "reloop_toggle", true);
+    }
+    engine.setValue(group, "beatjump", beatsToJump);
+    //This sadly does not work.
+    //engine.setValue(group, "loop_move", -beatsToJump);
+    if (loopEnabled){
+      engine.setValue(group, "reloop_toggle", true);
+    }
+    midi.sendShortMsg((0x96+(deck % 2)), 0x20+index, 0x62);
+  } //if value
+};
 
 //this below is connected to beat_active
 DJCi500.slicerBeatActive = function(value, group, control) {
