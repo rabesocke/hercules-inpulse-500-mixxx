@@ -1301,7 +1301,7 @@
                 <key>DJCi500.deckA.pitchSliderReset.input</key>
                 <description>Pitch slider Reset resolution</description>
                 <status>0x96</status>
-                <midino>0x46</midino>
+                <midino>0x44</midino>
                 <options>
                     <script-binding />
                 </options>
@@ -2358,7 +2358,7 @@
 				<key>DJCi500.deckB.pitchSliderReset.input</key>
 				<description>Pitch slider Reset resolution</description>
 				<status>0x97</status>
-				<midino>0x46</midino>
+				<midino>0x44</midino>
 				<options>
 					<script-binding />
 				</options>

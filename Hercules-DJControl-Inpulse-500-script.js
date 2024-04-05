@@ -248,7 +248,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   this.vinylButtonState = [true, true, true, true];
 
   // Pitch ranges and status
-  this.pitchRanges = [0.08, 0.15, 0.32]; //select pitch range
+  this.pitchRanges = [0.08, 0.10, 0.15, 0.16, 0.24, 0.50, 0.90]; //select pitch range
   this.pitchRangeId = 0; //id of the array, one for each deck
 
   // Effect section components
@@ -689,8 +689,8 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   this.pitchUpSemiTone = new components.Button({
     midi: [0x95 + midiChannel, 0x42],
-    on: pairColorsOn[2],
-    off: pairColorsOff[2],
+    on: pairColorsOn[6],
+    off: pairColorsOff[6],
     input: function (channel, control, value, status, group) {
       if (value === 0x7F){
         engine.setValue(group, "pitch_up", 1);
@@ -704,8 +704,8 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   this.pitchUpTone = new components.Button({
     midi: [0x95 + midiChannel, 0x43],
-    on: pairColorsOn[3],
-    off: pairColorsOff[3],
+    on: pairColorsOn[6],
+    off: pairColorsOff[6],
     input: function (channel, control, value, status, group) {
       if (value === 0x7F){
         engine.setValue(group, "pitch_up", 1);
@@ -719,15 +719,15 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   });
 
   this.pitchSliderIncrease = new components.Button({
-    midi: [0x95 + midiChannel, 0x44],
-    on: pairColorsOn[4],
-    off: pairColorsOff[4],
+    midi: [0x95 + midiChannel, 0x46],
+    on: 0x63,
+    off: 0x42,
     input: function (channel, control, value, status, group) {
       if (value === 0x7F){
         deckData.pitchRangeId++;
-        if (deckData.pitchRangeId > 2)
+        if (deckData.pitchRangeId > 6)
         {
-          deckData.pitchRangeId = 2;
+          deckData.pitchRangeId = 6;
         }
         engine.setValue(group, "rateRange", deckData.pitchRanges[deckData.pitchRangeId]);
         midi.sendShortMsg(status, control, this.on); //17 -- 3B
@@ -740,8 +740,8 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   this.pitchSliderDecrease = new components.Button({
     midi: [0x95 + midiChannel, 0x45],
-    on: pairColorsOn[5],
-    off: pairColorsOff[5],
+    on: pairColorsOn[3],
+    off: pairColorsOff[3],
     input: function (channel, control, value, status, group) {
       if (value === 0x7F){
         deckData.pitchRangeId = deckData.pitchRangeId - 1;
@@ -759,7 +759,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   });
 
   this.pitchSliderReset = new components.Button({
-    midi: [0x95 + midiChannel, 0x46],
+    midi: [0x95 + midiChannel, 0x44],
     on: pairColorsOn[6],
     off: pairColorsOff[6],
     input: function (channel, control, value, status, group) {
@@ -913,15 +913,24 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   // Beat jump (PAD Mode 8)
   this.beatJumpButtons = [];
-  var values = [1, 1, 2, 2, 4, 4, 8, 8];
+  var jumpValues = [1, 1, 2, 2, 4, 4, 8, 8];
+  var jumpValuesShift = [16, 16, 32, 32, 64, 64, 128, 128];
   for (var i = 1; i <= 8; i++) {
     var movement = (i % 2 === 0) ? '_forward' : '_backward';
     this.beatJumpButtons[i] = new components.Button({
       midi: [0x95 + midiChannel, 0x70 + (i - 1)],
       number: i,
+      shiftOffset: 8,
+      shiftControl: true,
+      sendShifted: false,
       on: pairColorsOn[i-1],
       off: pairColorsOff[i-1],
-      key: 'beatjump_' + values[i - 1] + movement,
+      unshift: function () {
+        this.inKey = 'beatjump_' + jumpValues[i - 1] + movement;
+      },
+      shift: function () {
+        this.inKey = 'beatjump_' + jumpValuesShift[i - 1] + movement;
+      },
     });
   };
 
@@ -1008,12 +1017,13 @@ DJCi500.init = function() {
 
   // Turn on lights:
   for (var i = 0; i < 2; i++) {
-    midi.sendShortMsg(0x96+i, 0x40, 0x2);
-    midi.sendShortMsg(0x96+i, 0x41, 0x2);
-    midi.sendShortMsg(0x96+i, 0x42, 0x78);
-    midi.sendShortMsg(0x96+i, 0x43, 0x78);
-    midi.sendShortMsg(0x96+i, 0x45, 0x37);
-    midi.sendShortMsg(0x96+i, 0x46, 0x24);
+    midi.sendShortMsg(0x96+i, 0x40, 0x12);
+    midi.sendShortMsg(0x96+i, 0x41, 0x12);
+    midi.sendShortMsg(0x96+i, 0x42, 0x40);
+    midi.sendShortMsg(0x96+i, 0x43, 0x40);
+    midi.sendShortMsg(0x96+i, 0x44, 0x40);
+    midi.sendShortMsg(0x96+i, 0x45, 0x02);
+    midi.sendShortMsg(0x96+i, 0x46, 0x42);
   }
 
   DJCi500.tempoTimer = engine.beginTimer(250, DJCi500.tempoLEDs);
