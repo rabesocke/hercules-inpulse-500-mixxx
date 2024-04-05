@@ -235,7 +235,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   // For loop and looprolls
   var fractions = ['0.125', '0.25', '0.5', '1', '2', '4', '8', '16'];
-  var shiftFractions = ['0.75', '1.25', '1.5', '1.75', '32', '64', '128', '256'];
+  var shiftFractions = ['0.03125', '0.0625', '32', '64', '128', '256', '512', '512'];
 
   // For key shift pads and beat jump pads
   var pairColorsOn = [0x1F, 0x1F, 0x03, 0x03, 0x74, 0x74, 0x60, 0x60]; 
@@ -252,8 +252,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   this.pitchRangeId = 0; //id of the array, one for each deck
 
   // Effect section components
-  this.onlyEffectEnabled = false;
-  this.filterAndEffectEnabled = false;
+  this.effectEnabled = false;
 
   // Make sure the shift button remaps the shift actions
   this.shiftButton = new components.Button({
@@ -307,10 +306,10 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
                 1,//((status & 0xF0) !=== 0x80 && value > 0),
                 54);
             } else {
-              engine.toggleControl(deckData.currentDeck, "play");
+              script.toggleControl(deckData.currentDeck, "play");
             }
           } else {
-            engine.toggleControl(deckData.currentDeck, "play");
+            script.toggleControl(deckData.currentDeck, "play");
           }
         }
       };
@@ -803,8 +802,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
       group: "[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]",
       outKey: "enabled",
       output: function (value, group, control) {
-        DJCi500.updateFilterKnobMode(deckData, unit, DJCi500.EFFECT_ONLY_MODE);
-        if ((value) && (deckData.onlyEffectEnabled)) {
+        if (value) {
           this.send(0x7F);
         } else {
           this.send(0x7C);
@@ -831,46 +829,40 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
         };
       }
     });
-
-    // Lower row, effect + HPF/LPF button on filter knob
-    this.effectButtons[i + 4] = new components.Button({
-      midi: [0x95 + midiChannel, 0x60 + (i + 3)],
-      number: i + 4,
-      shiftOffset: 8,
-      shiftControl: true,
-      sendShifted: true,
-      group: "[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]",
-      outKey: "enabled",
-      output: function (value, group, control) {
-        DJCi500.updateFilterKnobMode(deckData, unit, DJCi500.EFFECT_ONLY_MODE);
-        if ((value) && (deckData.filterAndEffectEnabled)) {
-          this.send(0x7F);
-        } else {
-          this.send(0x7C);
-        }
-      },
-      unshift: function() {
-        // Normal effect button operation, toggling the effect assigned to it
-        this.input = function (channel, control, value, status, group) {
-          var fxNo = control - 0x63;
-          var unit = channel - 0x95;
-          if (value === 0x7F){
-            script.toggleControl(this.group, "enabled");
-          }
-        };
-      },
-      shift: function () {
-        // Shift button will change the effect to the next in the list
-        this.input = function (channel, control, value, status, group) {
-          var fxNo = control - 0x6B;
-          var unit = channel - 0x95;
-          if (value === 0x7F){
-            engine.setValue(this.group, 'effect_selector', -1);
-          }
-        };
-      }
-    });
   };
+
+  // Effect chain selectors
+  this.effectButtons[5] = new components.Button({
+    midi: [0x95 + midiChannel, 0x64],
+    number: 5,
+    shiftOffset: 8,
+    shiftControl: true,
+    sendShifted: true,
+    group: "[QuickEffectRack1_[Channel" + midiChannel + "]]",
+    on: 0x5C,
+    off: 0x5C,
+    input: function (channel, _control, value, _status, group) {
+      if (value === 0x7F) {
+        engine.setValue(this.group, 'chain_preset_selector', -1);
+      }
+    }
+  });
+
+  this.effectButtons[6] = new components.Button({
+    midi: [0x95 + midiChannel, 0x65],
+    number: 6,
+    shiftOffset: 8,
+    shiftControl: true,
+    sendShifted: true,
+    group: "[QuickEffectRack1_[Channel" + midiChannel + "]]",
+    on: 0x5C,
+    off: 0x5C,
+    input: function (channel, _control, value, _status, group) {
+      if (value === 0x7F) {
+        engine.setValue(this.group, 'chain_preset_selector', 1);
+      }
+    }
+  });
 
   // Set the current channel FX route with the two extra PADs
   this.effectButtons[4] = new components.Button({
@@ -909,11 +901,10 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     number: midiChannel,
     group: "[QuickEffectRack1_[Channel" + midiChannel + "]]",
     input: function (channel, control, value, status, group) {
-      if ((deckData.onlyEffectEnabled) || (deckData.filterAndEffectEnabled)) {
+      if (DJCi500.updateEffectStatus(midiChannel, deckData.currentDeck)) {
         // Move the effects knobs
         engine.setValue("[EffectRack1_EffectUnit" + this.number + "]", "super1", Math.abs(script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127) - 0.5)*2 );
-      }
-      if ((deckData.filterAndEffectEnabled) || (!deckData.onlyEffectEnabled)) {
+      } else {
         // Move the filter knob
         engine.setValue("[QuickEffectRack1_" + deckData.currentDeck + "]", "super1", script.absoluteNonLin(value, 0.0, 0.5, 1.0, 0, 127));
       }
@@ -1040,6 +1031,10 @@ DJCi500.init = function() {
   // Update the fx rack selection
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit1]", 0, 0);
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit2]", 0, 0);
+
+  // Light up FX quick effect chain selector buttons
+  midi.sendShortMsg(0x96, 0x64, 0x5C);
+  midi.sendShortMsg(0x96, 0x65, 0x5C);
 };
 
 // Crossfader control, set the curve
@@ -1336,21 +1331,13 @@ DJCi500.deckSelector = function(channel, control, value, status, group) {
   };
 };
 
-// Update the filter knob mode for the given deck
-DJCi500.updateFilterKnobMode = function (deckData, midiChannel, mode) {
-  var status = false;
-
-  for (var i = 1; i++; i <=3) {
-    status = status || engine.getValue("[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]");
+DJCi500.updateEffectStatus = function(midiChannel, channel) {
+  let status = false;
+  for (var i = 0; i <= 3; i++) {
+    status = status || engine.getValue("[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]", "enabled");
   }
-
-  if (mode === DJCi500.EFFECT_ONLY_MODE) {
-    deckData.filterAndEffectEnabled = false;
-    deckData.onlyEffectEnabled = status;
-  } else {
-    deckData.onlyEffectEnabled = false;
-    deckData.filterAndEffectEnabled = status;
-  }
+  return status;
+  // return engine.getValue("[EffectRack1_EffectUnit" + midiChannel + "]", "group_[Channel" + channel + "]_enable");
 }
 
 ///////////////////////////////////////////////////////////////
