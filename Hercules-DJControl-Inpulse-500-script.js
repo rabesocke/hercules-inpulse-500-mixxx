@@ -1035,6 +1035,8 @@ DJCi500.init = function() {
   // Light up FX quick effect chain selector buttons
   midi.sendShortMsg(0x96, 0x64, 0x5C);
   midi.sendShortMsg(0x96, 0x65, 0x5C);
+  midi.sendShortMsg(0x97, 0x64, 0x5C);
+  midi.sendShortMsg(0x97, 0x65, 0x5C);
 };
 
 // Crossfader control, set the curve
