@@ -105,6 +105,11 @@ DJCi500.PadColorMapper = new ColorMapper({
 DJCi500.EFFECT_ONLY_MODE = 1;
 DJCi500.FILTER_AND_EFFECT_MODE = 2;
 
+// For key shift pads and beat jump pads
+const pairColorsOn = [0x1F, 0x1F, 0x03, 0x03, 0x74, 0x74, 0x60, 0x60]; 
+const pairColorsOff = [0x12, 0x12, 0x02, 0x02, 0x4C, 0x4C, 0x40, 0x40]; 
+
+
 ///////////////////////////////////////////////////////////////
 //                          SLICER                           //
 ///////////////////////////////////////////////////////////////
@@ -137,7 +142,7 @@ DJCi500.vuMeterUpdateMaster = function(value, _group, control) {
   // Reserve the red led for peak indicator, this will in turn, make
   // the display more similar (I hope) to what Mixxx VU shows
   value = script.absoluteLinInverse(value, 0.0, 1.0, 0, 124);
-  var control = (control === "VuMeterL") ? 0x40 : 0x41;
+  var control = (control === "vu_meter_left") ? 0x40 : 0x41;
   midi.sendShortMsg(0xB0, control, value);
 };
 
@@ -237,9 +242,9 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   var fractions = ['0.125', '0.25', '0.5', '1', '2', '4', '8', '16'];
   var shiftFractions = ['0.03125', '0.0625', '32', '64', '128', '256', '512', '512'];
 
-  // For key shift pads and beat jump pads
-  var pairColorsOn = [0x1F, 0x1F, 0x03, 0x03, 0x74, 0x74, 0x60, 0x60]; 
-  var pairColorsOff = [0x12, 0x12, 0x02, 0x02, 0x4C, 0x4C, 0x40, 0x40]; 
+  // For beatjumps
+  var jumpValues = ['1', '1', '2', '2', '4', '4', '8', '8'];
+  var jumpValuesShift = ['16', '16', '32', '32', '64', '64', '128', '128'];
 
   // Brake status for this deck
   this.slowPauseSetState = [false, false, false, false];
@@ -913,23 +918,39 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   // Beat jump (PAD Mode 8)
   this.beatJumpButtons = [];
-  var jumpValues = [1, 1, 2, 2, 4, 4, 8, 8];
-  var jumpValuesShift = [16, 16, 32, 32, 64, 64, 128, 128];
   for (var i = 1; i <= 8; i++) {
     var movement = (i % 2 === 0) ? '_forward' : '_backward';
+    var jmpVal = jumpValues[i - 1];
+    var jmpValShft = jumpValuesShift[i - 1];
     this.beatJumpButtons[i] = new components.Button({
       midi: [0x95 + midiChannel, 0x70 + (i - 1)],
       number: i,
       shiftOffset: 8,
       shiftControl: true,
-      sendShifted: false,
-      on: pairColorsOn[i-1],
-      off: pairColorsOff[i-1],
+      sendShifted: true,
+      on: pairColorsOn[i - 1],
+      off: pairColorsOff[i - 1],
+      jump: 'beatjump_' + jmpVal + movement,
+      jumpShift: 'beatjump_' + jmpValShft + movement,
       unshift: function () {
-        this.inKey = 'beatjump_' + jumpValues[i - 1] + movement;
+        this.input = function(_channel, control, value, status, _group) {
+          if (value === 0x7F) {
+            engine.setValue(deckData.currentDeck, this.jump, true);
+            midi.sendShortMsg(status, control, this.on);
+          } else {
+            midi.sendShortMsg(status, control, this.off);
+          }
+        }
       },
       shift: function () {
-        this.inKey = 'beatjump_' + jumpValuesShift[i - 1] + movement;
+        this.input = function(_channel, control, value, status, _group) {
+          if (value === 0x7F) {
+            engine.setValue(deckData.currentDeck, this.jumpShift, true);
+            midi.sendShortMsg(status, control, this.on);
+          } else {
+            midi.sendShortMsg(status, control, this.off);
+          }
+        }
       },
     });
   };
@@ -1017,6 +1038,7 @@ DJCi500.init = function() {
 
   // Turn on lights:
   for (var i = 0; i < 2; i++) {
+    // PAD 5 Key and tempo range controls
     midi.sendShortMsg(0x96+i, 0x40, 0x12);
     midi.sendShortMsg(0x96+i, 0x41, 0x12);
     midi.sendShortMsg(0x96+i, 0x42, 0x40);
@@ -1024,6 +1046,25 @@ DJCi500.init = function() {
     midi.sendShortMsg(0x96+i, 0x44, 0x40);
     midi.sendShortMsg(0x96+i, 0x45, 0x02);
     midi.sendShortMsg(0x96+i, 0x46, 0x42);
+
+    // PAD 8 Beatjump leds
+    midi.sendShortMsg(0x96+i, 0x70, pairColorsOff[0]);
+    midi.sendShortMsg(0x96+i, 0x71, pairColorsOff[1]);
+    midi.sendShortMsg(0x96+i, 0x72, pairColorsOff[2]);
+    midi.sendShortMsg(0x96+i, 0x73, pairColorsOff[3]);
+    midi.sendShortMsg(0x96+i, 0x74, pairColorsOff[4]);
+    midi.sendShortMsg(0x96+i, 0x75, pairColorsOff[5]);
+    midi.sendShortMsg(0x96+i, 0x76, pairColorsOff[6]);
+    midi.sendShortMsg(0x96+i, 0x77, pairColorsOff[7]);
+    // PAD 8 shift
+    midi.sendShortMsg(0x96+i, 0x78, pairColorsOff[0]);
+    midi.sendShortMsg(0x96+i, 0x79, pairColorsOff[1]);
+    midi.sendShortMsg(0x96+i, 0x7A, pairColorsOff[2]);
+    midi.sendShortMsg(0x96+i, 0x7B, pairColorsOff[3]);
+    midi.sendShortMsg(0x96+i, 0x7C, pairColorsOff[4]);
+    midi.sendShortMsg(0x96+i, 0x7D, pairColorsOff[5]);
+    midi.sendShortMsg(0x96+i, 0x7E, pairColorsOff[6]);
+    midi.sendShortMsg(0x96+i, 0x7F, pairColorsOff[7]);
   }
 
   DJCi500.tempoTimer = engine.beginTimer(250, DJCi500.tempoLEDs);
@@ -1265,7 +1306,7 @@ DJCi500.tempoLEDs = function () {
 // After a channel change, make sure we read the current status
 DJCi500.updateDeckStatus = function(group) {
   var playing = engine.getValue(group, "play_indicator");
-  var volume = script.absoluteLinInverse(engine.getValue(group, "VuMeter"), 0.0, 1.0, 0, 127);
+  var volume = script.absoluteLinInverse(engine.getValue(group, "vu_meter"), 0.0, 1.0, 0, 127);
 
   // Update the vinyl button
   var vinylState = false;
@@ -1345,7 +1386,7 @@ DJCi500.deckSelector = function(channel, control, value, status, group) {
 
 DJCi500.updateEffectStatus = function(midiChannel, channel) {
   let status = false;
-  for (var i = 0; i <= 3; i++) {
+  for (var i = 1; i <= 3; i++) {
     status = status || engine.getValue("[EffectRack1_EffectUnit" + midiChannel + "_Effect" + i + "]", "enabled");
   }
   return status;

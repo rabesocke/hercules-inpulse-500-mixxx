@@ -1635,6 +1635,88 @@
 				</options>
 			</control>
 
+			<!--Pad MODE 8 + Shift - BeatJump: 0x78 to 0x7F-->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[1].input</key>
+				<description>Beat jump 16 backward</description>
+				<status>0x96</status>
+				<midino>0x78</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[2].input</key>
+				<description>Beat jump 16 forward</description>
+				<status>0x96</status>
+				<midino>0x79</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[3].input</key>
+				<description>Beat jump 32 backward</description>
+				<status>0x96</status>
+				<midino>0x7A</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[4].input</key>
+				<description>Beat jump 32 forward</description>
+				<status>0x96</status>
+				<midino>0x7B</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[5].input</key>
+				<description>Beat jump 64 backward</description>
+				<status>0x96</status>
+				<midino>0x7C</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[6].input</key>
+				<description>Beat jump 64 forward</description>
+				<status>0x96</status>
+				<midino>0x7D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[7].input</key>
+				<description>Beat jump 128 backward</description>
+				<status>0x96</status>
+				<midino>0x7E</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckA.beatJumpButtons[8].input</key>
+				<description>Beat jump 128 forward</description>
+				<status>0x96</status>
+				<midino>0x7F</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+
 			<!-- NN's MIDI Channel 8 (0x97 Deck B - Pads)-->
 			<!-- Pad Select-->
 			<control>
@@ -2687,6 +2769,87 @@
 				<description>Beat jump 8 forward</description>
 				<status>0x97</status>
 				<midino>0x77</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+            <!-- PAD MODE 8 + Shift -->
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[1].input</key>
+				<description>Beat jump 16 backward</description>
+				<status>0x97</status>
+				<midino>0x78</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[2].input</key>
+				<description>Beat jump 16 forward</description>
+				<status>0x97</status>
+				<midino>0x79</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[3].input</key>
+				<description>Beat jump 32 backward</description>
+				<status>0x97</status>
+				<midino>0x7A</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[4].input</key>
+				<description>Beat jump 32 forward</description>
+				<status>0x97</status>
+				<midino>0x7B</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[5].input</key>
+				<description>Beat jump 64 backward</description>
+				<status>0x97</status>
+				<midino>0x7C</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[6].input</key>
+				<description>Beat jump 64 forward</description>
+				<status>0x97</status>
+				<midino>0x7D</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[7].input</key>
+				<description>Beat jump 128 backward</description>
+				<status>0x97</status>
+				<midino>0x7E</midino>
+				<options>
+					<script-binding />
+				</options>
+			</control>
+			<control>
+				<group>[Channel1]</group>
+				<key>DJCi500.deckB.beatJumpButtons[8].input</key>
+				<description>Beat jump 128 forward</description>
+				<status>0x97</status>
+				<midino>0x7F</midino>
 				<options>
 					<script-binding />
 				</options>
