@@ -614,9 +614,9 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   };
 
   // A bit repeated code, but I want the leds to react accordingly
-  this.loopShiftedButtons = [];
+  this.loopShiftButtons = [];
   for (var i = 1; i <= 8; i++) {
-    this.loopButtons[i] = new components.Button({
+    this.loopShiftButtons[i] = new components.Button({
       midi: [0x95 + midiChannel, 0x10 + (i - 1) + 8],
       number: i,
       shiftControl: false,
@@ -845,10 +845,14 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     sendShifted: true,
     group: "[QuickEffectRack1_[Channel" + midiChannel + "]]",
     on: 0x5C,
-    off: 0x5C,
-    input: function (channel, _control, value, _status, group) {
+    off: 0x30,
+    input: function (channel, control, value, status, group) {
       if (value === 0x7F) {
         engine.setValue(this.group, 'chain_preset_selector', -1);
+        midi.sendShortMsg(status, control, this.on); //17 -- 3B
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off); //3B -- 33
       }
     }
   });
@@ -861,10 +865,14 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     sendShifted: true,
     group: "[QuickEffectRack1_[Channel" + midiChannel + "]]",
     on: 0x5C,
-    off: 0x5C,
-    input: function (channel, _control, value, _status, group) {
+    off: 0x30,
+    input: function (channel, control, value, status, group) {
       if (value === 0x7F) {
         engine.setValue(this.group, 'chain_preset_selector', 1);
+        midi.sendShortMsg(status, control, this.on); //17 -- 3B
+      }
+      else {
+        midi.sendShortMsg(status, control, this.off); //3B -- 33
       }
     }
   });
@@ -1065,6 +1073,9 @@ DJCi500.init = function() {
     midi.sendShortMsg(0x96+i, 0x7D, pairColorsOff[5]);
     midi.sendShortMsg(0x96+i, 0x7E, pairColorsOff[6]);
     midi.sendShortMsg(0x96+i, 0x7F, pairColorsOff[7]);
+    // Light up FX quick effect chain selector buttons
+    midi.sendShortMsg(0x96+i, 0x64, 0x30);
+    midi.sendShortMsg(0x96+i, 0x65, 0x30);
   }
 
   DJCi500.tempoTimer = engine.beginTimer(250, DJCi500.tempoLEDs);
@@ -1082,12 +1093,6 @@ DJCi500.init = function() {
   // Update the fx rack selection
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit1]", 0, 0);
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit2]", 0, 0);
-
-  // Light up FX quick effect chain selector buttons
-  midi.sendShortMsg(0x96, 0x64, 0x5C);
-  midi.sendShortMsg(0x96, 0x65, 0x5C);
-  midi.sendShortMsg(0x97, 0x64, 0x5C);
-  midi.sendShortMsg(0x97, 0x65, 0x5C);
 };
 
 // Crossfader control, set the curve
