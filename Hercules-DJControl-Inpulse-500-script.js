@@ -1365,8 +1365,7 @@ DJCi500.updateDeckStatus = function(group) {
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit1]", 0, 0);
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit2]", 0, 0);
 
-  DJCi500.fxEnabledIndicator(0, "[QuickEffectRack1_[Channel3]]", 0, 0);
-  DJCi500.fxEnabledIndicator(0, "[QuickEffectRack1_[Channel4]]", 0, 0);
+  DJCi500.fxEnabledIndicator(0, "[QuickEffectRack1_" + group + "]", 0, 0);
 
   // Slicer
   switch(group) {
