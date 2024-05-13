@@ -3,13 +3,13 @@
 //
 // ***************************************************************************
 // * Mixxx mapping script file for the Hercules DJControl Inpulse 500.
-// * Authors: Ev3nt1ne, DJ Phatso, resetreboot 
+// * Authors: Ev3nt1ne, DJ Phatso, resetreboot
 // *    contributions by Kerrick Staley, Bentheshrubber, ThatOneRuffian
 //
 //  Version 1.6c: (August 2023) resetreboot
 //  * Requires Mixxx >= 2.3.4
 //  * Volume meters follow correctly the selected channel
-//  * Use the full 14 bits for knobs for more precission 
+//  * Use the full 14 bits for knobs for more precission
 //  * Add effects to the PAD 7 mode
 //  * Create decks for four channel mode
 //  * Change the behavior of the FX buttons, use them as Channel selector, using the LEDs
@@ -60,7 +60,7 @@
 //
 //  Version 1.0 - Based upon Inpulse 300 v1.2 (official)
 //
-// TO DO: 
+// TO DO:
 //  * Browser knob has a ton of colors to do things!
 //  * Vinyl + SHIFT led should reflect brake status
 //  * Quant + SHIFT led should reflect key lock status
@@ -106,8 +106,8 @@ DJCi500.EFFECT_ONLY_MODE = 1;
 DJCi500.FILTER_AND_EFFECT_MODE = 2;
 
 // For key shift pads and beat jump pads
-const pairColorsOn = [0x1F, 0x1F, 0x03, 0x03, 0x74, 0x74, 0x60, 0x60]; 
-const pairColorsOff = [0x12, 0x12, 0x02, 0x02, 0x4C, 0x4C, 0x40, 0x40]; 
+const pairColorsOn = [0x1F, 0x1F, 0x03, 0x03, 0x74, 0x74, 0x60, 0x60];
+const pairColorsOff = [0x12, 0x12, 0x02, 0x02, 0x4C, 0x4C, 0x40, 0x40];
 
 
 ///////////////////////////////////////////////////////////////
@@ -230,6 +230,18 @@ DJCi500.fxSelIndicator = function(_value, group, _control, _status) {
     } else {
       midi.sendShortMsg(0x97, 0x67, 0x00);
     }
+  }
+}
+
+DJCi500.fxEnabledIndicator = function(_value, group, _control, _status) {
+  var deckA = DJCi500.deckA.currentDeck;
+  var deckB = DJCi500.deckB.currentDeck;
+  var active = engine.getValue(group, 'enabled');
+
+  if (group == "[QuickEffectRack1_" + deckA + "]") {
+    midi.sendShortMsg(0x96, 0x66, active ? 0x1C : 0x60)
+  } else if (group == "[QuickEffectRack1_" + deckB + "]") {
+    midi.sendShortMsg(0x97, 0x66, active ? 0x1C : 0x60)
   }
 }
 
@@ -372,7 +384,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
           deckData.vinylButtonState[deck] = new_status;
           var new_message = new_status ? 0x7F : 0x00;
           midi.sendShortMsg(this.midi[0], 0x03, new_message);
-        } 
+        }
       };
     },
     shift: function () {
@@ -404,7 +416,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     shiftControl: false,
     shiftChannel: true,
     sendShifted: true,
-    outKey: 'quantize', 
+    outKey: 'quantize',
     unshift: function () {
       this.inKey = 'quantize';
     },
@@ -480,7 +492,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     rpm: 33 + 1/3,
     inputWheel: function(_channel, _control, value, _status, group) {
       var deck = parseInt(deckData.currentDeck.charAt(8));
-      value = this.inValueScale(value) * 4; 
+      value = this.inValueScale(value) * 4;
       if (engine.isScratching(deck)) {
         engine.scratchTick(deck, value);
       } else {
@@ -877,6 +889,21 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
     }
   });
 
+  // Filter kill switch
+  this.effectButtons[7] = new components.Button({
+    midi: [0x95 + midiChannel, 0x66],
+    number: 4,
+    shiftOffset: 8,
+    shiftControl: true,
+    sendShifted: true,
+    group: "[QuickEffectRack1_[Channel" + midiChannel + "]]",
+    input: function (_channel, _control, value, _status, _group) {
+      if (value === 0x7F) {
+        script.toggleControl(this.group, 'enabled');
+      }
+    }
+  });
+
   // Set the current channel FX route with the two extra PADs
   this.effectButtons[4] = new components.Button({
     midi: [0x95 + midiChannel, 0x63],
@@ -1015,7 +1042,7 @@ DJCi500.init = function() {
   engine.makeConnection("[Channel4]", "play_indicator", DJCi500.numberIndicator);
   engine.getValue("[Channel4]", "play_indicator", DJCi500.numberIndicator);
 
-  // Connect Master VU meter 
+  // Connect Master VU meter
   engine.makeConnection("[Main]", "vu_meter_left", DJCi500.vuMeterUpdateMaster);
   engine.makeConnection("[Main]", "vu_meter_right", DJCi500.vuMeterUpdateMaster);
   engine.makeConnection("[Main]", "peak_indicator_left", DJCi500.vuMeterPeakLeftMaster);
@@ -1033,6 +1060,11 @@ DJCi500.init = function() {
   engine.makeConnection("[EffectRack1_EffectUnit2]", "group_[Channel3]_enable", DJCi500.fxSelIndicator);
   engine.makeConnection("[EffectRack1_EffectUnit1]", "group_[Channel4]_enable", DJCi500.fxSelIndicator);
   engine.makeConnection("[EffectRack1_EffectUnit2]", "group_[Channel4]_enable", DJCi500.fxSelIndicator);
+
+  engine.makeConnection("[QuickEffectRack1_[Channel1]]", "enabled", DJCi500.fxEnabledIndicator);
+  engine.makeConnection("[QuickEffectRack1_[Channel2]]", "enabled", DJCi500.fxEnabledIndicator);
+  engine.makeConnection("[QuickEffectRack1_[Channel3]]", "enabled", DJCi500.fxEnabledIndicator);
+  engine.makeConnection("[QuickEffectRack1_[Channel4]]", "enabled", DJCi500.fxEnabledIndicator);
 
   // Connect the slicer beats
   DJCi500.slicerBeat1 = engine.makeConnection('[Channel1]', 'beat_active', DJCi500.slicerBeatActive);
@@ -1093,6 +1125,9 @@ DJCi500.init = function() {
   // Update the fx rack selection
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit1]", 0, 0);
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit2]", 0, 0);
+
+  DJCi500.fxEnabledIndicator(0, "[QuickEffectRack1_[Channel1]]", 0, 0);
+  DJCi500.fxEnabledIndicator(0, "[QuickEffectRack1_[Channel2]]", 0, 0);
 };
 
 // Crossfader control, set the curve
@@ -1113,7 +1148,7 @@ DJCi500.crossfaderSetCurve = function(channel, control, value, _status, _group) 
 
 // Crossfader enable or disable
 DJCi500.crossfaderEnable = function(channel, control, value, _status, _group) {
-  if(value) {  
+  if(value) {
     DJCi500.crossfaderEnabled = true;
   } else {
     DJCi500.crossfaderEnabled = false;
@@ -1129,7 +1164,7 @@ DJCi500.crossfader = function(channel, control, value, status, group) {
       var result = 0;
       if (value <= 0) {
         result = -1;
-      } 
+      }
       else if (value >= 127) {
         result = 1;
       }
@@ -1329,6 +1364,8 @@ DJCi500.updateDeckStatus = function(group) {
   // Update the fx rack selection
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit1]", 0, 0);
   DJCi500.fxSelIndicator(0, "[EffectRack1_EffectUnit2]", 0, 0);
+
+  DJCi500.fxEnabledIndicator(0, "[QuickEffectRack1_" + group + "]", 0, 0);
 
   // Slicer
   switch(group) {
