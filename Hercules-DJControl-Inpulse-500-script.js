@@ -78,6 +78,9 @@ var DJCi500 = {};
 // when using Twitch, VRChat or Second Life
 DJCi500.browserOffFocusMode = false;
 
+// Set initial state for vinyl mode button
+DJCi500.initialVinylMode = true;
+
 // Colors
 DJCi500.PadColorMapper = new ColorMapper({
   0xFF0000: 0x60,
@@ -262,7 +265,7 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
   this.slowPauseSetState = [false, false, false, false];
 
   // Vinyl button state
-  this.vinylButtonState = [true, true, true, true];
+  this.vinylButtonState = [DJCi500.initialVinylMode, DJCi500.initialVinylMode, DJCi500.initialVinylMode, DJCi500.initialVinylMode];
 
   // Pitch ranges and status
   this.pitchRanges = [0.08, 0.10, 0.15, 0.16, 0.24, 0.50, 0.90]; //select pitch range
@@ -1009,9 +1012,9 @@ DJCi500.init = function() {
   DJCi500.crossfaderEnabled = true;
   DJCi500.xFaderScratch = false;
 
-  // Turn On Vinyl buttons LED(one for each deck).
-  midi.sendShortMsg(0x91, 0x03, 0x7F);
-  midi.sendShortMsg(0x92, 0x03, 0x7F);
+  // Setup Vinyl buttons LED(one for each deck).
+  midi.sendShortMsg(0x91, 0x03, DJCi500.initialVinylMode ? 0x7F : 0x00);
+  midi.sendShortMsg(0x92, 0x03, DJCi500.initialVinylMode ? 0x7F : 0x00);
 
   //Turn On Browser button LED
   midi.sendShortMsg(0x90, 0x05, 0x10);
