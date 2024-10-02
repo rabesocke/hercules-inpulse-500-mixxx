@@ -670,61 +670,44 @@ DJCi500.Deck = function (deckNumbers, midiChannel) {
 
   // Sampler buttons (PAD Mode 4)
   this.samplerButtons = [];
-  for (let i = 1; i <= 16; i++) {
-    let midi = [];
-    switch (i) {
-      case 1:
-        midi = [0x96, 0x30];
-        break;
-      case 2:
-        midi = [0x96, 0x31];
-        break;
-      case 3:
-        midi = [0x96, 0x32];
-        break;
-      case 4:
-        midi = [0x96, 0x33];
-        break;
-      case 5:
-        midi = [0x97, 0x30];
-        break;
-      case 6:
-        midi = [0x97, 0x31];
-        break;
-      case 7:
-        midi = [0x97, 0x32];
-        break;
-      case 8:
-        midi = [0x97, 0x33];
-        break;
-      case 9:
-        midi = [0x96, 0x34];
-        break;
-      case 10:
-        midi = [0x96, 0x35];
-        break;
-      case 11:
-        midi = [0x96, 0x36];
-        break;
-      case 12:
-        midi = [0x96, 0x37];
-        break;
-      case 13:
-        midi = [0x97, 0x34];
-        break;
-      case 14:
-        midi = [0x97, 0x35];
-        break;
-      case 15:
-        midi = [0x97, 0x36];
-        break;
-      case 16:
-        midi = [0x97, 0x37];
-        break;
+  for (var i = 1; i <= 16; i++) {
+    let midiCommand = [];
+    if (i === 1) {
+      midiCommand = [0x96, 0x30];
+    } else if (i === 2) {
+      midiCommand = [0x96, 0x31];
+    } else if (i === 3) {
+      midiCommand = [0x96, 0x32];
+    } else if (i === 4) {
+      midiCommand = [0x96, 0x33];
+    } else if (i === 5) {
+      midiCommand = [0x97, 0x30];
+    } else if (i === 6) {
+      midiCommand = [0x97, 0x31];
+    } else if (i === 7) {
+      midiCommand = [0x97, 0x32];
+    } else if (i === 8) {
+      midiCommand = [0x97, 0x33];
+    } else if (i === 9) {
+      midiCommand = [0x96, 0x34];
+    } else if (i === 10) {
+      midiCommand = [0x96, 0x35];
+    } else if (i === 11) {
+      midiCommand = [0x96, 0x36];
+    } else if (i === 12) {
+      midiCommand = [0x96, 0x37];
+    } else if (i === 13) {
+      midiCommand = [0x97, 0x34];
+    } else if (i === 14) {
+      midiCommand = [0x97, 0x35];
+    } else if (i === 15) {
+      midiCommand = [0x97, 0x36];
+    } else if (i === 16) {
+      midiCommand = [0x97, 0x37];
     }
 
     this.samplerButtons[i] = new components.SamplerButton({
-      midi: midi,
+      midi: midiCommand,
       number: i,
       shiftOffset: 8,
       shiftControl: true,

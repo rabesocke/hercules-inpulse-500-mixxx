@@ -1113,8 +1113,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler5]</group>
-        <key>DJCi500.deckA.samplerButtons[5].input</key>
+        <group>[Sampler9]</group>
+        <key>DJCi500.deckA.samplerButtons[9].input</key>
         <description>PAD 5</description>
         <status>0x96</status>
         <midino>0x34</midino>
@@ -1123,8 +1123,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler6]</group>
-        <key>DJCi500.deckA.samplerButtons[6].input</key>
+        <group>[Sampler10]</group>
+        <key>DJCi500.deckA.samplerButtons[10].input</key>
         <description>PAD 6</description>
         <status>0x96</status>
         <midino>0x35</midino>
@@ -1133,8 +1133,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler7]</group>
-        <key>DJCi500.deckA.samplerButtons[7].input</key>
+        <group>[Sampler11]</group>
+        <key>DJCi500.deckA.samplerButtons[11].input</key>
         <description>PAD 7</description>
         <status>0x96</status>
         <midino>0x36</midino>
@@ -1143,8 +1143,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler8]</group>
-        <key>DJCi500.deckA.samplerButtons[8].input</key>
+        <group>[Sampler12]</group>
+        <key>DJCi500.deckA.samplerButtons[12].input</key>
         <description>PAD 8</description>
         <status>0x96</status>
         <midino>0x37</midino>
@@ -1195,8 +1195,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler5]</group>
-        <key>DJCi500.deckA.samplerButtons[5].input</key>
+        <group>[Sampler9]</group>
+        <key>DJCi500.deckA.samplerButtons[9].input</key>
         <description>PAD 5</description>
         <status>0x96</status>
         <midino>0x3C</midino>
@@ -1205,8 +1205,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler6]</group>
-        <key>DJCi500.deckA.samplerButtons[6].input</key>
+        <group>[Sampler10]</group>
+        <key>DJCi500.deckA.samplerButtons[10].input</key>
         <description>PAD 6</description>
         <status>0x96</status>
         <midino>0x3D</midino>
@@ -1215,8 +1215,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler7]</group>
-        <key>DJCi500.deckA.samplerButtons[7].input</key>
+        <group>[Sampler11]</group>
+        <key>DJCi500.deckA.samplerButtons[11].input</key>
         <description>PAD 7</description>
         <status>0x96</status>
         <midino>0x3E</midino>
@@ -1225,8 +1225,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler8]</group>
-        <key>DJCi500.deckA.samplerButtons[8].input</key>
+        <group>[Sampler12]</group>
+        <key>DJCi500.deckA.samplerButtons[12].input</key>
         <description>PAD 8</description>
         <status>0x96</status>
         <midino>0x3F</midino>
@@ -2219,8 +2219,8 @@
 
       <!--Pad MODE 4 - Sampler-->
       <control>
-        <group>[Sampler1]</group>
-        <key>DJCi500.deckB.samplerButtons[1].input</key>
+        <group>[Sampler5]</group>
+        <key>DJCi500.deckB.samplerButtons[5].input</key>
         <description>PAD 1</description>
         <status>0x97</status>
         <midino>0x30</midino>
@@ -2229,8 +2229,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler2]</group>
-        <key>DJCi500.deckB.samplerButtons[2].input</key>
+        <group>[Sampler6]</group>
+        <key>DJCi500.deckB.samplerButtons[6].input</key>
         <description>PAD 2</description>
         <status>0x97</status>
         <midino>0x31</midino>
@@ -2239,8 +2239,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler3]</group>
-        <key>DJCi500.deckB.samplerButtons[3].input</key>
+        <group>[Sampler7]</group>
+        <key>DJCi500.deckB.samplerButtons[7].input</key>
         <description>PAD 3</description>
         <status>0x97</status>
         <midino>0x32</midino>
@@ -2249,8 +2249,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler4]</group>
-        <key>DJCi500.deckB.samplerButtons[4].input</key>
+        <group>[Sampler8]</group>
+        <key>DJCi500.deckB.samplerButtons[8].input</key>
         <description>PAD 4</description>
         <status>0x97</status>
         <midino>0x33</midino>
@@ -2259,8 +2259,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler5]</group>
-        <key>DJCi500.deckB.samplerButtons[5].input</key>
+        <group>[Sampler13]</group>
+        <key>DJCi500.deckB.samplerButtons[13].input</key>
         <description>PAD 5</description>
         <status>0x97</status>
         <midino>0x34</midino>
@@ -2269,8 +2269,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler6]</group>
-        <key>DJCi500.deckB.samplerButtons[6].input</key>
+        <group>[Sampler14]</group>
+        <key>DJCi500.deckB.samplerButtons[14].input</key>
         <description>PAD 6</description>
         <status>0x97</status>
         <midino>0x35</midino>
@@ -2279,8 +2279,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler7]</group>
-        <key>DJCi500.deckB.samplerButtons[7].input</key>
+        <group>[Sampler15]</group>
+        <key>DJCi500.deckB.samplerButtons[15].input</key>
         <description>PAD 7</description>
         <status>0x97</status>
         <midino>0x36</midino>
@@ -2289,8 +2289,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler8]</group>
-        <key>DJCi500.deckB.samplerButtons[8].input</key>
+        <group>[Sampler16]</group>
+        <key>DJCi500.deckB.samplerButtons[16].input</key>
         <description>PAD 8</description>
         <status>0x97</status>
         <midino>0x37</midino>
@@ -2301,8 +2301,8 @@
 
       <!--Pad MODE 4 (SHIFT mode) - Sampler Pause (aka cue)-->
       <control>
-        <group>[Sampler1]</group>
-        <key>DJCi500.deckB.samplerButtons[1].input</key>
+        <group>[Sampler5]</group>
+        <key>DJCi500.deckB.samplerButtons[5].input</key>
         <description>PAD 1</description>
         <status>0x97</status>
         <midino>0x38</midino>
@@ -2311,8 +2311,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler2]</group>
-        <key>DJCi500.deckB.samplerButtons[2].input</key>
+        <group>[Sampler6]</group>
+        <key>DJCi500.deckB.samplerButtons[6].input</key>
         <description>PAD 2</description>
         <status>0x97</status>
         <midino>0x39</midino>
@@ -2321,8 +2321,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler3]</group>
-        <key>DJCi500.deckB.samplerButtons[3].input</key>
+        <group>[Sampler7]</group>
+        <key>DJCi500.deckB.samplerButtons[7].input</key>
         <description>PAD 3</description>
         <status>0x97</status>
         <midino>0x3A</midino>
@@ -2331,8 +2331,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler4]</group>
-        <key>DJCi500.deckB.samplerButtons[4].input</key>
+        <group>[Sampler8]</group>
+        <key>DJCi500.deckB.samplerButtons[8].input</key>
         <description>PAD 4</description>
         <status>0x97</status>
         <midino>0x3B</midino>
@@ -2341,8 +2341,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler5]</group>
-        <key>DJCi500.deckB.samplerButtons[5].input</key>
+        <group>[Sampler13]</group>
+        <key>DJCi500.deckB.samplerButtons[13].input</key>
         <description>PAD 5</description>
         <status>0x97</status>
         <midino>0x3C</midino>
@@ -2351,8 +2351,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler6]</group>
-        <key>DJCi500.deckB.samplerButtons[6].input</key>
+        <group>[Sampler14]</group>
+        <key>DJCi500.deckB.samplerButtons[14].input</key>
         <description>PAD 6</description>
         <status>0x97</status>
         <midino>0x3D</midino>
@@ -2361,8 +2361,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler7]</group>
-        <key>DJCi500.deckB.samplerButtons[7].input</key>
+        <group>[Sampler15]</group>
+        <key>DJCi500.deckB.samplerButtons[15].input</key>
         <description>PAD 7</description>
         <status>0x97</status>
         <midino>0x3E</midino>
@@ -2371,8 +2371,8 @@
         </options>
       </control>
       <control>
-        <group>[Sampler8]</group>
-        <key>DJCi500.deckB.samplerButtons[8].input</key>
+        <group>[Sampler16]</group>
+        <key>DJCi500.deckB.samplerButtons[16].input</key>
         <description>PAD 8</description>
         <status>0x97</status>
         <midino>0x3F</midino>
